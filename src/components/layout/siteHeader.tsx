@@ -4,6 +4,10 @@ import Button from '../common/button'
 
 const SiteHeader = () => {
   const router = useRouter()
+
+  const handleNavigation = (path:any) => {
+    router.push(path);
+  };
   return (
     <div
       className='siteHeader transparent'
@@ -20,6 +24,7 @@ const SiteHeader = () => {
         <div className='xs:hidden lg:flex gap-7'>
           <div className='flex xs:gap-5 lg:gap-7'>
             <span
+              onClick={() => handleNavigation('/pricing')}
               className={`px-3 py-1 ${
                 router.pathname == '/pricing' ? 'bg-[#0000000D]' : ''
               } rounded-[12px] flex items-center cursor-pointer`}
@@ -27,13 +32,15 @@ const SiteHeader = () => {
               Pricing
             </span>
             <span
+             onClick={() => handleNavigation('/blog')}
               className={`px-3 py-1 ${
-                router.pathname == '/blogs' ? 'bg-[#0000000D]' : ''
+                router.pathname == '/blog' ? 'bg-[#0000000D]' : ''
               } rounded-[12px] flex items-center cursor-pointer`}
             >
               Blogs
             </span>
             <span
+            onClick={() => handleNavigation('/contact-us')}
               className={`px-3 py-1 ${
                 router.pathname == '/contact-us' ? 'bg-[#0000000D]' : ''
               } rounded-[12px] flex items-center cursor-pointer`}
@@ -44,7 +51,7 @@ const SiteHeader = () => {
           <div className='flex gap-6'>
             <Button
               title='Sign in'
-              onClick={() => console.log('clicked')}
+              onClick={() => handleNavigation('/login')}
               width={80}
               background='#F5F5F5'
               color='#000'
