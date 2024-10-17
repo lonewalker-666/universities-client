@@ -10,7 +10,7 @@ interface Props {
 const SiteLayout = (props: Props) => {
   const { title, children, fullScreen } = props
   return (
-    <div className='h-screen flex relative flex-col items-center w-full overflow-y-auto'>
+    <div className='siteLayout'>
       <Header title={title} />
       <SiteHeader />
       <div

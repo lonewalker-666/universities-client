@@ -6,7 +6,7 @@ const SiteHeader = () => {
   const router = useRouter()
   return (
     <div
-      className='w-full sticky top-0 flex min-h-[66px] justify-center items-center bg-[white]'
+      className='siteHeader transparent'
       style={{ boxShadow: '0px 4px 25.9px 0px #00000014' }}
     >
       <div className='flex items-center justify-between gap-4 w-full max-w-[1600px] xs:px-4 md:px-10'>
