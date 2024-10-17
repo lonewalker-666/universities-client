@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { GoogleIcon, MetaIcon } from "../common/icons";
 import Divider from "../common/divider";
 import SiteLayout from "../layout/siteLayout";
+import router from "next/router";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -127,7 +128,11 @@ const Login = () => {
           </div>
           <div className="text-center mt-4">
             Don't you have an account?{" "}
-            <a href="#" className="text-[#6F42C1E5] hover:underline">
+            <a
+              href="#"
+              className="text-[#6F42C1E5] hover:underline"
+              onClick={() => router.push("/signup")}
+            >
               Sign up
             </a>
           </div>

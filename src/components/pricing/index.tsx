@@ -19,9 +19,10 @@ const Pricing = () => {
       </div>
 
       {/* Pricing Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 justify-around items-center p-4 sm:p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 lg:gap-10 justify-around p-4 sm:p-6">
         {/* Free Plan */}
-        <div className="w-full h-[650px] border border-gray-200 shadow-md p-6 bg-white flex flex-col justify-between rounded-[26.94px] ">
+
+        <div className="w-full h-[100%] border border-gray-200 shadow-md p-6 bg-white flex flex-col justify-between rounded-[26.94px] ">
           <div>
             <div className="flex items-center mb-4">
               <h3 className="text-xl font-semibold">Free</h3>
@@ -62,7 +63,7 @@ const Pricing = () => {
         </div>
 
         {/* Pro Plan */}
-        <div className="w-full h-[650px] border border-gray-200 shadow-md p-6 bg-white flex flex-col justify-between rounded-[26.94px] ">
+        <div className="w-full h-[100%] border border-gray-200 shadow-md p-6 bg-white flex flex-col justify-between rounded-[26.94px] ">
           <div>
             <div className="flex items-center mb-4">
               <h3 className="text-xl font-semibold">Pro</h3>
@@ -105,7 +106,7 @@ const Pricing = () => {
 
         {/* Enterprise Plan */}
         <div
-          className="w-full h-[650px] border border-gray-200 shadow-md p-6 bg-white flex flex-col justify-between rounded-[26.94px]
+          className="w-full h-[100%] border border-gray-200 shadow-md p-6 bg-white flex flex-col justify-between rounded-[26.94px]
          "
           style={{
             borderRadius: "26.94px",
@@ -181,7 +182,7 @@ const Pricing = () => {
         </div>
 
         <div
-          className="w-full h-[650px] border border-gray-200 shadow-md p-6 bg-white flex flex-col justify-between rounded-[26.94px]
+          className="w-full h-[100%] border border-gray-200 shadow-md p-6 bg-white flex flex-col justify-between rounded-[26.94px]
          "
         >
           <div>
