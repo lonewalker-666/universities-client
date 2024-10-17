@@ -9,7 +9,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = (e:any) => {
     e.preventDefault();
     // Handle login logic here
     console.log("Email:", email);
@@ -28,22 +28,24 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex lg:flex-row flex-col min-h-screen">
+    <div className="flex lg:flex-row flex-col h-full">
       {/* Left side: Login form */}
-      <div className="lg:w-1/2 w-full flex items-center justify-center p-8 bg-transparent">
-        <div className="max-w-md w-full">
-          <div className="flex justify-center mb-6">
-            <img src="/logo.png" alt="Logo" className="w-[230px] h-[50px]" />
+      <div className="lg:w-1/2 w-full flex justify-center px-8 py-12 bg-transparent">
+        <div className="max-w-md w-full flex flex-col gap-6">
+          <div className="ml-6">
+            <img src="/logo.png" alt="Logo" className="h-[50px]" />
           </div>
+          <div className="flex flex-col gap-2">
           <h1 className="text-4xl font-medium poppin-text  text-[#000000]">
             Get Started
           </h1>
 
-          <p className="text-md mb-4 poppin-text text-[#000000] ">
+          <p className="text-md font-medium poppin-text text-[#000000] ">
             Create your account
           </p>
+          </div>
           <form onSubmit={handleLogin}>
-            <div className="mb-8">
+            <div className="mb-6">
               <label className="block text-gray-700 mb-2">Name</label>
               <input
                 type="email"
@@ -54,7 +56,7 @@ const SignUp = () => {
                 required
               />
             </div>
-            <div className="mb-8">
+            <div className="mb-6">
               <label className="block text-gray-700 mb-2">Email</label>
               <input
                 type="email"
@@ -65,7 +67,7 @@ const SignUp = () => {
                 required
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-6">
               <label className="block text-gray-700 mb-2">Password</label>
               <input
                 type="password"
@@ -92,12 +94,12 @@ const SignUp = () => {
             </div> */}
             <button
               type="submit"
-              className="w-full bg-[#6F42C1E5] text-white py-4 rounded-lg transition-colors mt-6"
+              className="w-full bg-[#6F42C1E5] text-white py-4 rounded-lg transition-colors"
             >
               Sign up
             </button>
           </form>
-          <div className="flex items-center justify-center my-4">
+          <div className="flex items-center justify-center">
             <span className="flex-grow">
               <Divider
                 thickness={1}
@@ -137,7 +139,7 @@ const SignUp = () => {
               <p className="inter-text"> Meta</p>
             </button>
           </div>
-          <div className="text-center mt-4">
+          <div className="text-center pb-12">
             Already have an account?{" "}
             <a
               href="#"
@@ -150,13 +152,13 @@ const SignUp = () => {
         </div>
       </div>
 
-      <div className="lg:w-1/2 w-full hidden lg:flex items-center justify-center overflow-hidden">
+      <div className="lg:w-1/2 w-full hidden lg:flex items-center justify-center overflow-hidden fixed top-0 bottom-0 right-0 pointer-events-none">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-screen object-cover"
+          className="w-full h-full object-cover"
         >
           <source src="loginLoop.mp4" type="video/mp4" />
           Your browser does not support the video tag.

@@ -9,7 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = (e:any) => {
     e.preventDefault();
     // Handle login logic here
     console.log("Email:", email);
@@ -28,9 +28,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex lg:flex-row flex-col min-h-screen">
+    <div className="flex lg:flex-row flex-col h-full">
       {/* Left side: Login form */}
-      <div className="lg:w-1/2 w-full flex items-center justify-center p-8 bg-transparent">
+      <div className="lg:w-1/2 w-full flex items-center justify-center px-8 pt-12 bg-transparent">
         <div className="max-w-md w-full">
           <div className="flex justify-center mb-6">
             <img src="/logo.png" alt="Logo" className="w-[230px] h-[50px]" />
@@ -126,7 +126,7 @@ const Login = () => {
               <p className="inter-text"> Meta</p>
             </button>
           </div>
-          <div className="text-center mt-4">
+          <div className="text-center mt-4 pb-12">
             Don't you have an account?{" "}
             <a
               href="#"
@@ -139,13 +139,13 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="lg:w-1/2 w-full hidden lg:flex items-center justify-center overflow-hidden">
+      <div className="lg:w-1/2 w-full hidden lg:flex items-center justify-center overflow-hidden fixed top-0 bottom-0 right-0">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-screen object-cover"
+          className="w-full h-full object-cover"
         >
           <source src="loginLoop.mp4" type="video/mp4" />
           Your browser does not support the video tag.

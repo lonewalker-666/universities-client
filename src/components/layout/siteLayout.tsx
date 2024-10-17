@@ -14,7 +14,7 @@ const SiteLayout = (props: Props) => {
       <Header title={title} />
       <SiteHeader />
       <div
-        className={`flex flex-col w-full ${
+        className={`flex flex-col w-full min-h-[calc(100vh_-_66px)] ${
           !fullScreen ? 'max-w-[1300px]' : ''
         }`}
       >
