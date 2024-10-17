@@ -4,9 +4,13 @@ import Button from '../common/button'
 
 const SiteHeader = () => {
   const router = useRouter()
+
+  const handleNavigation = (path:any) => {
+    router.push(path);
+  };
   return (
     <div
-      className='w-full sticky top-0 flex min-h-[66px] justify-center items-center bg-[white]'
+      className='w-full sticky top-0 flex min-h-[66px] justify-center items-center bg-[white] z-20'
       style={{ boxShadow: '0px 4px 25.9px 0px #00000014' }}
     >
       <div className='flex items-center justify-between gap-4 w-full max-w-[1600px] xs:px-4 md:px-10'>
@@ -20,6 +24,7 @@ const SiteHeader = () => {
         <div className='xs:hidden lg:flex gap-7'>
           <div className='flex xs:gap-5 lg:gap-7'>
             <span
+              onClick={() => handleNavigation('/pricing')}
               className={`px-3 py-1 ${
                 router.pathname == '/pricing' ? 'bg-[#0000000D]' : ''
               } rounded-[12px] flex items-center cursor-pointer`}
@@ -27,13 +32,15 @@ const SiteHeader = () => {
               Pricing
             </span>
             <span
+             onClick={() => handleNavigation('/blog')}
               className={`px-3 py-1 ${
-                router.pathname == '/blogs' ? 'bg-[#0000000D]' : ''
+                router.pathname == '/blog' ? 'bg-[#0000000D]' : ''
               } rounded-[12px] flex items-center cursor-pointer`}
             >
               Blogs
             </span>
             <span
+            onClick={() => handleNavigation('/contact-us')}
               className={`px-3 py-1 ${
                 router.pathname == '/contact-us' ? 'bg-[#0000000D]' : ''
               } rounded-[12px] flex items-center cursor-pointer`}
@@ -44,7 +51,7 @@ const SiteHeader = () => {
           <div className='flex gap-6'>
             <Button
               title='Sign in'
-              onClick={() => console.log('clicked')}
+              onClick={() => handleNavigation('/login')}
               width={80}
               background='#F5F5F5'
               color='#000'
