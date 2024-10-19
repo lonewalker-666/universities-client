@@ -9,7 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLogin = (e:any) => {
+  const handleLogin = (e: any) => {
     e.preventDefault();
     // Handle login logic here
     console.log("Email:", email);
@@ -31,19 +31,25 @@ const Login = () => {
     <div className="flex lg:flex-row flex-col h-full">
       {/* Left side: Login form */}
       <div className="lg:w-1/2 w-full flex items-center justify-center px-8 pt-12 bg-transparent">
-        <div className="max-w-md w-full">
-          <div className="flex justify-center mb-6">
-            <img src="/logo.png" alt="Logo" className="w-[230px] h-[50px]" />
+        <div className="max-w-md w-full flex flex-col">
+          <div className="flex justify-center">
+            <img src="/logo.png" alt="Logo" className=" h-[50px]" />
           </div>
-          <h1 className="text-4xl font-medium poppin-text  text-[#000000]">
-            Welcome Back
-          </h1>
-
-          <p className="text-md mb-4 poppin-text text-[#000000] ">
-            Login into your account
-          </p>
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-row items-center">
+              <h1 className="text-4xl font-medium poppin-text  text-[#000000]">
+                Welcome Back
+              </h1>
+              <span>
+                <img src="/hand.png" alt="hand" className="w-[60px] h-[60px]" />
+              </span>
+            </div>
+            <p className="text-md mb-4 poppin-text text-[#000000] ">
+              Login into your account
+            </p>
+          </div>
           <form onSubmit={handleLogin}>
-            <div className="mb-8">
+            <div className="mb-6">
               <label className="block text-gray-700 mb-2">Email</label>
               <input
                 type="email"
@@ -54,7 +60,7 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-6">
               <label className="block text-gray-700 mb-2">Password</label>
               <input
                 type="password"
