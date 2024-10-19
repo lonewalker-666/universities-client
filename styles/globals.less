@@ -91,6 +91,7 @@ input[type='search']:hover::-webkit-search-cancel-button {
   align-items: center;
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .siteHeader {
@@ -110,16 +111,22 @@ input[type='search']:hover::-webkit-search-cancel-button {
 
 .hero-container {
   position: absolute;
-  height: 70vh;
+  height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   bottom: 0;
   .hero-text-container {
     position: absolute;
+    top: 50px;
     width: 100%;
+    max-width: 600px;
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 20px;
+    padding: 30px;
     h1 {
       font-size: 40px;
       font-weight: 600;
@@ -131,21 +138,17 @@ input[type='search']:hover::-webkit-search-cancel-button {
       text-align: center;
     }
   }
-}
-
-@keyframes college-animation {
-  from {
-    transform: translateY(-100px);
-  }
-  to {
-    transform: translateY(0px);
+  .hero-image{
+    min-width: 100%;
+    position: absolute;
+    bottom: -1.25rem;
+    object-fit: contain;
   }
 }
 
-@media screen and (min-width:1200px) {
+@media screen and (min-width: 768px) and (orientation:landscape) {
   .hero-container {
     position: absolute;
-    height: 70vh;
     width: 100%;
     bottom: 0;
     .hero-text-container {
@@ -155,6 +158,7 @@ input[type='search']:hover::-webkit-search-cancel-button {
       align-items: center;
       flex-direction: column;
       gap: 20px;
+      animation: hero-text-animation 1s linear 1 ;
       h1 {
         font-size: 40px;
         font-weight: 600;
@@ -167,4 +171,246 @@ input[type='search']:hover::-webkit-search-cancel-button {
       }
     }
   }
+  .hero-image{
+    min-height: 70vh;
+    top: 40vh;
+    animation: college-animation 1s linear 1 ;
+  }
 }
+
+@media screen and (min-width:768px) and (min-height:750px) {
+  .hero-container{
+    .hero-text-container{
+      top: 100px;
+    }
+  }
+}
+
+@keyframes hero-text-animation {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes college-animation {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+.resources-circle {
+  background: url('/circle.png') center bottom no-repeat;
+  background-size: 100%;
+  width: 100%;
+  position: relative;
+  min-height: 200px;
+  max-height: 100%;
+}
+
+// @media screen and (min-width:768px) {
+//   .resources-circle{
+//     background: url('/circle.png') center no-repeat;
+//     background-size: 100%;
+//     height: 200px;
+//     width: 100%;
+//   }
+// }
+
+.social-icon-container {
+  border-radius: 15%;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  transition: all 0.2s linear;
+  .social-icon {
+    position: relative;
+    transition: all 0.2s linear;
+    width: 80%;
+    height: 80%;
+    max-height: 139px;
+    path {
+      fill: #e5e5e5;
+      width: 100%;
+    }
+  }
+}
+
+.social-icon-container:hover {
+  &.facebook {
+    background: #1877f2;
+  }
+  &.discord {
+    background: #5865f2;
+  }
+  &.badge {
+    background: #ffd700;
+  }
+  &.instagram {
+    background: linear-gradient(
+      45deg,
+      #f09433 0%,
+      #e6683c 25%,
+      #dc2743 50%,
+      #cc2366 75%,
+      #bc1888 100%
+    );
+  }
+  &.linkedIn {
+    background: #0077b5;
+  }
+  .social-icon {
+    transform: scale(1.1);
+    path {
+      fill: white;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .social-icon-container {
+    border-radius: 12px;
+    padding-top: 15px;
+    padding-right: 15px;
+    max-height: 139px;
+    .social-icon {
+      position: relative;
+      left: -20px;
+      bottom: -5px;
+      width: 90%;
+      max-height: 139px;
+      path {
+        fill: #e5e5e5;
+        width: 100%;
+      }
+    }
+  }
+
+  .social-icon-container:hover {
+    .social-icon {
+      left: -15px;
+      bottom: 0px;
+      transform: scale(1.1);
+      path {
+        fill: white;
+      }
+    }
+  }
+}
+
+.testimonial-hover {
+  position: relative;
+  .hovered-top,
+  .hovered-bottom {
+    position: absolute;
+    opacity: 0;
+    transition: all .3s linear;
+  }
+  .hovered-bottom{
+    bottom: 0;
+    left: 0;
+  }
+  .hovered-top{
+    top: 0;
+    right: 0;
+  }
+}
+
+.testimonial-hover:hover{
+  .hovered-top,
+  .hovered-bottom{
+    opacity: 1;
+  }
+  .hovered-top{
+    top: -4.5rem;
+    right: -1.5rem;
+  }
+  .hovered-bottom{
+    bottom: -4.5rem;
+    left: -1.5rem;
+  }
+}
+
+.features-hover{
+  position: absolute;
+  .features-hover-inner{
+    position: relative;
+    .hover-text{
+      position: absolute;
+      overflow: hidden;
+      font-size: 14px;
+      padding: 5px 12px;
+      border-radius: 8px;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      background-color: white;
+      z-index: 1;
+      transition: all .3s linear;
+      &.center{
+        left: 18%;
+      }
+    }
+  }
+  span{
+    background-color: #fff;
+    border-radius: 12px;
+  }
+  &.essay{
+    bottom: 10%;
+    left: 0%;
+  }
+  &.resources{
+    top: -5%;
+    left: 18%;
+  }
+  &.ai{
+    top: -25%;
+  }
+  &.finance{
+    bottom: 10%;
+    right: 0%;
+  }
+  &.scholarship{
+    top: -5%;
+    right: 18%;
+  }
+}
+
+.features-hover:hover{
+  span{
+    background: #6F42C1E5;
+    path{
+      fill: white;
+    }
+  }
+  .icon{
+    path{
+      stroke: white;
+      fill: none;
+    }
+  }
+  .features-hover-inner{
+
+    .hover-text{
+      left: -20%;
+      top: -105%;
+      background: #6F42C1E5;
+      color: white;
+      width: auto;
+      opacity: 1;
+      &.center{
+        left: 18%;
+      }
+    }
+  }
+}
+

@@ -34,7 +34,7 @@ const Pricing = () => {
   // }
 
   return (
-    <div className='relative w-full items-center flex flex-col gap-10 pt-[66px]'>
+    <div className='relative w-full items-center flex flex-col gap-10 p-8 pt-[66px]'>
       <div className='w-full mt-[50px]'>
         <HeaderContainer
           title='Growth Plans'
@@ -59,8 +59,8 @@ const Pricing = () => {
                 {!isEmpty(plan?.PlanDescriptions) && plan?.PlanDescriptions.map((feature:any, idx:number) => (
                   idx < 4 && 
                   <li key={idx} className="flex items-center gap-2">
-                    <span className="bg-gray-300 rounded-md p-1 flex items-center justify-center">
-                      <TickIcon />
+                    <span className="bg-[#F3F4F6] rounded-md p-1 flex items-center justify-center">
+                      <TickIcon stroke="#6F7988" className="w-4 h-4 "/>
                     </span>
                     <span>{feature?.description}</span>
                   </li>

@@ -1,12 +1,13 @@
 
 import IndivualBlog from "@/src/components/blog/indivualBlog"
+import ContactUs from "@/src/components/contact-us"
 import SiteLayout from "@/src/components/layout/siteLayout"
 
 
 const BlogPage = () => {
   return (
     <SiteLayout title="Universities@USA-Home">
-    <IndivualBlog/>
+      <ContactUs />
     </SiteLayout>
   )
 }

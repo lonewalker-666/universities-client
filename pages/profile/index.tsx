@@ -1,11 +1,11 @@
 import ProductLayout from "@/src/components/layout/productLayout"
-import OverviewContainer from "@/src/components/overview"
+import ProfileContainer from "@/src/components/profile"
 
 
 const ProfilePage = () => {
   return (
     <ProductLayout title="Universities@USA-Profile">
-      <OverviewContainer />
+      <ProfileContainer />
     </ProductLayout>
   )
 }

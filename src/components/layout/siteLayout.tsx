@@ -1,24 +1,28 @@
+import useScrollPosition from '@/src/hooks/useScrollPosition'
 import Header from './header'
+import SiteFooter from './siteFooter'
 import SiteHeader from './siteHeader'
 
 interface Props {
   title: string
   children: string | JSX.Element
-  fullScreen?: boolean
+  containerRef?: any
+  transparentHeader?: boolean
 }
 
 const SiteLayout = (props: Props) => {
-  const { title, children, fullScreen } = props
+  const { title, children, containerRef,transparentHeader } = props
+  const scrollPos = useScrollPosition(containerRef)
+  console.log(scrollPos);
   return (
-    <div className='siteLayout'>
+    <div className='siteLayout' ref={containerRef}>
       <Header title={title} />
-      <SiteHeader />
+      <SiteHeader transparent={transparentHeader && scrollPos?.y === 0}/>
       <div
-        className={`flex flex-col w-full min-h-[calc(100vh_-_66px)] ${
-          !fullScreen ? 'max-w-[1300px]' : ''
-        }`}
+        className="flex flex-col w-full min-h-[calc(100vh_-_66px)]"
       >
         {children}
+        <SiteFooter />
       </div>
     </div>
   )

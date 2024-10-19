@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const HeroSection = () => {
   return (
-    <div className='bg-[#C0ECFF] w-full min-h-full relative overflow-hidden'>
+    <div className='bg-[#C0ECFF] w-full min-h-full h-[800px] relative overflow-hidden'>
       <div className='hero-container'>
         <div className='hero-text-container'>
           <h1>Your Pathway to Success</h1>
@@ -17,7 +17,7 @@ const HeroSection = () => {
           alt='/collegeMain.svg'
           width={1900}
           height={1000}
-          className='min-w-full lg:min-h-[70vh] absolute lg:top-[10vh] -bottom-5'
+          className='hero-image'
         />
       </div>
     </div>

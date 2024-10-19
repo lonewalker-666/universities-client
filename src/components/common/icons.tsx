@@ -1,8 +1,6 @@
 export const TickIcon = (props: any) => {
-  const { color } = props;
   return (
     <svg
-      className="w-4 h-4 "
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"
@@ -26,12 +24,12 @@ export const PlusOutlined = (props: any) => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      class="size-6"
+      className="size-6"
       {...props}
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M12 4.5v15m7.5-7.5h-15"
       />
     </svg>
@@ -52,8 +50,8 @@ export const checkBox = (props: any) => {
       {...props}
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="m4.5 12.75 6 6 9-13.5"
       />
     </svg>

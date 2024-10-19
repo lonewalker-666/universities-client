@@ -7,6 +7,8 @@ import Features from './components/features';
 import Pricing from './components/pricing';
 import Testimonials from './components/testimonial';
 import Community from './components/community';
+import ProductFaq from './components/productFaq';
+import Footer from './components/footer';
 
 const HomeContainer = () => {
   // const tryAPI = async() => {
@@ -34,6 +36,8 @@ const HomeContainer = () => {
         <Pricing />
         <Testimonials />
         <Community />
+        <ProductFaq />
+        <Footer />
     </>
   )
 }

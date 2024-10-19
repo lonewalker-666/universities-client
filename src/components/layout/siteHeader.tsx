@@ -2,7 +2,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Button from '../common/button'
 
-const SiteHeader = () => {
+interface Props{
+  transparent?: boolean
+}
+
+const SiteHeader = (props:Props) => {
+  const {transparent} = props
   const router = useRouter()
 
   const handleNavigation = (path:any) => {
@@ -10,7 +15,7 @@ const SiteHeader = () => {
   };
   return (
     <div
-      className='siteHeader transparent'
+      className={`siteHeader ${transparent ? "transparent" : ""}`}
       style={{ boxShadow: '0px 4px 25.9px 0px #00000014' }}
     >
       <div className='flex items-center justify-between gap-4 w-full max-w-[1600px] xs:px-4 md:px-10'>
