@@ -13,9 +13,9 @@ const ProductLayout = (props: Props) => {
     <div className='h-screen flex items-center w-full overflow-y-auto'>
       <Header title={title} />
       <ProductHeader />
-     <section className='ml-[280px] min-h-[150vh] w-full flex-1 bg-[green]'>
-
-     </section>
+      <section className='ml-[280px] min-h-[100vh] w-full flex-1 bg-[black] text-white'>
+        {children}
+      </section>
     </div>
   )
 }
