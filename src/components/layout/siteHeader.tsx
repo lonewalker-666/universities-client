@@ -19,7 +19,8 @@ const SiteHeader = () => {
           alt='/logo.png'
           width={1000}
           height={1000}
-          className='xs:w-[180px] md:w-[234px]'
+          className='xs:w-[180px] md:w-[234px] cursor-pointer'
+          onClick={() => router.push('/')}
         />
         <div className='xs:hidden lg:flex gap-7'>
           <div className='flex xs:gap-5 lg:gap-7'>
