@@ -8,10 +8,11 @@ interface Props {
   children: string | JSX.Element
   containerRef?: any
   transparentHeader?: boolean
+  noFooter?:boolean
 }
 
 const SiteLayout = (props: Props) => {
-  const { title, children, containerRef,transparentHeader } = props
+  const { title, children, containerRef,transparentHeader,noFooter } = props
   const scrollPos = useScrollPosition(containerRef)
   console.log(scrollPos);
   return (
@@ -22,7 +23,7 @@ const SiteLayout = (props: Props) => {
         className="flex flex-col w-full min-h-[calc(100vh_-_66px)]"
       >
         {children}
-        <SiteFooter />
+        {!noFooter && <SiteFooter />}
       </div>
     </div>
   )

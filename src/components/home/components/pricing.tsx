@@ -1,37 +1,12 @@
 import { useEffect, useState } from 'react';
 import { TickIcon } from '../../common/icons';
 import HeaderContainer from './headerContainer';
-import { getPlans } from '@/src/services/api';
 import { isEmpty } from 'lodash';
 import { Plans } from '@/Mock/plans';
 
 const Pricing = () => {
   const [plans, setPlans] = useState<any>(Plans);  // null to detect if data is loaded or not
   const [loading, setLoading] = useState(true); // track loading state
-
-  // const getPlansData = async () => {
-  //   try {
-  //     const response = await getPlans();
-  //     setPlans(response);
-  //   } catch (e) {
-  //     console.log(e);
-  //   } finally {
-  //     setLoading(false);  // set loading to false after data is fetched
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getPlansData();
-  // }, []);
-
-  // If plans data is not available, show a loading state or handle errors
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (!plans || plans.length === 0) {
-  //   return <div>No plans available</div>;
-  // }
 
   return (
     <div className='relative w-full items-center flex flex-col gap-10 p-8 pt-[66px]'>

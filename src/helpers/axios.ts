@@ -1,47 +1,58 @@
-import axios from 'axios'
+import axios from 'axios';
 import {
   getRefreshToken,
   setAccessToken,
   setRefreshToken
-} from './local-storage'
+} from './local-storage';
+import Router from 'next/router';
 
 // live EC2
 // const BASE_URL = "https://bubbl.cards/api";
 // development
 // const BASE_URL = "https://devapi.bubbl.cards/api";
-const BASE_URL = 'http://127.1.0.0:8000/api'
+const BASE_URL = 'http://127.1.0.0:8000/api';
 
-const axiosInstance = axios.create({ baseURL: BASE_URL })
+const axiosInstance = axios.create({ baseURL: BASE_URL });
 
 // Interceptor to check for 401 errors (token expiration)
 axiosInstance.interceptors.response.use(
   response => response, // if the response is successful, return it
   async error => {
-    const originalRequest = error.config
+    const originalRequest = error.config;
 
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true
+    // Check if the response exists and status is 401 (Unauthorized)
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
 
-      const refreshToken = getRefreshToken()
+      try {
+        const refreshToken = getRefreshToken();
 
-      const response = await axios.post(`${BASE_URL + '/auth/refresh-token'}`, {
-        refreshToken
-      })
+        // Send the request to refresh the token
+        const response = await axios.post(`${BASE_URL}/auth/refresh-token`, { refreshToken });
 
-      if (response.status === 200) {
-        const newAccessToken = response.data.accessToken
-        const newRefreshToken = response?.data?.refreshToken
-        setAccessToken(newAccessToken)
-        setRefreshToken(newRefreshToken)
+        if (response.status === 200) {
+          const newAccessToken = response.data.accessToken;
+          setAccessToken(newAccessToken);
 
-        // Set the new access token in the request header and retry the request
-        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
-        return axiosInstance(originalRequest)
+          // Set the new access token in the request header and retry the original request
+          originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+          return axiosInstance(originalRequest);  // Retry the request with the new token
+        }
+      } catch (refreshError) {
+        // If the refresh token also fails, redirect to the login page
+        console.error('Refresh token failed:', refreshError);
+        Router.push('/login');  // Redirect to login on token refresh failure
+        return Promise.reject(refreshError);  // Reject the original promise
       }
     }
 
-    return Promise.reject(error) // If it's a different error, reject the promise
+    // If the error is not a 401 or other conditions fail, push to login and reject
+    if (error.response && error.response.status === 401) {
+      Router.push('/login');  // Redirect to login on token expiration
+    }
+    
+    return Promise.reject(error);  // Reject the original error promise
   }
-)
+);
 
-export default axiosInstance
+export default axiosInstance;

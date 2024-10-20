@@ -3,7 +3,7 @@ import SignUp from "@/src/components/singup";
 
 const SignupPage = () => {
   return (
-    <SiteLayout title="Universities@USA-Home">
+    <SiteLayout title="Universities@USA-Home" noFooter>
       <SignUp />
     </SiteLayout>
   );

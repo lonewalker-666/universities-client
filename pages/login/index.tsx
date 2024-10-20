@@ -4,7 +4,7 @@ import Login from "@/src/components/login";
 
 const LoginPage = () => {
   return (
-    <SiteLayout title="Universities@USA-Home">
+    <SiteLayout title="Universities@USA-Home" noFooter>
       <Login />
     </SiteLayout>
   );

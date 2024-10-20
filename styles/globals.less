@@ -386,10 +386,16 @@ input[type='search']:hover::-webkit-search-cancel-button {
 }
 
 .features-hover:hover{
+
   span{
     background: #6F42C1E5;
     path{
       fill: white;
+    }
+  }
+  &.ai{
+    span{
+      background: linear-gradient(0deg, rgba(255,95,228,1) 30%, rgba(173,109,244,1) 100%);
     }
   }
   .icon{
@@ -403,8 +409,6 @@ input[type='search']:hover::-webkit-search-cancel-button {
     .hover-text{
       left: -20%;
       top: -105%;
-      background: #6F42C1E5;
-      color: white;
       width: auto;
       opacity: 1;
       &.center{

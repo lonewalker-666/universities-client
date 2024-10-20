@@ -4,22 +4,24 @@ interface ObjectLiteral {
   [key: string]: string | undefined;
 }
 
-
-
-export const COURSE_FEATURES = [
+export const GENDER = [
   {
-    icon: "/Groupicon.png",
-    description: "Connect with Like minded People",
+    "id": 1,
+    "name": "Male"
   },
   {
-    icon: "/Groupbundle.png",
-    description: "Curated Bundles and Kits for you",
+    "id": 2,
+    "name": "Female"
   },
   {
-    icon: "/Groupbar.png",
-    description: "Course Comparative Analysis",
+    "id": 3,
+    "name": "Others"
   },
-];
+  {
+    "id": 4,
+    "name": "Prefer Not to Say"
+  }
+]
 
 export const messageBg: ObjectLiteral = {
   success: "light-green-bg",
@@ -27,106 +29,152 @@ export const messageBg: ObjectLiteral = {
   info: "light-blue-bg",
 };
 
-export const defaultError = {
-  responseCode: "500",
-  responseDescription: "Internal Error",
-};
-
-export const Categories = [
+export const RACE = [
   {
-      "value": 1,
-      "label": "Arts and Humanities"
+    "id": 1,
+    "name": "American Indian or Alaska Native"
   },
   {
-      "value": 2,
-      "label": "Business"
+    "id": 2,
+    "name": "Asian/Cambodia"
   },
   {
-      "value": 3,
-      "label": "Computer Science"
+    "id": 3,
+    "name": "Asian/China"
   },
   {
-      "value": 4,
-      "label": "Data Science"
+    "id": 4,
+    "name": "Asian/India"
   },
   {
-      "value": 5,
-      "label": "Engineering"
+    "id": 5,
+    "name": "Asian/Japan"
   },
   {
-      "value": 6,
-      "label": "Health and Medicine"
+    "id": 6,
+    "name": "Asian/Korea"
   },
   {
-      "value": 7,
-      "label": "Mathematics"
+    "id": 7,
+    "name": "Asian/Malaysia"
   },
   {
-      "value": 8,
-      "label": "Science"
+    "id": 8,
+    "name": "Asian/Pakistan"
   },
   {
-      "value": 9,
-      "label": "Social Science"
+    "id": 9,
+    "name": "Asian/Philippines"
   },
   {
-      "value": 10,
-      "label": "Personal Development"
+    "id": 10,
+    "name": "Asian/Vietnam"
   },
   {
-      "value": 11,
-      "label": "Education"
+    "id": 11,
+    "name": "Asian/Other East Asia"
   },
   {
-      "value": 12,
-      "label": "Language Learning"
+    "id": 12,
+    "name": "Asian/Other South Asia"
+  },
+  {
+    "id": 13,
+    "name": "Asian/Other Southeast Asia"
+  },
+  {
+    "id": 14,
+    "name": "Black or African American/U.S. / African American"
+  },
+  {
+    "id": 15,
+    "name": "Black or African American/Africa"
+  },
+  {
+    "id": 16,
+    "name": "Black or African American/Caribbean"
+  },
+  {
+    "id": 17,
+    "name": "Black or African American/Other"
+  },
+  {
+    "id": 18,
+    "name": "Hispanic/Latino/Central America"
+  },
+  {
+    "id": 19,
+    "name": "Hispanic/Latino/Cuba"
+  },
+  {
+    "id": 20,
+    "name": "Hispanic/Latino/Mexico"
+  },
+  {
+    "id": 21,
+    "name": "Hispanic/Latino/Puerto Rico"
+  },
+  {
+    "id": 22,
+    "name": "Hispanic/Latino/South America"
+  },
+  {
+    "id": 23,
+    "name": "Hispanic/Latino/Spain"
+  },
+  {
+    "id": 24,
+    "name": "Hispanic/Latino/Other"
+  },
+  {
+    "id": 25,
+    "name": "Native Hawaiian or Other Pacific Islander/Guam"
+  },
+  {
+    "id": 26,
+    "name": "Native Hawaiian or Other Pacific Islander/Hawaii"
+  },
+  {
+    "id": 27,
+    "name": "Native Hawaiian or Other Pacific Islander/Samoa"
+  },
+  {
+    "id": 28,
+    "name": "Native Hawaiian or Other Pacific Islander/Other Pacific Islands"
+  },
+  {
+    "id": 29,
+    "name": "White/Europe"
+  },
+  {
+    "id": 30,
+    "name": "White/Middle East"
+  },
+  {
+    "id": 31,
+    "name": "White/Other"
+  },
+  {
+    "id": 32,
+    "name": "Prefer Not to Answer"
   }
 ]
 
-
-
-export const DIFFICULTY = [{
-  value:1,
-  label:"Beginner"
-},{
-  value:2,
-  label:"Intermediate"
-},{
-  value:3,
-  label:"Advanced"
-}]
-
-export const LANGUAGE = [
+export const GRADE_LEVEL = [
   {
-    value: 1,
-    label: "English"
+    "id": 1,
+    "name": "Freshman"
   },
   {
-    value:2,
-    label: "Hindi"
+    "id": 2,
+    "name": "Sophomore"
   },
   {
-    value:3,
-    label: "French"
+    "id": 3,
+    "name": "Junior"
+  },
+  {
+    "id": 4,
+    "name": "Senior"
   }
 ]
-
-export const AUTH_ENDPOINT: any = process.env.NEXT_PUBLIC_AUTH_END_POINT;
-export const COURSE_ENDPOINT: any = process.env.NEXT_PUBLIC_COURSE_END_POINT;
-export const USER_ENDPOINT: any = process.env.NEXT_PUBLIC_USER_END_POINT;
-export const AES_KEY: any = process.env.NEXT_PUBLIC_ENCRYPTION_KEY;
-export const AES_IV: any = process.env.NEXT_PUBLIC_ENCRYPTION_IV;
-export const FILE_END_POINT:any = process.env.NEXT_PUBLIC_FILE_END_POINT
-
-export const noAuthCheckPaths = [
-  "/login",
-  "/signup",
-  "/",
-  "/home",
-  "/courses",
-  "/about",
-];
-export const homePath = ["/", "/home"];
-
-export const slideImages = ["/slide-1.png","/slide-2.png","/slide-3.png"]
-export const productSlideImages = ["/productSlide.png","/slide-1.png","/productSlide.png"]
