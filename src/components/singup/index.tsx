@@ -9,7 +9,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLogin = (e:any) => {
+  const handleLogin = (e: any) => {
     e.preventDefault();
     // Handle login logic here
     console.log("Email:", email);
@@ -32,17 +32,22 @@ const SignUp = () => {
       {/* Left side: Login form */}
       <div className="lg:w-1/2 w-full flex justify-center px-8 py-12 bg-transparent">
         <div className="max-w-md w-full flex flex-col gap-6">
-          <div className="ml-6">
+          <div className="flex justify-center">
             <img src="/logo.png" alt="Logo" className="h-[50px]" />
           </div>
           <div className="flex flex-col gap-2">
-          <h1 className="text-4xl font-medium poppin-text  text-[#000000]">
-            Get Started
-          </h1>
+            <div className="flex flex-row items-center">
+              <h1 className="text-4xl font-medium poppin-text  text-[#000000]">
+                Get Started
+              </h1>
+              <span>
+                <img src="/hand.png" alt="hand" className="w-[60px] h-[60px]" />
+              </span>
+            </div>
 
-          <p className="text-md font-medium poppin-text text-[#000000] ">
-            Create your account
-          </p>
+            <p className="text-md font-medium poppin-text text-[#000000] ">
+              Create your account
+            </p>
           </div>
           <form onSubmit={handleLogin}>
             <div className="mb-6">
@@ -52,7 +57,7 @@ const SignUp = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-4  bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
@@ -63,7 +68,7 @@ const SignUp = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-4  bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>

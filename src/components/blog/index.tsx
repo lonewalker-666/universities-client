@@ -1,7 +1,7 @@
 import React from "react";
 import Divider from "../common/divider";
 import SiteLayout from "../layout/siteLayout";
-
+import Image from "next/image";
 const Blog = () => {
   const posts = [
     {
@@ -43,12 +43,19 @@ const Blog = () => {
   return (
     <>
       <div className="w-full">
-        <img
-          src="/blogIntro.png"
-          alt="Blog Banner"
-          className="w-full object-cover"
-        />
+        <div className="flex flex-col gap-2 justify-center items-center bg-[url('/blogImgBg.png')] bg-no-repeat  min-h-[500px] bg-[length:100%_100%]">
+          <span className="inter-text text-[#6F42C1E5] font-extrabold ">
+            Blogs
+          </span>
+          <p className="inter-text font-semibold lg:text-xl md:text-lg xs:text-sm">
+            Insights & Updates
+          </p>
+          <p className="inter-text font-medium lg:text-xl md:text-sm xs:text-xs text-[#00000080] ">
+            Stay informed with the latest news and articles
+          </p>
+        </div>
       </div>
+
       <div className="flex justify-center px-8 w-full">
         <div className="flex flex-col gap-3 w-full max-w-[1300px]">
           <div>
