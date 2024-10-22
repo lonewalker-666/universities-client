@@ -14,7 +14,7 @@ const ProductLayout = (props: Props) => {
     <div className='h-screen flex items-center w-full overflow-y-auto overflow-x-hidden'>
       <Header title={title} />
       <ProductNav />
-      <section className='ml-[280px] min-h-[100vh] w-full flex-1 text-white'>
+      <section className='md:ml-[280px] min-h-[100vh] w-full text-white'>
         <PageHeader title='Your Profile'/>
         {children}
       </section>

@@ -11,7 +11,7 @@ import MessagesOutlined from '../common/icons/messages'
 const ProductNav = () => {
     const router = useRouter()
   return (
-    <section className='fixed h-screen w-[280px] flex flex-col gap-12 p-8 border-r border-[#E8E8E9]'>
+    <section className='fixed xs:hidden md:flex h-screen w-[280px] flex-col gap-12 p-8 border-r border-[#E8E8E9]'>
       <Image
         src='/logo.png'
         alt='/logo.png'
@@ -20,7 +20,7 @@ const ProductNav = () => {
         className='xs:w-[180px] md:w-[234px]'
       />
       <div className='flex flex-col gap-3 '>
-        <Link href='//overview' className={`nav ${router.pathname == "/overview" ? "active" : ""}`}>
+        <Link href='/overview' className={`nav ${router.pathname == "/overview" ? "active" : ""}`}>
           <DashoardOutlined color={router.pathname == "/overview" ? "#fff" : "black"} />
           <p>Overview</p>
         </Link>

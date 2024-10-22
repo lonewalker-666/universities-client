@@ -59,14 +59,14 @@ const SiteHeader = (props:Props) => {
               title='Sign in'
               onClick={() => handleNavigation('/login')}
               width={80}
-              background='#F5F5F5'
+              background={transparent ? '#c0ecff' :'#F5F5F5'}
               color='#000'
-              border='1px solid #CAD0D9'
+              border={transparent ? 'none' : '1px solid #CAD0D9'}
             />
             <Button
               title='Start for Free'
               width={150}
-              onClick={() => console.log('clicked')}
+              onClick={() => handleNavigation('/signup')}
             />
           </div>
         </div>
