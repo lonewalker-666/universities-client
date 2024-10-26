@@ -1,180 +1,211 @@
-import Router from "next/router";
+import Router from 'next/router'
 
 interface ObjectLiteral {
-  [key: string]: string | undefined;
+  [key: string]: string | undefined
 }
 
 export const GENDER = [
   {
-    "id": 1,
-    "name": "Male"
+    value: 1,
+    label: 'Male'
   },
   {
-    "id": 2,
-    "name": "Female"
+    value: 2,
+    label: 'Female'
   },
   {
-    "id": 3,
-    "name": "Others"
+    value: 3,
+    label: 'Others'
   },
   {
-    "id": 4,
-    "name": "Prefer Not to Say"
+    value: 4,
+    label: 'Prefer Not to Say'
   }
 ]
 
 export const messageBg: ObjectLiteral = {
-  success: "light-green-bg",
-  error: "light-red-bg",
-  info: "light-blue-bg",
-};
+  success: 'light-green-bg',
+  error: 'light-red-bg',
+  info: 'light-blue-bg'
+}
 
 export const RACE = [
   {
-    "id": 1,
-    "name": "American Indian or Alaska Native"
+    value: 1,
+    label: 'American Indian or Alaska Native'
   },
   {
-    "id": 2,
-    "name": "Asian/Cambodia"
+    value: 2,
+    label: 'Asian/Cambodia'
   },
   {
-    "id": 3,
-    "name": "Asian/China"
+    value: 3,
+    label: 'Asian/China'
   },
   {
-    "id": 4,
-    "name": "Asian/India"
+    value: 4,
+    label: 'Asian/India'
   },
   {
-    "id": 5,
-    "name": "Asian/Japan"
+    value: 5,
+    label: 'Asian/Japan'
   },
   {
-    "id": 6,
-    "name": "Asian/Korea"
+    value: 6,
+    label: 'Asian/Korea'
   },
   {
-    "id": 7,
-    "name": "Asian/Malaysia"
+    value: 7,
+    label: 'Asian/Malaysia'
   },
   {
-    "id": 8,
-    "name": "Asian/Pakistan"
+    value: 8,
+    label: 'Asian/Pakistan'
   },
   {
-    "id": 9,
-    "name": "Asian/Philippines"
+    value: 9,
+    label: 'Asian/Philippines'
   },
   {
-    "id": 10,
-    "name": "Asian/Vietnam"
+    value: 10,
+    label: 'Asian/Vietnam'
   },
   {
-    "id": 11,
-    "name": "Asian/Other East Asia"
+    value: 11,
+    label: 'Asian/Other East Asia'
   },
   {
-    "id": 12,
-    "name": "Asian/Other South Asia"
+    value: 12,
+    label: 'Asian/Other South Asia'
   },
   {
-    "id": 13,
-    "name": "Asian/Other Southeast Asia"
+    value: 13,
+    label: 'Asian/Other Southeast Asia'
   },
   {
-    "id": 14,
-    "name": "Black or African American/U.S. / African American"
+    value: 14,
+    label: 'Black or African American/U.S. / African American'
   },
   {
-    "id": 15,
-    "name": "Black or African American/Africa"
+    value: 15,
+    label: 'Black or African American/Africa'
   },
   {
-    "id": 16,
-    "name": "Black or African American/Caribbean"
+    value: 16,
+    label: 'Black or African American/Caribbean'
   },
   {
-    "id": 17,
-    "name": "Black or African American/Other"
+    value: 17,
+    label: 'Black or African American/Other'
   },
   {
-    "id": 18,
-    "name": "Hispanic/Latino/Central America"
+    value: 18,
+    label: 'Hispanic/Latino/Central America'
   },
   {
-    "id": 19,
-    "name": "Hispanic/Latino/Cuba"
+    value: 19,
+    label: 'Hispanic/Latino/Cuba'
   },
   {
-    "id": 20,
-    "name": "Hispanic/Latino/Mexico"
+    value: 20,
+    label: 'Hispanic/Latino/Mexico'
   },
   {
-    "id": 21,
-    "name": "Hispanic/Latino/Puerto Rico"
+    value: 21,
+    label: 'Hispanic/Latino/Puerto Rico'
   },
   {
-    "id": 22,
-    "name": "Hispanic/Latino/South America"
+    value: 22,
+    label: 'Hispanic/Latino/South America'
   },
   {
-    "id": 23,
-    "name": "Hispanic/Latino/Spain"
+    value: 23,
+    label: 'Hispanic/Latino/Spain'
   },
   {
-    "id": 24,
-    "name": "Hispanic/Latino/Other"
+    value: 24,
+    label: 'Hispanic/Latino/Other'
   },
   {
-    "id": 25,
-    "name": "Native Hawaiian or Other Pacific Islander/Guam"
+    value: 25,
+    label: 'Native Hawaiian or Other Pacific Islander/Guam'
   },
   {
-    "id": 26,
-    "name": "Native Hawaiian or Other Pacific Islander/Hawaii"
+    value: 26,
+    label: 'Native Hawaiian or Other Pacific Islander/Hawaii'
   },
   {
-    "id": 27,
-    "name": "Native Hawaiian or Other Pacific Islander/Samoa"
+    value: 27,
+    label: 'Native Hawaiian or Other Pacific Islander/Samoa'
   },
   {
-    "id": 28,
-    "name": "Native Hawaiian or Other Pacific Islander/Other Pacific Islands"
+    value: 28,
+    label: 'Native Hawaiian or Other Pacific Islander/Other Pacific Islands'
   },
   {
-    "id": 29,
-    "name": "White/Europe"
+    value: 29,
+    label: 'White/Europe'
   },
   {
-    "id": 30,
-    "name": "White/Middle East"
+    value: 30,
+    label: 'White/Mvaluedle East'
   },
   {
-    "id": 31,
-    "name": "White/Other"
+    value: 31,
+    label: 'White/Other'
   },
   {
-    "id": 32,
-    "name": "Prefer Not to Answer"
+    value: 32,
+    label: 'Prefer Not to Answer'
   }
 ]
 
 export const GRADE_LEVEL = [
   {
-    "id": 1,
-    "name": "Freshman"
+    value: 1,
+    label: 'Freshman'
   },
   {
-    "id": 2,
-    "name": "Sophomore"
+    value: 2,
+    label: 'Sophomore'
   },
   {
-    "id": 3,
-    "name": "Junior"
+    value: 3,
+    label: 'Junior'
   },
   {
-    "id": 4,
-    "name": "Senior"
+    value: 4,
+    label: 'Senior'
   }
 ]
+
+export const CITIZENSHIP = [
+  { value: 1, label: 'US Citizen or US National' },
+  { value: 2, label: 'US Permanent Resident' },
+  { value: 3, label: 'International' },
+  { value: 4, label: 'Prefer Not to Say' }
+]
+
+export const ARMY_STATUS = [
+  { value: 1, label: "Currently Serving" },
+  { value: 2, label: "Previously Served" },
+  { value: 3, label: "Current Dependent" },
+  { value: 4, label: "Not Applicable" },
+  { value: 5, label: "Prefer Not to Answer" }
+]
+
+export const FIRST_GENERATION = [
+  { value: 1, label: "Yes" },
+  { value: 2, label: "No" },
+  { value: 3, label: "Prefer Not to Answer" }
+];
+
+export const FINIANCIAL_AID = [
+  { value: 1, label: "Less than $30,000" },
+  { value: 2, label: "$30,000 - $50,000" },
+  { value: 3, label: "$50,000 - $75,000" },
+  { value: 4, label: "$75,000 - $100,000" },
+  { value: 5, label: "$100,000 - $150,000" },
+  { value: 6, label: "More than $150,000" },
+  { value: 7, label: "Prefer not to Answer" }
+];

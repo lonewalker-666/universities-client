@@ -43,11 +43,11 @@ const ProductFaq = () => {
   return (
     <div className=' w-full relative items-center justify-center min-h-full flex flex-col p-8 gap-10 pt-[66px]'>
       <div
-        className='bg-[#AD6DF4] rounded-full absolute xs:blur-[40px] md:blur-[100px] right-[-15%] top-[10%]'
+        className='bg-[#AD6DF4] bg-opacity-50 rounded-full absolute xs:blur-[40px] md:blur-[100px] right-[-15%] top-[10%]'
         style={{ height: size.width / 4, width: size.width / 4 }}
       />
       <div
-        className='bg-[#FF5FE4] rounded-full absolute xs:blur-[40px] md:blur-[100px] left-[-15%] bottom-[10%]'
+        className='bg-[#FF5FE4] bg-opacity-50 rounded-full absolute xs:blur-[40px] md:blur-[100px] left-[-15%] bottom-[10%]'
         style={{ height: size.width / 4, width: size.width / 4 }}
       />
       <div className='w-full mt-[50px]'>
@@ -66,7 +66,7 @@ const ProductFaq = () => {
                   <span className='font-medium text-xs sm:text-sm md:text-base'>
                     {record?.title}
                   </span>
-                  <span className='w-[14px] h-[14px] flex items-center justify-center'>
+                  <span className='w-[16px] flex items-center justify-center'>
                     <PlusOutlined
                       style={{
                         transform:

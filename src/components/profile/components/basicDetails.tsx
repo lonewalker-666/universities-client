@@ -11,7 +11,7 @@ interface Props {
   setProfileData: any
 }
 
-const BassicDetails = (props: Props) => {
+const BasicDetails = (props: Props) => {
   const { visible, onShow, onHide, profileData, setProfileData } = props
   const editButtonTitle = (
     <div className='flex gap-3 items-center justify-center h-full w-full'>
@@ -20,7 +20,7 @@ const BassicDetails = (props: Props) => {
   )
   const saveButtonTitle = (
     <div className='flex gap-3 items-center justify-center h-full w-full'>
-      <EditIcon /> Save
+      <EditIcon color='white' /> Save
     </div>
   )
   return (
@@ -72,6 +72,8 @@ const BassicDetails = (props: Props) => {
                   setProfileData({ ...profileData, name: e.target.value })
                 }
                 style={{ fontSize: 26 }}
+                hideTitle
+                title='Name'
               />
               <EditableField
                 visible={visible?.basicDetailsEdit}
@@ -82,7 +84,8 @@ const BassicDetails = (props: Props) => {
                     email: e.target.value.trim()
                   })
                 }
-                
+                hideTitle
+                title='Email'
               />
             </span>
           </div>
@@ -107,19 +110,56 @@ const BassicDetails = (props: Props) => {
             />
           )}
         </div>
-        <div className='w-full rounded-[12px] bg-[#F9F9F9] flex justify-between xs:items-start md:items-center xs:flex-col md:flex-row xs:gap-5 md:gap-12 lg:p-8 xs:p-6'>
-          <EditableField
-            visible={visible?.basicDetailsEdit}
-            value={profileData?.name || ''}
-            onChange={(e: any) =>
-              setProfileData({ ...profileData, name: e.target.value })
-            }
-            title='Qualification'
-          />
+        <div className='w-full rounded-[12px] bg-[#F9F9F9] grid xs:grid-cols-1 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3 xs:gap-2 sm:gap-8 md:gap-2 lg:gap-12 py-4 lg:px-8 xs:px-6'>
+          <span className=" pr-6 xs:border-b sm:border-b-0 md:border-b lg:border-b-0 xs:border-r-0 sm:border-r md:border-r-0 lg:border-r pb-4 border[#3b3b3b]">
+            <EditableField
+              visible={visible?.basicDetailsEdit}
+              titleStyle = {{fontSize:16}}
+              style={{fontSize:18}}
+              value={profileData?.qualifications || ''}
+              onChange={(e: any) =>
+                setProfileData({
+                  ...profileData,
+                  qualifications: e.target.value
+                })
+              }
+              title='Qualification'
+            />
+          </span>
+          <span className=" pr-6 xs:border-b sm:border-b-0 md:border-b lg:border-b-0 xs:border-r-0 sm:border-r md:border-r-0 lg:border-r pb-4 border[#3b3b3b]">
+            <EditableField
+              visible={visible?.basicDetailsEdit}
+              titleStyle = {{fontSize:16}}
+              style={{fontSize:18}}
+              value={profileData?.mobile || ''}
+              onChange={(e: any) =>
+                setProfileData({
+                  ...profileData,
+                  mobile: e.target.value
+                })
+              }
+              title='Mobile No.'
+            />
+          </span>
+          <span className="">
+            <EditableField
+              visible={visible?.basicDetailsEdit}
+              titleStyle = {{fontSize:16}}
+              style={{fontSize:18}}
+              value={profileData?.location || ''}
+              onChange={(e: any) =>
+                setProfileData({
+                  ...profileData,
+                  location: e.target.value
+                })
+              }
+              title='Location'
+            />
+          </span>
         </div>
       </div>
     </div>
   )
 }
 
-export default BassicDetails
+export default BasicDetails

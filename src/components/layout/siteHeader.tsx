@@ -16,7 +16,6 @@ const SiteHeader = (props:Props) => {
   return (
     <div
       className={`siteHeader ${transparent ? "transparent" : ""}`}
-      style={{ boxShadow: '0px 4px 25.9px 0px #00000014' }}
     >
       <div className='flex items-center justify-between gap-4 w-full max-w-[1600px] xs:px-4 md:px-10'>
         <Image

@@ -1,13 +1,12 @@
 {
-  "name": "mynerva--client",
+  "name": "universities-client",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploydev" : "npm install && npm run dev"
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -30,11 +29,12 @@
     "next": "13.4.12",
     "next-with-less": "^3.0.1",
     "postcss": "8.4.27",
-    "react": "18.2.0",
+    "quill": "^2.0.2",
+    "react": "^18.3.0",
     "react-apexcharts": "^1.4.1",
     "react-chartjs-2": "^5.2.0",
     "react-circular-progressbar": "^2.1.0",
-    "react-dom": "18.2.0",
+    "react-dom": "^18.3.0",
     "react-icons": "^5.0.1",
     "react-quill": "^2.0.0",
     "react-slick": "^0.30.2",

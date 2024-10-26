@@ -1,3 +1,5 @@
+import { isEmpty } from 'lodash'
+
 interface Props {
   visible: boolean
   value: string
@@ -7,25 +9,42 @@ interface Props {
   title?: string
   titleStyle?: any
   style?: any
+  hideTitle?: boolean
+  placeholder?: string
 }
 
 const EditableField = (props: Props) => {
-  const { visible, value, onChange, style, title,titleStyle } = props
+  const {
+    visible,
+    value,
+    onChange,
+    style,
+    title,
+    titleStyle,
+    hideTitle,
+    placeholder
+  } = props
 
   return (
-    <div className='flex flex-col gap-1 max-w-full'>
-      <p className='text-black font-medium text-opacity-30 text-sm' style={titleStyle || {}}>{title}</p>
+    <div className='flex flex-col gap-3 max-w-full justify-center'>
+      <p
+        className='text-black font-medium text-opacity-30 text-sm'
+        style={titleStyle || {}}
+      >
+        {hideTitle ? '' : title}
+      </p>
       {visible ? (
         <>
           <input
             type='text'
-            className={`border-b bg-transparent text-black max-w-full font-medium text-opacity-80 ${
+            className={`border-b bg-transparent text-lg text-black max-w-full p-2 font-medium text-opacity-80 ${
               value
                 ? 'border-gray-300 focus:outline-none focus:border-blue-500'
                 : 'border-red-600'
             }`}
             value={value}
             onChange={onChange}
+            placeholder={placeholder || `Enter your ${title}`}
           />
           {!value && (
             <p className='font-medium text-red-600'>
@@ -34,7 +53,12 @@ const EditableField = (props: Props) => {
           )}
         </>
       ) : (
-        <p className='font-medium text-opacity-80 text-black' style={style || {}}>{value}</p>
+        <p
+          className='font-medium text-opacity-80 text-black overflow-hidden text-ellipsis whitespace-nowrap'
+          style={style || {}}
+        >
+          {value}
+        </p>
       )}
     </div>
   )
