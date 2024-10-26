@@ -1,46 +1,10 @@
 import React from "react";
 import Divider from "../common/divider";
+import { posts } from "@/Mock/posts";
 import SiteLayout from "../layout/siteLayout";
 import Image from "next/image";
 import HeaderContainer from "../home/components/headerContainer";
 const Blog = () => {
-  const posts = [
-    {
-      id: 1,
-      title:
-        "Post sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "',
-      imageUrl: "/blogimg1.png",
-      date: "2023-09-01",
-    },
-    {
-      id: 2,
-      title:
-        "Post sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, "',
-      imageUrl: "/blogimg2.png",
-      date: "2023-09-02",
-    },
-    {
-      id: 3,
-      title:
-        "Post sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, "',
-      imageUrl: "/blogimg3.png",
-      date: "2023-09-03",
-    },
-    {
-      id: 4,
-      title: "How to Choose the Right College for Your Future",
-      description:
-        "hoosing the right college is one of the most important decisions you’ll make. Your choice will shape your academic journey, career prospects, and personal growth.",
-      imageUrl: "/blogImg.png",
-      date: "2024-04-28",
-    },
-  ];
-
   return (
     <>
       <div className="w-full">
@@ -80,37 +44,41 @@ const Blog = () => {
                 </button>
                 <span className="text-sm text-gray-500">{posts[3].date}</span>
               </div>
-              <h2 className="lg:text-[46px] text-[20px] font-semibold bricolage-text  leading-10">
-                {posts[3].title}
-              </h2>
-              <p className="text-gray-600 mt-2 inter-text">
-                {posts[3].description}
-              </p>
+              <div className="flex flex-col items-center text-center">
+                <h2 className="lg:text-[36px] text-[20px] font-semibold bricolage-text leading-10">
+                  {posts[3].title}
+                </h2>
+                <p className="text-gray-600 mt-2 inter-text">
+                  {posts[3].description}
+                </p>
+              </div>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+          {/*blogs section*/}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-6">
             {posts.slice(0, 3).map((post) => (
               <div
                 key={post.id}
-                className=" bg-transparent rounded-lg  hover:scale-105 transition-transform duration-200"
+                className="bg-transparent rounded-lg hover:scale-105 transition-transform duration-200 "
               >
                 <img
                   src={post.imageUrl}
                   alt={post.title}
-                  className="w-full h-48 object-cover rounded-lg"
+                  className="w-full h-48 sm:h-60 object-cover rounded-t-lg"
                 />
-                <div className="flex items-center gap-6 p-4">
-                  <button className="text-sm font-medium text-[#3F4654] bg-transparent border border-[#3F4654] rounded px-2 py-1 inter-text">
+                <div className="flex items-center gap-4 p-3 md:p-4">
+                  <button className="text-sm font-medium text-[#3F4654] bg-transparent border border-[#3F4654] rounded px-2 py-1">
                     Career Development
                   </button>
                   <span className="text-sm text-gray-500">{post.date}</span>
                 </div>
-                <div className="p-4">
-                  <h2 className="text-xl font-semibold bricolage-text">
+                <div className="px-3 pb-4 md:px-4">
+                  <h2 className="text-lg md:text-xl bricolage-text font-semibold text-[#111827] leading-relaxed">
                     {post.title}
                   </h2>
-                  <p className="text-gray-600 inter-text">{post.description}</p>
+                  <p className="text-gray-600 text-sm md:text-base">
+                    {post.description}
+                  </p>
                 </div>
               </div>
             ))}
