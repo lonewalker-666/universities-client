@@ -79,8 +79,8 @@ const [form,setForm] = useState(initial)
           </form>
       </div>
           <Image
-          src='/lawyer.png'
-          alt='/lawyer.png'
+          src='/lawyer.jpg'
+          alt='/lawyer.jpg'
           width={700}
           height={700}
           className='w-1/2 xs:hidden lg:block'
