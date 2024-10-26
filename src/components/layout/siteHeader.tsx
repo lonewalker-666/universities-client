@@ -2,7 +2,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Button from '../common/button'
 
-const SiteHeader = () => {
+interface Props{
+  transparent?: boolean
+}
+
+const SiteHeader = (props:Props) => {
+  const {transparent} = props
   const router = useRouter()
 
   const handleNavigation = (path:any) => {
@@ -10,8 +15,7 @@ const SiteHeader = () => {
   };
   return (
     <div
-      className='siteHeader transparent'
-      style={{ boxShadow: '0px 4px 25.9px 0px #00000014' }}
+      className={`siteHeader ${transparent ? "transparent" : ""}`}
     >
       <div className='flex items-center justify-between gap-4 w-full max-w-[1600px] xs:px-4 md:px-10'>
         <Image
@@ -54,14 +58,14 @@ const SiteHeader = () => {
               title='Sign in'
               onClick={() => handleNavigation('/login')}
               width={80}
-              background='#F5F5F5'
+              background={transparent ? '#c0ecff' :'#F5F5F5'}
               color='#000'
-              border='1px solid #CAD0D9'
+              border={transparent ? 'none' : '1px solid #CAD0D9'}
             />
             <Button
               title='Start for Free'
               width={150}
-              onClick={() => console.log('clicked')}
+              onClick={() => handleNavigation('/signup')}
             />
           </div>
         </div>

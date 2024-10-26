@@ -3,7 +3,7 @@ import SiteLayout from "@/src/components/layout/siteLayout";
 
 const BlogPage = () => {
   return (
-    <SiteLayout title="Universities@USA-Home" fullScreen>
+    <SiteLayout title="Universities@USA-Home">
       <Blog />
     </SiteLayout>
   );

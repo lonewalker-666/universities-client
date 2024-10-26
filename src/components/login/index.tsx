@@ -30,7 +30,7 @@ const Login = () => {
   return (
     <div className="flex lg:flex-row flex-col h-full">
       {/* Left side: Login form */}
-      <div className="lg:w-1/2 w-full flex items-center justify-center px-8 pt-12 bg-transparent">
+      <div className="lg:w-1/2 w-full flex justify-center px-8 pt-12 bg-transparent">
         <div className="max-w-md w-full flex flex-col">
           <div className="flex justify-center">
             <img src="/logo.png" alt="Logo" className=" h-[50px]" />

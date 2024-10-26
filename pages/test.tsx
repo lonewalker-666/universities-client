@@ -1,4 +1,4 @@
-import { createUser } from '@/src/services/authApi'
+import { createUser, facebooklogin, getOtp, googlSignup } from '@/src/services/authApi'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
@@ -7,10 +7,10 @@ const TestPage = () => {
 
   async function handleFormSubmit() {
     try {
-      const response:any = await createUser({
-        firstName: 'Kishore Kumar',
+      const response:any = await facebooklogin({
+        // firstName: 'Kishore Kumar',
         // lastName: 'Ravishankar',
-        // email: 'rolex@vikram.in',
+        email: 'kishorekk54321@gmail.com',
         // password: 'blabla',
         // deviceID: 'dcdjhhj'
       });

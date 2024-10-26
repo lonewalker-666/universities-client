@@ -3,7 +3,7 @@
 interface Props{
     title: string
     heading: string
-    description: string
+    description: string | JSX.Element
 }
 
 
@@ -16,7 +16,7 @@ const HeaderContainer = (props: Props) => {
           {title}
         </h6>
         <h4 className='text-center font-bold text-3xl'>{heading}</h4>
-        <p className='text-center text-[#00000080] text-xl max-w-lg'>{description}</p>
+        <p className='text-center text-[#00000080] text-xl max-w-md'>{description}</p>
       </div>
     </div>
   )
