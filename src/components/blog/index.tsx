@@ -2,6 +2,7 @@ import React from "react";
 import Divider from "../common/divider";
 import SiteLayout from "../layout/siteLayout";
 import Image from "next/image";
+import HeaderContainer from "../home/components/headerContainer";
 const Blog = () => {
   const posts = [
     {
@@ -43,16 +44,12 @@ const Blog = () => {
   return (
     <>
       <div className="w-full">
-        <div className="flex flex-col gap-2 justify-center items-center bg-[url('/blogImgBg.png')] bg-no-repeat  min-h-[500px] bg-[length:100%_100%]">
-          <span className="inter-text text-[#6F42C1E5] font-extrabold ">
-            Blogs
-          </span>
-          <p className="inter-text font-semibold lg:text-xl md:text-lg xs:text-sm">
-            Insights & Updates
-          </p>
-          <p className="inter-text font-medium lg:text-xl md:text-sm xs:text-xs text-[#00000080] ">
-            Stay informed with the latest news and articles
-          </p>
+        <div className="flex flex-col gap-2 p-6 justify-center items-center bg-[url('/blogImgBg.png')] bg-no-repeat  min-h-[450px] bg-cover bg-center">
+          <HeaderContainer
+            title="Blogs"
+            heading="Insights & Updates"
+            description="Stay informed with the latest news and articles"
+          />
         </div>
       </div>
 
