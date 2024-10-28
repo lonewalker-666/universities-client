@@ -4,7 +4,7 @@ import OverviewContainer from "@/src/components/overview"
 
 const OverviewPage = () => {
   return (
-    <ProductLayout title="Universities@USA-Overview">
+    <ProductLayout title="Universities@USA-Overview" pageTitle="Overview">
       <OverviewContainer />
     </ProductLayout>
   )

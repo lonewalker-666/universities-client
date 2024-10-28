@@ -1,11 +1,9 @@
 import ProductLayout from "@/src/components/layout/productLayout"
-import ProfileContainer from "@/src/components/profile"
 
 
 const ProfilePage = () => {
   return (
-    <ProductLayout title="Universities@USA-Profile" pageTitle="Profile">
-      <ProfileContainer />
+    <ProductLayout title="Universities@USA-Wishlist" pageTitle="Wishlist">
     </ProductLayout>
   )
 }
