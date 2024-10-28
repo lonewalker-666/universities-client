@@ -1,8 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { get } from "lodash";
 import { useState } from "react";
-import { message } from "../components/common/toastManager";
-import { defaultError } from "../lib/constants";
+
 
 interface Props {
   url: string;
@@ -64,13 +63,10 @@ const useCallApi = (props: Props) => {
       await setState({ ...state, data: response });
       onSuccess && onSuccess();
       onSuccessData && onSuccessData(response);
-      showSuccessMessage &&
-        message({ type: "success", text: responseDescription });
     } else {
       await setState({ ...state, error: true, data: response });
       onError && onError();
-      onErrorData && onErrorData(response || defaultError);
-      message({ type: "error", text: successMessage || responseDescription });
+      onErrorData && onErrorData(response);
     }
   };
 

@@ -1,5 +1,4 @@
 import Router from "next/router"
-import { noAuthCheckPaths } from "./constants"
 import { get, omit } from "lodash"
 import u from "./util"
 import { USER } from "../context/action"
@@ -38,16 +37,12 @@ export const CheckAuth = async (callApi:any,dispatch:any) => {
       await callApi({ ss_d: encrypted_ss_d });
     } 
     else {
-      !noAuthCheckPaths.includes(Router.pathname) && Router.push("/login?lt=1");
       localStorage.clear()
       closeSplash()
     }
   };
 
-  // const setAuthDataError = () => {
-  //   message({ type: "error", text: "Oop! Something went wrong. Please try login again." })
-  //   Router.push('/login?lt=1')
-  // }
+
 
   export const setAuthData = async(data:string,dispatch:any) => {
    try{
@@ -76,7 +71,6 @@ export const CheckAuth = async (callApi:any,dispatch:any) => {
       type:USER,
       payload:decryptData
     })
-   await noAuthCheckPaths.includes(Router.pathname) && Router.push("/dashboard");
     closeSplash()
   }
 

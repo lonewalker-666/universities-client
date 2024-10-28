@@ -57,7 +57,7 @@ function createValidationRule(ruleName:string, errorMessage:string, validateFunc
   }
 
   export function passwordValidate() {
-    const passFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!%&*_\-])[a-zA-Z\d!%&*_\-]{8,16}$/;
+    const passFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/;
     return createValidationRule(
       "passwordValidate",
       `passwords must contain 1 uppercase and lowercase letters and a number and a special character(!%&*_/-) maxLength:16`,
