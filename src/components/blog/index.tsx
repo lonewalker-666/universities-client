@@ -18,7 +18,7 @@ const Blog = () => {
       </div>
 
       <div className="flex justify-center px-8 w-full">
-        <div className="flex flex-col gap-3 w-full max-w-[1300px]">
+        <div className="flex flex-col  gap-3 w-full max-w-[1200px]">
           <div>
             <p className="lg:text-[36px] font-semibold text-[#111827] xs:text-[24px]">
               Recent Blog
@@ -30,22 +30,22 @@ const Blog = () => {
               marginBlock="20px"
             />
           </div>
-          <div className="flex flex-col md:flex-row gap-6 p-6 items-center">
+          <div className="flex flex-col items-start md:flex-row gap-6 p-6">
             <img
               src={posts[3].imageUrl}
               alt={posts[3].title}
               className="w-full md:w-1/2 h-50 object-cover rounded-lg"
             />
 
-            <div className="flex flex-col md:w-1/2">
-              <div className="flex items-center justify-center gap-4 mb-2">
+            <div className="flex flex-col md:w-1/2 ">
+              <div className="flex items-center justify-center gap-4 ">
                 <button className="text-sm font-medium text-[#3F4654] bg-transparent border border-[#3F4654] rounded px-2 py-1">
                   Career Development
                 </button>
                 <span className="text-sm text-gray-500">{posts[3].date}</span>
               </div>
-              <div className="flex flex-col items-center text-center">
-                <h2 className="lg:text-[36px] text-[20px] font-semibold bricolage-text leading-10">
+              <div className="flex flex-col items-center text-center md:mt-4 lg:mt-12 ">
+                <h2 className="  xs:text-[20px]  lg:text-[36px] font-semibold bricolage-text">
                   {posts[3].title}
                 </h2>
                 <p className="text-gray-600 mt-2 inter-text">

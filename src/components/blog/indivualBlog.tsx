@@ -1,5 +1,6 @@
 import React from "react";
 import { blogContent } from "@/Mock/blogContent";
+import { data } from "@/Mock/blogContent";
 import { titles } from "@/Mock/blogContent";
 import { relatedPosts } from "@/Mock/blogContent";
 const IndividualBlog = () => {
@@ -59,9 +60,9 @@ const IndividualBlog = () => {
         </div>
 
         {/* Blog Content */}
-        <div className="md:col-span-3 overflow-y-auto text-gray-700 space-y-6 max-w-2xl">
+        {/* <div className="md:col-span-3 overflow-y-auto text-gray-700 space-y-6 max-w-2xl">
           {blogContent.map((content, index) => {
-            if (content.type === "heading") {
+            if (content?.type === "heading") {
               return (
                 <h2
                   key={index}
@@ -131,10 +132,48 @@ const IndividualBlog = () => {
             }
             return null;
           })}
+        </div> */}
+        <div className="md:col-span-3 overflow-y-auto text-gray-700 space-y-6 max-w-2xl">
+          {data?.data?.overviewParas.map((para, index) => (
+            <p
+              key={index}
+              className="leading-relaxed inter font-normal text-[#111827]"
+            >
+              {para.paragraph.split(" ").map((word, wordIndex) => {
+                const highlight = para.overviewHighlights?.find(
+                  (highlight) => highlight.highlighted_text === word
+                );
+                if (highlight) {
+                  return (
+                    <a
+                      key={wordIndex}
+                      href={highlight.url || "#"}
+                      className="text-blue-500 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {word}{" "}
+                    </a>
+                  );
+                }
+                return word + " ";
+              })}
+            </p>
+          ))}
+
+          {data?.data?.topics.map((topic) =>
+            topic.contentParas.map((content, index) => (
+              <p
+                key={index}
+                className="leading-relaxed inter font-normal text-[#111827]"
+              >
+                {content.paragraph}
+              </p>
+            ))
+          )}
         </div>
       </div>
 
-      {/* Related Blog Posts Section */}
       <div className="mt-12">
         <h2 className="text-3xl font-semibold mb-6">Related Blog Posts</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
