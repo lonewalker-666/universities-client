@@ -1,4 +1,6 @@
+import { sign } from "crypto";
 
 export const defaultGlobalState = {
-   user:{}
+   user:{},
+   signup:{},
 }

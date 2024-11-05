@@ -41,7 +41,7 @@ const BasicDetails = (props: Props) => {
                 alt='default profile'
                 width={300}
                 height={300}
-                className='xs:w-[100px] md:w-[130px] lg:w-[150px]'
+                className='xs:w-[100px] md:w-[100px] lg:w-[130px]'
               />
               {visible?.basicDetailsEdit ? (
                 <Button

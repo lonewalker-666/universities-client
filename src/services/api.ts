@@ -1,51 +1,64 @@
 import axios from "../helpers/axios";
+import { toast } from 'react-toastify';
+
 
 export const getPlans = async () => {
   try {
     const res = await axios.get('/get/plans');  // Make sure POST is correct here
-    console.log('Response received:', res);  // Log entire response object
-    if (res?.data?.data) {
-      return res?.data?.data;
-    } else {
-      console.error("Unexpected response structure", res);
-      return [];
+    if(res?.data?.success){
+      return res.data.data;
+    }
+    else {
+      toast.error(res?.data?.message || "Error fetching plans");
     }
   } catch (e) {
+    toast.error("Error fetching plans");
     console.error('Error fetching plans:', e);  // Log error for more details
-    return [];
   }
 };
 
 
 export const getGender = async () => {
   try {
-    const res = await axios.get(`/get/gender`);
-    console.log('Response received:', res.data);
-    return res;
+    const res = await axios.get('/get/gender');  // Make sure POST is correct here
+    if(res?.data?.success){
+      return res.data.data;
+    }
+    else {
+      toast.error(res?.data?.message || "Error fetching gender");
+    }
   } catch (e) {
-    console.log(e);
-    return e;
+    toast.error("Error fetching gender");
+    console.error('Error fetching gender:', e);  // Log error for more details
   }
 };
 
 export const getGradeLevel = async () => {
   try {
-    const res = await axios.get(`/get/gradeLevel`);
-    console.log('Response received:', res.data);
-    return res;
+    const res = await axios.get('/get/gradeLevel');  // Make sure POST is correct here
+    if(res?.data?.success){
+      return res.data.data;
+    }
+    else {
+      toast.error(res?.data?.message || "Error fetching gradeLevel");
+    }
   } catch (e) {
-    console.log(e);
-    return e;
+    toast.error("Error fetching gradeLevel");
+    console.error('Error fetching gradeLevel:', e);  // Log error for more details
   }
 };
 
 export const getRace = async () => {
   try {
-    const res = await axios.get(`/get/race`);
-    console.log('Response received:', res.data);
-    return res;
+    const res = await axios.get('/get/race');  // Make sure POST is correct here
+    if(res?.data?.success){
+      return res.data.data;
+    }
+    else {
+      toast.error(res?.data?.message || "Error fetching race");
+    }
   } catch (e) {
-    console.log(e);
-    return e;
+    toast.error("Error fetching race");
+    console.error('Error fetching race:', e);  // Log error for more details
   }
 };

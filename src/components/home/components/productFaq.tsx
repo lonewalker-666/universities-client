@@ -41,7 +41,7 @@ const ProductFaq = () => {
   ]
 
   return (
-    <div className=' w-full relative items-center justify-center min-h-full flex flex-col p-8 gap-10 pt-[66px]'>
+    <div className=' w-full relative items-center justify-center flex flex-col p-8 gap-10 pt-[66px]'>
       <div
         className='bg-[#AD6DF4] bg-opacity-50 rounded-full absolute xs:blur-[40px] md:blur-[100px] right-[-15%] top-[10%]'
         style={{ height: size.width / 4, width: size.width / 4 }}

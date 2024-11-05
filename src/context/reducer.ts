@@ -1,4 +1,4 @@
-import { USER } from "./action";
+import { SIGNUP, USER } from "./action";
 import { defaultGlobalState } from "./defaultGlobalState";
 
 const reducer = (state = defaultGlobalState, action: any) => {
@@ -7,6 +7,12 @@ const reducer = (state = defaultGlobalState, action: any) => {
       return {
         ...state,
         user: action.payload,
+      };
+
+    case SIGNUP:
+      return {
+        ...state,
+        signup: action.payload,
       };
 
     default:

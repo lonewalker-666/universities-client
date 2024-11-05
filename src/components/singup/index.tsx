@@ -2,26 +2,43 @@ import React, { useState } from 'react'
 import { GoogleIcon, MetaIcon } from '../common/icons'
 import Divider from '../common/divider'
 import router from 'next/router'
-
+import { signUpSchema } from '@/src/helpers/validators'
 
 const SignUp = () => {
-const [form, setForm] = useState({
-  email: '',
-  password: '',
-  firstName: '',
-  lastName: '',
-  errors: {}
-})
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: ''
+  })
 
-const {email, password, firstName, lastName, errors} : any = form
+  const [errors, setErrors] = useState<any>({})
 
-  const handleLogin = (e: any) => {
-    // Handle login logic here
-    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/
+  const { email, password, firstName, lastName }: any = form
 
-    // if (!passRegex.test(password)) {
-  // }
-}
+  const validate = () => {
+    const { error } = signUpSchema.validate(form, { abortEarly: false })
+    if (!error) return null
+
+    // Map Joi error messages
+    const newErrors: any = {}
+    error.details.forEach(item => {
+      console.log(item)
+      newErrors[item.path[0]] = item.message
+    })
+    return newErrors
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    const newErrors = validate()
+    setErrors(newErrors || {})
+
+    if (!newErrors) {
+      // Submit form or process data
+      console.log('Form submitted:', form)
+    }
+  }
 
   const handleGoogleLogin = () => {
     // Handle Google login logic here
@@ -55,58 +72,74 @@ const {email, password, firstName, lastName, errors} : any = form
               Create your account
             </p>
           </div>
-          <form >
-            <div className='mb-6'>
-              <label className='block text-gray-700 mb-2'>Name</label>
+          <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
+            <div >
+              <label className='block text-gray-700 mb-2'>First Name</label>
               <input
                 type='text'
                 placeholder='Enter your First Name'
                 value={firstName}
-                onChange={e => setForm({...form, firstName: e.target.value})}
+                onChange={e => setForm({ ...form, firstName: e.target.value })}
                 className='w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                required
+                
               />
-              {errors?.firstName && <p style={{ color: 'red' }}>{errors?.firstName}</p>}
+              {errors?.firstName && (
+                <p style={{ color: 'red' }} className='mt-2'>
+                  {errors?.firstName}
+                </p>
+              )}
             </div>
-            <div className='mb-6'>
-              <label className='block text-gray-700 mb-2'>Name</label>
+            <div >
+              <label className='block text-gray-700 mb-2'>Last Name</label>
               <input
                 type='text'
                 placeholder='Enter your Last Name'
                 value={lastName}
-                onChange={e => setForm({...form, lastName: e.target.value})}
+                onChange={e => setForm({ ...form, lastName: e.target.value })}
                 className='w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                required
+                
               />
-               {errors?.lastName && <p style={{ color: 'red' }}>{errors?.lastName}</p>}
+              {errors?.lastName && (
+                <p style={{ color: 'red' }} className='mt-2'>
+                  {errors?.lastName}
+                </p>
+              )}
             </div>
-            <div className='mb-6'>
+            <div >
               <label className='block text-gray-700 mb-2'>Email</label>
               <input
-                type='email'
+                type='text'
                 placeholder='Enter your email'
                 value={email}
-                onChange={e => setForm({...form, email: e.target.value})}
+                onChange={e => setForm({ ...form, email: e.target.value })}
                 className='w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                required
+                
               />
-               {errors?.email && <p style={{ color: 'red' }}>{errors?.email}</p>}
+              {errors?.email && (
+                <p style={{ color: 'red' }} className='mt-2'>
+                  {errors?.email}
+                </p>
+              )}
             </div>
-            <div className='mb-6'>
+            <div >
               <label className='block text-gray-700 mb-2'>Password</label>
               <input
                 type='password'
                 placeholder='Enter your password'
                 value={password}
-                onChange={e => setForm({...form, password: e.target.value})}
+                onChange={e => setForm({ ...form, password: e.target.value })}
                 className='w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                required
+                
               />
+              {errors?.password && (
+                <p style={{ color: 'red' }} className='mt-2'>
+                  {errors?.password}
+                </p>
+              )}
             </div>
-            {errors?.firstName && <p style={{ color: 'red' }}>{errors?.firstName}</p>}
             <button
-              // type='submit'
-              onClick={handleLogin}
+              type='submit'
+              // onClick={handleSubmit}
               className='w-full bg-[#6F42C1E5] text-white py-4 rounded-lg transition-colors'
             >
               Sign up
