@@ -4,12 +4,10 @@ import reducer from "@/src/context/reducer";
 import { UserContext } from "@/src/context/userContext";
 import type { AppProps } from "next/app";
 import { useEffect, useReducer } from "react";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [state, dispatch] = useReducer(reducer, defaultGlobalState);
-
 
   const values: any = {
     state,
