@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowForwardIcon } from "../common/icons";
 
-const Colleges = () => {
+const CollegeVisit = () => {
   const recentColleges = [
     { id: 1, name: "Harvard University", image: "/recentvisit.png" },
     { id: 2, name: "Stanford University", image: "/recentvisit.png" },
@@ -10,7 +10,7 @@ const Colleges = () => {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="w-full max-w-[1200px] flex flex-col gap-4 p-8">
+      <div className="w-full max-w-[1000px] flex flex-col gap-4 p-8">
         <div className="flex flex-row items-center gap-2">
           <h1 className="text-[#000000CC] font-bold text-[24px]">
             Recent Visits
@@ -42,4 +42,4 @@ const Colleges = () => {
   );
 };
 
-export default Colleges;
+export default CollegeVisit;
