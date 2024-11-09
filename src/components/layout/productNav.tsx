@@ -11,7 +11,7 @@ import MessagesOutlined from '../common/icons/messages'
 const ProductNav = () => {
     const router = useRouter()
   return (
-    <section className='fixed xs:hidden md:flex h-screen w-[280px] flex-col gap-12 p-8 border-r border-[#E8E8E9]'>
+    <section className='fixed xs:hidden lg:flex h-screen w-[280px] bg-white flex-col gap-12 p-8 border-r border-[#E8E8E9]'>
       <Image
         src='/logo.png'
         alt='/logo.png'

@@ -2,12 +2,23 @@ import { useEffect, useState } from 'react';
 import { TickIcon } from '../../common/icons';
 import HeaderContainer from './headerContainer';
 import { isEmpty } from 'lodash';
-import { Plans } from '@/Mock/plans';
+import { getPlans } from '@/src/services/api';
 
 const Pricing = () => {
-  const [plans, setPlans] = useState<any>(Plans);  // null to detect if data is loaded or not
+  const [plans, setPlans] = useState<any>([]);  // null to detect if data is loaded or not
   const [loading, setLoading] = useState(true); // track loading state
-
+  const getPlansData = async () => {
+    try {
+      const res = await getPlans()
+      setPlans(res)
+    } catch (e) {
+      console.error('Error fetching plans:', e);  // Log error for more details
+      return null;
+    }
+  }
+useEffect(() => {
+  getPlansData()
+},[])
   return (
     <div className='relative w-full items-center flex flex-col gap-10 p-8 pt-[66px]'>
       <div className='w-full mt-[50px]'>

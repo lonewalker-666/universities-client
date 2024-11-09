@@ -1,6 +1,6 @@
-const ACCESSTOKEN = 'accesstoken'
-const REFRESHTOKEN = 'refreshtoken'
-const REGISTER = 'register'
+const ACCESSTOKEN = '_at'
+const REFRESHTOKEN = '_rf'
+const DEVICEID = '_di'
 
 const set = (key: string, value: string) => localStorage.setItem(key, value)
 const get = (key: string) => localStorage.getItem(key)
@@ -14,10 +14,6 @@ export const getRefreshToken = () => get(REFRESHTOKEN)
 export const setRefreshToken = (token: string) => set(REFRESHTOKEN, token)
 export const removeRefreshToken = () => remove(REFRESHTOKEN)
 
-export const setRegisterData = (user: object) =>
-  set(REGISTER, JSON.stringify(user))
-export const getRegisterData = () => {
-  const registerData = get(REGISTER)
-  return registerData ? JSON.parse(registerData) : null
-}
-export const removeRegisterData = () => remove(REGISTER)
+
+export const setDeviceId = (deviceId: string) => set(DEVICEID, deviceId)
+export const getDeviceId = () => get(DEVICEID)

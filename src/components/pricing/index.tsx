@@ -1,18 +1,29 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PlusOutlined, TickIcon } from "../common/icons";
 import HeaderContainer from "../home/components/headerContainer";
 import { isEmpty } from "lodash";
-import { Plans } from "@/Mock/plans";
+import { getPlans } from "@/src/services/api";
 
 const Pricing = () => {
-  const [plans, setPlans] = useState<any>(Plans); 
+  const [plans, setPlans] = useState<any>([]); 
   const [faqOpen, setFaqOpen] = useState(null)
   const faqContentRefs = useRef<any>([])
 
   const toggleFAQ = (index: any) => {
     setFaqOpen(faqOpen === index ? null : index)
   }
-
+  const getPlansData = async () => {
+    try {
+      const res = await getPlans()
+      setPlans(res)
+    } catch (e) {
+      console.error('Error fetching plans:', e);  // Log error for more details
+      return null;
+    }
+  }
+useEffect(() => {
+  getPlansData()
+},[])
   const Faqs = [
     {
       title: 'What is Universities@USA?',

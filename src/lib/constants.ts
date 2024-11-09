@@ -209,3 +209,283 @@ export const FINIANCIAL_AID = [
   { value: 6, label: "More than $150,000" },
   { value: 7, label: "Prefer not to Answer" }
 ];
+
+export const ACT_SUBJECTS = [
+  {
+      "id": 1,
+      "name": "Composite",
+      "total_score": 36
+  },
+  {
+      "id": 2,
+      "name": "English",
+      "total_score": 36
+  },
+  {
+      "id": 3,
+      "name": "Math",
+      "total_score": 36
+  },
+  {
+      "id": 4,
+      "name": "Reading",
+      "total_score": 36
+  },
+  {
+      "id": 5,
+      "name": "Science",
+      "total_score": 36
+  }
+]
+
+export const SAT_SUBJECTS = [
+  {
+      "id": 6,
+      "name": "Reading and Writing",
+      "total_score": 800
+  },
+  {
+      "id": 7,
+      "name": "Math",
+      "total_score": 800
+  }
+]
+
+export const AP_SUBJECTS = [
+  {
+      "id": 8,
+      "name": "AP 2-D Art and Design",
+      "total_score": 5
+  },
+  {
+      "id": 9,
+      "name": "AP 3-D Art and Design",
+      "total_score": 5
+  },
+  {
+      "id": 10,
+      "name": "AP Art History",
+      "total_score": 5
+  },
+  {
+      "id": 11,
+      "name": "AP Biology",
+      "total_score": 5
+  },
+  {
+      "id": 12,
+      "name": "AP Calculus AB",
+      "total_score": 5
+  },
+  {
+      "id": 13,
+      "name": "AP Chemistry",
+      "total_score": 5
+  },
+  {
+      "id": 14,
+      "name": "AP Chinese Language and Culture",
+      "total_score": 5
+  },
+  {
+      "id": 15,
+      "name": "AP Comparative Government and Politics",
+      "total_score": 5
+  },
+  {
+      "id": 16,
+      "name": "AP Computer Science A",
+      "total_score": 5
+  },
+  {
+      "id": 17,
+      "name": "AP Computer Science Principles",
+      "total_score": 5
+  },
+  {
+      "id": 18,
+      "name": "AP Drawing",
+      "total_score": 5
+  },
+  {
+      "id": 19,
+      "name": "AP English Language and Composition",
+      "total_score": 5
+  },
+  {
+      "id": 20,
+      "name": "AP English Literature and Composition",
+      "total_score": 5
+  },
+  {
+      "id": 21,
+      "name": "AP Environmental Science",
+      "total_score": 5
+  },
+  {
+      "id": 22,
+      "name": "AP European History",
+      "total_score": 5
+  },
+  {
+      "id": 23,
+      "name": "AP French Language and Culture",
+      "total_score": 5
+  },
+  {
+      "id": 24,
+      "name": "AP German Language and Culture",
+      "total_score": 5
+  },
+  {
+      "id": 25,
+      "name": "AP Human Geography",
+      "total_score": 5
+  },
+  {
+      "id": 26,
+      "name": "AP Italian Language and Culture",
+      "total_score": 5
+  },
+  {
+      "id": 27,
+      "name": "AP Japanese Language and Culture",
+      "total_score": 5
+  },
+  {
+      "id": 28,
+      "name": "AP Latin",
+      "total_score": 5
+  },
+  {
+      "id": 29,
+      "name": "AP Macroeconomics",
+      "total_score": 5
+  },
+  {
+      "id": 30,
+      "name": "AP Microeconomics",
+      "total_score": 5
+  },
+  {
+      "id": 31,
+      "name": "AP Music Theory",
+      "total_score": 5
+  },
+  {
+      "id": 32,
+      "name": "AP Physics 1: Algebra-Based",
+      "total_score": 5
+  },
+  {
+      "id": 33,
+      "name": "AP Physics 2: Algebra-Based",
+      "total_score": 5
+  },
+  {
+      "id": 34,
+      "name": "AP Physics C: Electricity and Magnetism",
+      "total_score": 5
+  },
+  {
+      "id": 35,
+      "name": "AP Physics C: Mechanics",
+      "total_score": 5
+  },
+  {
+      "id": 36,
+      "name": "AP Precalculus",
+      "total_score": 5
+  },
+  {
+      "id": 37,
+      "name": "AP Psychology",
+      "total_score": 5
+  },
+  {
+      "id": 38,
+      "name": "AP Research",
+      "total_score": 5
+  },
+  {
+      "id": 39,
+      "name": "AP Seminar",
+      "total_score": 5
+  },
+  {
+      "id": 40,
+      "name": "AP Spanish Language and Culture",
+      "total_score": 5
+  },
+  {
+      "id": 41,
+      "name": "AP Spanish Literature and Culture",
+      "total_score": 5
+  },
+  {
+      "id": 42,
+      "name": "AP Statistics",
+      "total_score": 5
+  },
+  {
+      "id": 43,
+      "name": "AP United States Government and Politics",
+      "total_score": 5
+  },
+  {
+      "id": 44,
+      "name": "AP United States History",
+      "total_score": 5
+  },
+  {
+      "id": 45,
+      "name": "AP World History: Modern",
+      "total_score": 5
+  }
+]
+
+export const TOEFL_SUBJECTS = [
+  {
+      "id": 46,
+      "name": "Reading",
+      "total_score": 30
+  },
+  {
+      "id": 47,
+      "name": "Speaking",
+      "total_score": 30
+  },
+  {
+      "id": 48,
+      "name": "Listening",
+      "total_score": 30
+  },
+  {
+      "id": 49,
+      "name": "Writing",
+      "total_score": 30
+  }
+]
+
+export const IELTS_SUBJECTS = [
+  {
+      "id": 50,
+      "name": "Reading",
+      "total_score": 9
+  },
+  {
+      "id": 51,
+      "name": "Speaking",
+      "total_score": 9
+  },
+  {
+      "id": 52,
+      "name": "Listening",
+      "total_score": 9
+  },
+  {
+      "id": 53,
+      "name": "Writing",
+      "total_score": 9
+  }
+]

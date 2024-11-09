@@ -2,26 +2,54 @@ import React, { useState } from 'react'
 import { GoogleIcon, MetaIcon } from '../common/icons'
 import Divider from '../common/divider'
 import router from 'next/router'
-
+import { signUpSchema } from '@/src/helpers/validators'
+import { setDeviceId } from '@/src/helpers/local-storage'
+import { getOtp } from '@/src/services/authApi'
+import { setRegisterData } from '@/src/helpers/session-storage'
+import EyeCrossOutlined from '../common/icons/eyeCrossOutlined'
+import EyeOutlined from '../common/icons/eyeOutlined'
 
 const SignUp = () => {
-const [form, setForm] = useState({
-  email: '',
-  password: '',
-  firstName: '',
-  lastName: '',
-  errors: {}
-})
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: ''
+  })
 
-const {email, password, firstName, lastName, errors} : any = form
+  const [errors, setErrors] = useState<any>({})
+  const [showPassword, setShowPassword] = useState(false)
 
-  const handleLogin = (e: any) => {
-    // Handle login logic here
-    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/
+  const { email, password, firstName, lastName }: any = form
 
-    // if (!passRegex.test(password)) {
-  // }
-}
+  const validate = () => {
+    const { error } = signUpSchema.validate(form, { abortEarly: false })
+    if (!error) return null
+
+    // Map Joi error messages
+    const newErrors: any = {}
+    error.details.forEach(item => {
+      console.log(item)
+      newErrors[item.path[0]] = item.message
+    })
+    return newErrors
+  }
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+    const newErrors = validate()
+    setErrors(newErrors || {})
+
+    if (!newErrors) {
+      const deviceID = crypto.randomUUID()
+      const response = await getOtp({ email })
+      if (response) {
+        setDeviceId(deviceID)
+        setRegisterData({ ...form, deviceID })
+        router.push('/verify')
+      }
+    }
+  }
 
   const handleGoogleLogin = () => {
     // Handle Google login logic here
@@ -38,12 +66,9 @@ const {email, password, firstName, lastName, errors} : any = form
       {/* Left side: Login form */}
       <div className='lg:w-1/2 w-full flex justify-center px-8 py-12 bg-transparent'>
         <div className='max-w-md w-full flex flex-col gap-6'>
-          <div className='flex justify-center'>
-            <img src='/logo.png' alt='Logo' className='h-[50px]' />
-          </div>
           <div className='flex flex-col gap-2'>
             <div className='flex flex-row items-center'>
-              <h1 className='text-4xl font-medium poppin-text  text-[#000000]'>
+              <h1 className='xs:text-2xl md:text-4xl font-medium poppin-text  text-[#000000]'>
                 Get Started
               </h1>
               <span>
@@ -55,58 +80,84 @@ const {email, password, firstName, lastName, errors} : any = form
               Create your account
             </p>
           </div>
-          <form >
-            <div className='mb-6'>
-              <label className='block text-gray-700 mb-2'>Name</label>
+          <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
+            <div>
+              <label className='block text-gray-700 mb-2'>First Name</label>
               <input
                 type='text'
                 placeholder='Enter your First Name'
                 value={firstName}
-                onChange={e => setForm({...form, firstName: e.target.value})}
+                onChange={e => setForm({ ...form, firstName: e.target.value })}
                 className='w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                required
               />
-              {errors?.firstName && <p style={{ color: 'red' }}>{errors?.firstName}</p>}
+              {errors?.firstName && (
+                <p style={{ color: 'red' }} className='mt-2'>
+                  {errors?.firstName}
+                </p>
+              )}
             </div>
-            <div className='mb-6'>
-              <label className='block text-gray-700 mb-2'>Name</label>
+            <div>
+              <label className='block text-gray-700 mb-2'>Last Name</label>
               <input
                 type='text'
                 placeholder='Enter your Last Name'
                 value={lastName}
-                onChange={e => setForm({...form, lastName: e.target.value})}
+                onChange={e => setForm({ ...form, lastName: e.target.value })}
                 className='w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                required
               />
-               {errors?.lastName && <p style={{ color: 'red' }}>{errors?.lastName}</p>}
+              {errors?.lastName && (
+                <p style={{ color: 'red' }} className='mt-2'>
+                  {errors?.lastName}
+                </p>
+              )}
             </div>
-            <div className='mb-6'>
+            <div>
               <label className='block text-gray-700 mb-2'>Email</label>
               <input
-                type='email'
+                type='text'
                 placeholder='Enter your email'
                 value={email}
-                onChange={e => setForm({...form, email: e.target.value})}
+                onChange={e => setForm({ ...form, email: e.target.value })}
                 className='w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                required
               />
-               {errors?.email && <p style={{ color: 'red' }}>{errors?.email}</p>}
+              {errors?.email && (
+                <p style={{ color: 'red' }} className='mt-2'>
+                  {errors?.email}
+                </p>
+              )}
             </div>
-            <div className='mb-6'>
+            <div>
               <label className='block text-gray-700 mb-2'>Password</label>
-              <input
-                type='password'
-                placeholder='Enter your password'
-                value={password}
-                onChange={e => setForm({...form, password: e.target.value})}
-                className='w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
-                required
-              />
+              <div className='relative w-full'>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder='Enter your password'
+                  value={password}
+                  onChange={e => setForm({ ...form, password: e.target.value })}
+                  className='w-full px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                />
+                {showPassword ? (
+                  <EyeCrossOutlined
+                    className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer bg-[#FAFAFA]'
+                    color='#6F42C1E5'
+                    onClick={() => setShowPassword(false)}
+                  />
+                ) : (
+                  <EyeOutlined
+                    className='absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer bg-[#FAFAFA]'
+                    onClick={() => setShowPassword(true)}
+                    color='#6F42C1E5'
+                  />
+                )}
+              </div>
+              {errors?.password && (
+                <p style={{ color: 'red' }} className='mt-2'>
+                  {errors?.password}
+                </p>
+              )}
             </div>
-            {errors?.firstName && <p style={{ color: 'red' }}>{errors?.firstName}</p>}
             <button
-              // type='submit'
-              onClick={handleLogin}
+              type='submit'
               className='w-full bg-[#6F42C1E5] text-white py-4 rounded-lg transition-colors'
             >
               Sign up

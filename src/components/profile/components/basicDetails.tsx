@@ -15,12 +15,12 @@ const BasicDetails = (props: Props) => {
   const { visible, onShow, onHide, profileData, setProfileData } = props
   const editButtonTitle = (
     <div className='flex gap-3 items-center justify-center h-full w-full'>
-      <EditIcon /> Edit
+      <EditIcon className="w-4"/> Edit
     </div>
   )
   const saveButtonTitle = (
     <div className='flex gap-3 items-center justify-center h-full w-full'>
-      <EditIcon color='white' /> Save
+      <EditIcon className="w-4" color='white' /> Save
     </div>
   )
   return (
@@ -32,7 +32,7 @@ const BasicDetails = (props: Props) => {
         height={300}
         className='w-full min-h-[80px] object-cover'
       />
-      <div className='w-full max-w-[1000px] flex flex-col xs:gap-5 md:gap-12 p-8'>
+      <div className='w-full max-w-[1000px] flex flex-col xs:gap-5 lg:gap-12 p-6'>
         <div className='w-full flex justify-between xs:items-start md:items-center xs:flex-col md:flex-row xs:gap-5 md:gap-12'>
           <div className='flex w-full lg:items-center xs:flex-col lg:flex-row xs:gap-5 md:gap-12'>
             <span className='xs:w-full lg:w-auto pt-3 flex justify-between xs:-mt-20 md:-mt-24 lg:-mt-28 gap-5'>
@@ -41,7 +41,7 @@ const BasicDetails = (props: Props) => {
                 alt='default profile'
                 width={300}
                 height={300}
-                className='xs:w-[100px] md:w-[130px] lg:w-[150px]'
+                className='xs:w-[100px] md:w-[130px]'
               />
               {visible?.basicDetailsEdit ? (
                 <Button
@@ -71,7 +71,7 @@ const BasicDetails = (props: Props) => {
                 onChange={(e: any) =>
                   setProfileData({ ...profileData, name: e.target.value })
                 }
-                style={{ fontSize: 26 }}
+                style={{ fontSize: 20, fontWeight: 600 }}
                 hideTitle
                 title='Name'
               />
@@ -86,6 +86,7 @@ const BasicDetails = (props: Props) => {
                 }
                 hideTitle
                 title='Email'
+                style={{ fontSize: 18, fontWeight: 500 }}
               />
             </span>
           </div>
@@ -114,8 +115,8 @@ const BasicDetails = (props: Props) => {
           <span className=" pr-6 xs:border-b sm:border-b-0 md:border-b lg:border-b-0 xs:border-r-0 sm:border-r md:border-r-0 lg:border-r pb-4 border[#3b3b3b]">
             <EditableField
               visible={visible?.basicDetailsEdit}
-              titleStyle = {{fontSize:16}}
-              style={{fontSize:18}}
+              titleStyle = {{fontSize:14}}
+              style={{fontSize:16}}
               value={profileData?.qualifications || ''}
               onChange={(e: any) =>
                 setProfileData({
@@ -129,8 +130,8 @@ const BasicDetails = (props: Props) => {
           <span className=" pr-6 xs:border-b sm:border-b-0 md:border-b lg:border-b-0 xs:border-r-0 sm:border-r md:border-r-0 lg:border-r pb-4 border[#3b3b3b]">
             <EditableField
               visible={visible?.basicDetailsEdit}
-              titleStyle = {{fontSize:16}}
-              style={{fontSize:18}}
+              titleStyle = {{fontSize:14}}
+              style={{fontSize:16}}
               value={profileData?.mobile || ''}
               onChange={(e: any) =>
                 setProfileData({
@@ -144,8 +145,8 @@ const BasicDetails = (props: Props) => {
           <span className="">
             <EditableField
               visible={visible?.basicDetailsEdit}
-              titleStyle = {{fontSize:16}}
-              style={{fontSize:18}}
+              titleStyle = {{fontSize:14}}
+              style={{fontSize:16}}
               value={profileData?.location || ''}
               onChange={(e: any) =>
                 setProfileData({

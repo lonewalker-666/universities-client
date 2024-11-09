@@ -18,19 +18,19 @@ const PersonalDetails = (props: Props) => {
   const { visible, onShow, onHide, profileData, setProfileData } = props
   const editButtonTitle = (
     <div className='flex gap-3 items-center justify-center h-full w-full'>
-      <EditIcon /> Edit
+      <EditIcon className="w-4"/> Edit
     </div>
   )
   const saveButtonTitle = (
     <div className='flex gap-3 items-center justify-center h-full w-full'>
-      <EditIcon color='white' /> Save
+      <EditIcon color='white' className="w-4"/> Save
     </div>
   )
   return (
-    <div className='w-full p-8 bg-[#FEFEFE] text-black rounded-[15px] border border-[#E8E8E9] flex flex-col justify-center items-center gap-7'>
-      <div className='flex xs:flex-col sm:flex-row w-full max-w-[1000px] justify-between gap-5'>
+    <div className='w-full xs:p-4 md:p-8 bg-[#FEFEFE] text-black rounded-[15px] border border-[#E8E8E9] flex flex-col justify-center items-center xs:gap-4 md:gap-7'>
+      <div className='flex w-full max-w-[1000px] justify-between gap-5'>
         <span className='flex items-center'>
-          <h1 className='xs:text-2xl md:text-3xl font-semibold'>
+          <h1 className='text-xl font-semibold'>
             Personal Details
           </h1>
         </span>
@@ -38,7 +38,7 @@ const PersonalDetails = (props: Props) => {
           {visible?.personalDetailEdit ? (
             <Button
               title={saveButtonTitle}
-              width={120}
+              width={116}
               height={50}
               onClick={() => onHide()}
               className='primary-button'
@@ -46,7 +46,7 @@ const PersonalDetails = (props: Props) => {
           ) : (
             <Button
               title={editButtonTitle}
-              width={120}
+              width={116}
               height={50}
               background='#F5F5F5'
               color='#000'
@@ -57,7 +57,7 @@ const PersonalDetails = (props: Props) => {
           )}
         </span>
       </div>
-      <div className='grid xs:grid-cols-1 w-full md:grid-cols-2 gap-7 max-w-[1000px]'>
+      <div className='grid xs:grid-cols-1 w-full md:grid-cols-2 xs:gap-3 md:gap-7 max-w-[1000px] px-2'>
         <EditableSelect
           visible={visible?.personalDetailEdit}
           value={profileData?.gender}
@@ -66,8 +66,8 @@ const PersonalDetails = (props: Props) => {
             setProfileData({ ...profileData, gender: e.target.value })
           }
           options={GENDER}
-          titleStyle={{ fontSize: 18 }}
-          style={{ fontSize: 20 }}
+          titleStyle={{ fontSize: 14 }}
+          style={{ fontSize: 16 }}
         />
         <EditableSelect
           visible={visible?.personalDetailEdit}
@@ -79,8 +79,8 @@ const PersonalDetails = (props: Props) => {
           }
           }
           options={RACE}
-          titleStyle={{ fontSize: 18 }}
-          style={{ fontSize: 20 }}
+          titleStyle={{ fontSize: 14 }}
+          style={{ fontSize: 16 }}
         />
                <EditableSelect
           visible={visible?.personalDetailEdit}
@@ -90,8 +90,8 @@ const PersonalDetails = (props: Props) => {
             setProfileData({ ...profileData, army_status: e.target.value })
           }
           options={ARMY_STATUS}
-          titleStyle={{ fontSize: 18 }}
-          style={{ fontSize: 20 }}
+          titleStyle={{ fontSize: 14 }}
+          style={{ fontSize: 16 }}
         />
                      <EditableSelect
           visible={visible?.personalDetailEdit}
@@ -101,8 +101,8 @@ const PersonalDetails = (props: Props) => {
             setProfileData({ ...profileData, citizen_status: e.target.value })
           }
           options={CITIZENSHIP}
-          titleStyle={{ fontSize: 18 }}
-          style={{ fontSize: 20 }}
+          titleStyle={{ fontSize: 14 }}
+          style={{ fontSize: 16 }}
         />
                      <EditableSelect
           visible={visible?.personalDetailEdit}
@@ -112,8 +112,8 @@ const PersonalDetails = (props: Props) => {
             setProfileData({ ...profileData, first_generation: e.target.value })
           }
           options={FIRST_GENERATION}
-          titleStyle={{ fontSize: 18 }}
-          style={{ fontSize: 20 }}
+          titleStyle={{ fontSize: 14 }}
+          style={{ fontSize: 16 }}
         />
                      <EditableSelect
           visible={visible?.personalDetailEdit}
@@ -123,8 +123,8 @@ const PersonalDetails = (props: Props) => {
             setProfileData({ ...profileData, financial_aid: e.target.value })
           }
           options={FINIANCIAL_AID}
-          titleStyle={{ fontSize: 18 }}
-          style={{ fontSize: 20 }}
+          titleStyle={{ fontSize: 14 }}
+          style={{ fontSize: 16 }}
         />
       </div>
     </div>

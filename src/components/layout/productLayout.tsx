@@ -16,7 +16,7 @@ const ProductLayout = (props: Props) => {
     <div className='h-screen flex items-center w-full overflow-y-auto overflow-x-hidden'>
       <Header title={title} />
       <ProductNav />
-      <section className='md:ml-[280px] h-[100vh] w-full text-white'>
+      <section className='lg:ml-[280px] h-[100vh] w-full text-white overflow-x-auto'>
         <PageHeader title={pageTitle || ''}>
             {customHeader || ''}
         </PageHeader>
