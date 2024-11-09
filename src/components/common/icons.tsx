@@ -107,3 +107,22 @@ export const MetaIcon = (props: any) => {
     </svg>
   );
 };
+
+export const ArrowForwardIcon = (props: any) => {
+  const { color } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="10"
+      height="16"
+      viewBox="0 0 10 16"
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M-9.99117e-08 13.7143L5.71429 8L-5.99471e-07 2.28571L1.14286 -4.99559e-08L9.14286 8L1.14286 16L-9.99117e-08 13.7143Z"
+        fill={color || "white"}
+      />
+    </svg>
+  );
+};
