@@ -1,14 +1,23 @@
+import { getRegisterData, removeRegisterData } from "@/src/helpers/session-storage";
+import { createUser, verifyOtp } from "@/src/services/authApi";
 import { useState } from "react"
+import { toast } from "react-toastify";
 
 const Verify = () => {
 const [otp, setOtp] = useState('')
-    const handleVerify = (e: any) => {
+    const handleVerify = async(e: any) => {
+      e.preventDefault()
         const otpRegex = /^\d{6}$/;
-
-        if (otpRegex.test(otp)) {
-            console.log("Otp:", otp);
+        if (!otpRegex.test(otp)) {
+           toast.error("Invalid OTP");
           } else {
-            console.log("Otp:", otp);
+            const regData = getRegisterData()
+            const verified = await verifyOtp({email:regData?.email,otp})
+            if(verified) {
+              toast.success("OTP verified successfully")
+              await createUser({...regData})
+            }
+            removeRegisterData()
           }
     }
     const handleOtpChange = (e: any) => {
@@ -24,13 +33,13 @@ const [otp, setOtp] = useState('')
             Verify your email
           </h1>
           <p className="text-md text-center font-medium poppin-text text-[#000000]">
-              An otp mail has been sent to your email.<br/> Please verify your email to create account.
+              An OTP mail has been sent to your email.<br/> Please verify your email to create account.
             </p>
             <form onSubmit={handleVerify}>
             <div >
               <input
                 type="text"
-                placeholder="Enter your Otp"
+                placeholder="Enter your OTP"
                 value={otp}
                 onChange={(e:any) => handleOtpChange(e)}
                 className="w-full px-4 py-4 bg-[#FAFAFA] rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"

@@ -7,7 +7,7 @@ const TestPage = () => {
 
   async function handleFormSubmit() {
     try {
-      const response:any = await facebooklogin({
+      const response:any = await createUser({
         // firstName: 'Kishore Kumar',
         // lastName: 'Ravishankar',
         email: 'kishorekk54321@gmail.com',

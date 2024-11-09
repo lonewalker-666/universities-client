@@ -1,8 +1,7 @@
 import axios from 'axios';
 import {
   getRefreshToken,
-  setAccessToken,
-  setRefreshToken
+  setAccessToken
 } from './local-storage';
 import Router from 'next/router';
 
@@ -31,6 +30,7 @@ axiosInstance.interceptors.response.use(
         const response = await axios.post(`${BASE_URL}/auth/refresh-token`, { refreshToken });
 
         if (response.status === 200) {
+          console.log("headers",response);
           const newAccessToken = response.data.accessToken;
           setAccessToken(newAccessToken);
 

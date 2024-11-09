@@ -16,7 +16,6 @@ interface Props {
 const SiteLayout = (props: Props) => {
   const { title, children, containerRef,transparentHeader,noFooter } = props
   const scrollPos = useScrollPosition(containerRef)
-  console.log(scrollPos);
   return (
     <div className='siteLayout' ref={containerRef}>
       
