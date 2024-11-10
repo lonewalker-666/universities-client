@@ -62,3 +62,18 @@ export const getRace = async () => {
     console.error('Error fetching race:', e);  // Log error for more details
   }
 };
+
+export const getHighscholl = async () => {
+  try {
+    const res = await axios.get('/get/highSchool');  // Make sure POST is correct here
+    if(res?.data?.success){
+      return res.data.data;
+    }
+    else {
+      toast.error(res?.data?.message || "Error fetching highSchool");
+    }
+  } catch (e) {
+    toast.error("Error fetching highSchool");
+    console.error('Error fetching highSchool:', e);  // Log error for more details
+  }
+};

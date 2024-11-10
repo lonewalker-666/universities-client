@@ -1,5 +1,32 @@
 import { get } from 'lodash'
 
+export const ProfileMapper = (data: any) => {
+  const firstName = get(data, 'firstName', '')
+  const lastName = get(data, 'lastName', '')
+  const email = get(data, 'email', '')
+  const mobile = get(data, 'mobile', '')
+  const location = get(data, 'location', '')
+  const gender_id = get(data, 'gender_id', '')
+  const race_id = get(data, 'race_id', '')
+  const first_generation_id = get(data, 'first_generation_id', '')
+  const citizenship_id = get(data, 'citizenship_id', '')
+  const armed_force_status_id = get(data, 'armed_force_status_id', '')
+  const financial_aid_id = get(data, 'financial_aid_id', '')
+  return {
+    firstName,
+    lastName,
+    email,
+    mobile,
+    location,
+    gender_id,
+    race_id,
+    first_generation_id,
+    citizenship_id,
+    armed_force_status_id,
+    financial_aid_id
+  }
+}
+
 export const CollegesListMapper = (data: any) => {
   const university_name = get(data, 'university_name', '')
   const city_state = get(data, 'city_state', '')
@@ -23,6 +50,8 @@ export const CollegeDetailsMapper = (data: any) => {
   const graduation_rate = get(data, 'overview.graduation_rate', '')
   const median_earnings = get(data, 'overview.median_earnings', '')
   const study_fields = get(data, 'fields_of_study.top_fields', [])
+  const costs_average_annual_cost = get(data, 'costs.average_annual_cost', '')
+  const by_family_income = get(data, 'costs.by_family_income', [])
   return {
     university_name,
     city_state,
@@ -33,13 +62,15 @@ export const CollegeDetailsMapper = (data: any) => {
     location_type,
     graduation_rate,
     median_earnings,
-    study_fields
+    study_fields,
+    costs_average_annual_cost,
+    by_family_income
   }
 }
 
 export const StudyFieldsMapper = (data: any) => {
-const field = get(data, 'field_of_study', '')
-const median_earnings = get(data, 'median_earnings', '')
-const graduates = get(data, 'graduates', '')
-return { field, median_earnings, graduates }
+  const field = get(data, 'field_of_study', '')
+  const median_earnings = get(data, 'median_earnings', '')
+  const graduates = get(data, 'graduates', '')
+  return { field, median_earnings, graduates }
 }

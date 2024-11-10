@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useShowHide } from '@/src/hooks/useShowHide'
 import BasicDetails from './components/basicDetails'
 import PersonalDetails from './components/personalDetails'
 import { start } from 'repl'
 import AcademicDetails from './components/academicDetails'
+import { getProfile } from '@/src/services/userApi'
 
 const ProfileContainer = () => {
   const initialProfileData = {
@@ -25,40 +26,38 @@ const ProfileContainer = () => {
     financial_aid:1,
     first_generation:1
   }
-  const initial = {
-    basicDetailsEdit: false,
-    personalDetailEdit: false,
-    academicDetailEdit: false,
-  }
+ 
   const [profilData, setProfileData] = useState(initialProfileData)
-  const { visible, onShow, onHide } = useShowHide(initial)
+
+  const getProfileData = async() => {
+    const profile = await getProfile()
+    console.log(profile);
+    setProfileData(profile)
+  }
+
+  useEffect(() => {
+  getProfileData()
+  }, [])
 
   return (
     <div className='w-full flex flex-col items-center'>
       <div className='w-full max-w-[1200px] flex flex-col gap-8 p-8'>
         <BasicDetails
           profileData={profilData}
-          visible={visible}
-          onShow={onShow}
-          onHide={onHide}
+          refetch={getProfileData}
           setProfileData={setProfileData}
         />
       </div>
       <div className='w-full max-w-[1200px] flex flex-col gap-8 p-8'>
         <PersonalDetails
           profileData={profilData}
-          visible={visible}
-          onShow={onShow}
-          onHide={onHide}
           setProfileData={setProfileData}
+          refetch={getProfileData}
         />
       </div>
       <div className='w-full max-w-[1200px] flex flex-col gap-8 p-8'>
         <AcademicDetails
           profileData={profilData}
-          visible={visible}
-          onShow={onShow}
-          onHide={onHide}
           setProfileData={setProfileData}
         />
       </div>

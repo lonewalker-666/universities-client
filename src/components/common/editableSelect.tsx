@@ -16,6 +16,7 @@ interface Props {
   hideTitle?: boolean
   options: Array<optionsObject>
   placeholder?: string
+  errMsg?:string
 }
 
 const EditableSelect = (props: Props) => {
@@ -28,7 +29,8 @@ const EditableSelect = (props: Props) => {
     titleStyle,
     hideTitle,
     options,
-    placeholder
+    placeholder,
+    errMsg
   } = props
   const selectedValue = !isEmpty(options) ? options.find(
     (option) => option.value == value)?.label || "" : ""
@@ -45,7 +47,7 @@ const EditableSelect = (props: Props) => {
         <>
           <select
             className={`border p-4 rounded-xl bg-[#FAFAFA] max-w-full font-medium text-opacity-80 ${
-              value
+              !errMsg
                 ? 'border-gray-300 focus:outline-none focus:border-blue-500'
                 : 'border-red-600'
             }`}
@@ -54,12 +56,12 @@ const EditableSelect = (props: Props) => {
           >
             {!isEmpty(options) &&
               options.map((option, index) => (
-                <option key={index} value={option?.value}>
+                <option key={index} selected={option?.value == value}  value={option?.value}>
                   {option?.label}
                 </option>
               ))}
           </select>
-          {!value && (
+          {errMsg && (
             <p className='font-medium text-red-600'>
               Please Select any one of the options
             </p>

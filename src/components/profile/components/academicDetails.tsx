@@ -4,17 +4,22 @@ import EditableCell from '../../common/editableCell'
 import { GENDER, GRADE_LEVEL, RACE } from '@/src/lib/constants'
 import EditableDatePicker from '../../common/editableDatePicker'
 import EditableSelect from '../../common/editableSelect'
+import { useShowHide } from '@/src/hooks/useShowHide'
+import { getHighscholl } from '@/src/services/api'
+import { isEmpty } from 'lodash'
+import { useEffect, useState } from 'react'
 
 interface Props {
-  visible: any
-  onShow: any
-  onHide: any
+
   profileData: any
   setProfileData: any
 }
 
 const AcademicDetails = (props: Props) => {
-  const { visible, onShow, onHide, profileData, setProfileData } = props
+  const { profileData, setProfileData } = props
+  const [highSchool,setHighSchool] = useState([])
+  const { visible, onShow, onHide } = useShowHide(false)
+
   const editButtonTitle = (
     <div className='flex gap-3 items-center justify-center h-full w-full'>
       <EditIcon className="w-4"/> Edit
@@ -25,7 +30,15 @@ const AcademicDetails = (props: Props) => {
       <EditIcon color='white' className="w-4"/> Save
     </div>
   )
-  const highSchool =[{value:1,label:'School1'},{value:2,label:'School2'},{value:3,label:'School3'}]
+  const getHighSchoolData = async() => {
+    const highSchool = await getHighscholl()
+   const list = !isEmpty(highSchool) ? highSchool.map((item: any) => ({value: item.id, label: item.name})) : []
+   setHighSchool(list)
+  }
+  useEffect(() => {
+    getHighSchoolData()
+  },[])
+  // const highSchool =[{value:1,label:'School1'},{value:2,label:'School2'},{value:3,label:'School3'}]
   return (
     <div className='w-full xs:p-4 md:p-8 bg-[#FEFEFE] text-black border rounded-[15px] border-[#E8E8E9] flex flex-col justify-center items-center xs:gap-3 md:gap-7'>
     <div className='flex w-full max-w-[1000px] justify-between xs:gap-3 md:gap-5'>
@@ -35,7 +48,7 @@ const AcademicDetails = (props: Props) => {
         </h1>
       </span>
       <span className='flex items-center justify-end'>
-        {visible?.academicDetailEdit ? (
+        {visible ? (
           <Button
             title={saveButtonTitle}
             width={116}
@@ -51,7 +64,7 @@ const AcademicDetails = (props: Props) => {
             background='#F5F5F5'
             color='#000'
             border='1px solid #CAD0D9'
-            onClick={() => onShow('academicDetailEdit')}
+            onClick={() => onShow('visible')}
             className='primary-button'
           />
         )}
@@ -59,7 +72,7 @@ const AcademicDetails = (props: Props) => {
     </div>
     <div className='grid xs:grid-cols-1 w-full md:grid-cols-2 xs:gap-3 md:gap-7 max-w-[1000px] px-2'>
       <EditableSelect
-        visible={visible?.academicDetailEdit}
+        visible={visible}
         value={profileData?.highSchool}
         title='High School'
         onChange={(e: any) =>
@@ -70,7 +83,7 @@ const AcademicDetails = (props: Props) => {
         style={{ fontSize: 16 }}
       />
       <EditableSelect
-        visible={visible?.academicDetailEdit}
+        visible={visible}
         value={profileData?.gradeLevel}
         title='Grade Level'
         onChange={(e: any) =>
@@ -81,7 +94,7 @@ const AcademicDetails = (props: Props) => {
         style={{ fontSize: 16 }}
       />
       <EditableDatePicker
-        visible={visible?.academicDetailEdit}
+        visible={visible}
         value={profileData?.startDate}
         title='College Start Date'
         onChange={(e: any) =>
@@ -91,7 +104,7 @@ const AcademicDetails = (props: Props) => {
         style={{ fontSize: 16 }}
       />
       <EditableDatePicker
-        visible={visible?.academicDetailEdit}
+        visible={visible}
         value={profileData?.graduationDate}
         title='Graduation Date'
         onChange={(e: any) =>
@@ -101,7 +114,7 @@ const AcademicDetails = (props: Props) => {
         style={{ fontSize: 16 }}
       />
       <EditableCell
-        visible={visible?.academicDetailEdit}
+        visible={visible}
         titleStyle={{ fontSize: 14 }}
         style={{ fontSize: 16 }}
         value={profileData?.rank || ''}
@@ -114,7 +127,7 @@ const AcademicDetails = (props: Props) => {
         title='Class Rank'
       />
       <EditableCell
-        visible={visible?.academicDetailEdit}
+        visible={visible}
         titleStyle={{ fontSize: 14 }}
         style={{ fontSize: 16 }}
         value={profileData?.gpa || ''}

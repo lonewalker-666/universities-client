@@ -65,12 +65,8 @@ const Overview = (props: any) => {
           </h5>
           <h3 className='font-semibold text-[18px]'>{average_annual_cost}</h3>
           <progress
-            value={
-              (+average_annual_cost.replace('$', '').replaceAll(',', '') /
-                100000) *
-              100
-            }
-            max='100'
+            value={average_annual_cost.replace('$', '').replaceAll(',', '')}
+            max='100000'
           ></progress>
         </div>
         <div className='border border-[#E8E8E9] rounded-[14px] px-5 py-4 flex flex-col w-full'>
@@ -79,9 +75,8 @@ const Overview = (props: any) => {
           </h5>
           <h3 className='font-semibold text-[18px]'>{median_earnings}</h3>
           <progress
-            value={
-              (+median_earnings.replace('$', '').replaceAll(',', '') / 100000) * 100}
-            max='100'
+            value={median_earnings.replace('$', '').replaceAll(',', '')}
+            max='100000'
           ></progress>
         </div>
       </div>

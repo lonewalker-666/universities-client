@@ -2,17 +2,65 @@ import Image from 'next/image'
 import Button from '../../common/button'
 import EditableField from '../../common/editableField'
 import EditIcon from '../../common/icons/editIcon'
+import { ProfileMapper } from '@/src/lib/mapper'
+import { useShowHide } from '@/src/hooks/useShowHide'
+import { basicDetailsSchema } from '@/src/helpers/validators'
+import { useState } from 'react'
+import { updateProfile } from '@/src/services/userApi'
 
 interface Props {
-  visible: any
-  onShow: any
-  onHide: any
+  refetch: any
   profileData: any
   setProfileData: any
 }
 
 const BasicDetails = (props: Props) => {
-  const { visible, onShow, onHide, profileData, setProfileData } = props
+  const { profileData, setProfileData,refetch } = props
+  const {firstName,lastName,email,mobile,location } = ProfileMapper(profileData)
+  const [errors, setErrors] = useState<any>({})
+
+  const form = {
+    firstName,
+    lastName,
+    email,
+    mobile,
+    location
+  }
+
+  const validate = () => {
+    const { error } = basicDetailsSchema.validate(form, { abortEarly: false })
+    if (!error) return null
+
+    // Map Joi error messages
+    const newErrors: any = {}
+    error.details.forEach(item => {
+      newErrors[item.path[0]] = item.message
+    })
+    return newErrors
+  }
+
+
+  const handleSave = async() => {
+    const newErrors = validate()
+    setErrors(newErrors || {})
+
+    if (!newErrors) {
+    const res =  await updateProfile({
+        profileEmojiId:1,
+        mobile:mobile,
+        email:email,
+        firstName:firstName,
+        lastName:lastName,
+        location:location,
+      })
+      if(res){
+        refetch()
+        onHide()
+      }
+    }
+  }
+
+  const { visible, onShow, onHide } = useShowHide(false)
   const editButtonTitle = (
     <div className='flex gap-3 items-center justify-center h-full w-full'>
       <EditIcon className="w-4"/> Edit
@@ -43,12 +91,12 @@ const BasicDetails = (props: Props) => {
                 height={300}
                 className='xs:w-[100px] md:w-[130px]'
               />
-              {visible?.basicDetailsEdit ? (
+              {visible ? (
                 <Button
                   title={saveButtonTitle}
                   width={120}
                   height={50}
-                  onClick={() => onHide()}
+                  onClick={() => handleSave()}
                   className='primary-button xs:flex lg:hidden xs:mt-[3.2rem] md:mt-20'
                 />
               ) : (
@@ -59,43 +107,45 @@ const BasicDetails = (props: Props) => {
                   background='#F5F5F5'
                   color='#000'
                   border='1px solid #CAD0D9'
-                  onClick={() => onShow('basicDetailsEdit')}
+                  onClick={() => onShow('visible')}
                   className='primary-button xs:flex lg:hidden xs:mt-[3.2rem] md:mt-20'
                 />
               )}
             </span>
-            <span className='flex flex-col text-black'>
+            <span className='flex flex-wrap gap-2 text-black'>
               <EditableField
-                visible={visible?.basicDetailsEdit}
-                value={profileData?.name || ''}
+                visible={visible}
+                value={firstName}
                 onChange={(e: any) =>
-                  setProfileData({ ...profileData, name: e.target.value })
+                  setProfileData({ ...profileData, firstName: e.target.value })
                 }
                 style={{ fontSize: 20, fontWeight: 600 }}
                 hideTitle
-                title='Name'
+                title='FirstName'
+                errorMsg={errors?.firstName}
               />
               <EditableField
-                visible={visible?.basicDetailsEdit}
-                value={profileData?.email || ''}
+                visible={visible}
+                value={lastName}
                 onChange={(e: any) =>
                   setProfileData({
                     ...profileData,
-                    email: e.target.value.trim()
+                    lastName: e.target.value
                   })
                 }
                 hideTitle
-                title='Email'
-                style={{ fontSize: 18, fontWeight: 500 }}
+                title='LastName'
+                style={{ fontSize: 20, fontWeight: 600 }}
+                errorMsg={errors?.lastName}
               />
             </span>
           </div>
-          {visible?.basicDetailsEdit ? (
+          {visible ? (
             <Button
               title={saveButtonTitle}
               width={120}
               height={50}
-              onClick={() => onHide()}
+              onClick={() => handleSave()}
               className='primary-button xs:hidden lg:flex'
             />
           ) : (
@@ -106,7 +156,7 @@ const BasicDetails = (props: Props) => {
               background='#F5F5F5'
               color='#000'
               border='1px solid #CAD0D9'
-              onClick={() => onShow('basicDetailsEdit')}
+              onClick={() => onShow('visible')}
               className='primary-button xs:hidden lg:flex'
             />
           )}
@@ -114,25 +164,26 @@ const BasicDetails = (props: Props) => {
         <div className='w-full rounded-[12px] bg-[#F9F9F9] grid xs:grid-cols-1 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3 xs:gap-2 sm:gap-8 md:gap-2 lg:gap-12 py-4 lg:px-8 xs:px-6'>
           <span className=" pr-6 xs:border-b sm:border-b-0 md:border-b lg:border-b-0 xs:border-r-0 sm:border-r md:border-r-0 lg:border-r pb-4 border[#3b3b3b]">
             <EditableField
-              visible={visible?.basicDetailsEdit}
+              visible={visible}
               titleStyle = {{fontSize:14}}
               style={{fontSize:16}}
-              value={profileData?.qualifications || ''}
+              value={email}
               onChange={(e: any) =>
                 setProfileData({
                   ...profileData,
-                  qualifications: e.target.value
+                  email: e.target.value
                 })
               }
-              title='Qualification'
+              title='Email'
+              errorMsg={errors?.email}
             />
           </span>
           <span className=" pr-6 xs:border-b sm:border-b-0 md:border-b lg:border-b-0 xs:border-r-0 sm:border-r md:border-r-0 lg:border-r pb-4 border[#3b3b3b]">
             <EditableField
-              visible={visible?.basicDetailsEdit}
+              visible={visible}
               titleStyle = {{fontSize:14}}
               style={{fontSize:16}}
-              value={profileData?.mobile || ''}
+              value={mobile}
               onChange={(e: any) =>
                 setProfileData({
                   ...profileData,
@@ -140,14 +191,15 @@ const BasicDetails = (props: Props) => {
                 })
               }
               title='Mobile No.'
+              errorMsg={errors?.mobile}
             />
           </span>
           <span className="">
             <EditableField
-              visible={visible?.basicDetailsEdit}
+              visible={visible}
               titleStyle = {{fontSize:14}}
               style={{fontSize:16}}
-              value={profileData?.location || ''}
+              value={location}
               onChange={(e: any) =>
                 setProfileData({
                   ...profileData,
@@ -155,6 +207,7 @@ const BasicDetails = (props: Props) => {
                 })
               }
               title='Location'
+              errorMsg={errors?.location}
             />
           </span>
         </div>

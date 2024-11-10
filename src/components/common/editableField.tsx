@@ -11,6 +11,7 @@ interface Props {
   style?: any
   hideTitle?: boolean
   placeholder?: string
+  errorMsg?: string
 }
 
 const EditableField = (props: Props) => {
@@ -22,11 +23,12 @@ const EditableField = (props: Props) => {
     title,
     titleStyle,
     hideTitle,
-    placeholder
+    placeholder,
+    errorMsg
   } = props
 
   return (
-    <div className='flex flex-col gap-3 max-w-full justify-center'>
+    <div className='flex flex-col max-w-full justify-center'>
       <p
         className='text-black font-medium text-opacity-30 text-sm'
         style={titleStyle || {}}
@@ -38,7 +40,7 @@ const EditableField = (props: Props) => {
           <input
             type='text'
             className={`border-b bg-transparent text-lg text-black max-w-full p-2 font-medium text-opacity-80 ${
-              value
+              !errorMsg
                 ? 'border-gray-300 focus:outline-none focus:border-blue-500'
                 : 'border-red-600'
             }`}
@@ -46,9 +48,9 @@ const EditableField = (props: Props) => {
             onChange={onChange}
             placeholder={placeholder || `Enter your ${title}`}
           />
-          {!value && (
+          {errorMsg && (
             <p className='font-medium text-red-600'>
-              {title || 'Field'} should not be empty
+              {errorMsg}
             </p>
           )}
         </>

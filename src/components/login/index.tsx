@@ -116,7 +116,7 @@ const Login = () => {
                 </p>
               )}
             </div>
-            <div className='flex justify-end items-center mb-4'>
+            <div className='flex justify-end items-center mt-4'>
               <a href='#' className='text-[#7E55C8] hover:underline'>
                 Forgot Password?
               </a>
