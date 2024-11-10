@@ -8,7 +8,8 @@ import {
 const GraduationRetention = (props: any) => {
   const { collegeData } = props
   const [active, setActive] = useState(false)
-  const { study_fields } = CollegeDetailsMapper(collegeData)
+  const { graduation_rate, retention_rate, withdrawal_rate, transfer_rate } = CollegeDetailsMapper(collegeData)
+
   return (
     <div className='w-full flex flex-col border border-[#E8E8E9] rounded-[20px]'>
       <button
@@ -16,28 +17,58 @@ const GraduationRetention = (props: any) => {
         onClick={() => setActive(!active)}
       >
         <div className='flex justify-between w-full max-w-[1000px] gap-3 items-center'>
-        <h3 className='text-xl font-semibold'>Field of Study</h3>
+        <h3 className='text-xl font-semibold'>Graduation and Retention</h3>
         <BackIcon
           className={`w-4 ${active ? 'rotate-[270deg]' : 'rotate-90'}`}
         />
         </div>
       </button>
-      <div
-        className={`accordian-inner ${active ? 'active' : ''}`}
-        onClick={(e: any) => e.stopPropagation()}
-      >
-        <div className='flex flex-col items-center w-full'>
-        <div className='flex flex-col gap-1 px-6 w-full max-w-[1000px]'>
-        <h5 className='text-md font-semibold'>
-          Top Field study at university name
-        </h5>
-        <p className='text-sm'>
-          Out of 49 undergraduate fields of study at Stanford University, the 5
-          largest are shown below.
-        </p>
+      <div className={`accordian-inner ${active ? 'active' : ''}`}>
+        <div className='w-full flex justify-center'>
+          <div className='grid xs:grid-cols-1 sm:grid-cols-2 gap-3 px-6 pb-6 w-full max-w-[1000px]'>
+            <div className='border border-[#E8E8E9] rounded-[14px] px-5 py-4 flex flex-col w-full'>
+              <h5 className='font-medium text-[#00000080] text-[14px]'>
+              Graduation rate
+              </h5>
+              <h3 className='font-semibold text-[20px] mt-2'>
+                {graduation_rate}
+              </h3>
+
+              <progress value={graduation_rate.replace('%', '')} max='100' className='mt-5'></progress>
+            </div>
+
+            <div className='border border-[#E8E8E9] rounded-[14px] px-5 py-4 flex flex-col w-full'>
+              <h5 className='font-medium text-[#00000080] text-[14px]'>
+              Students Who Return After Their First Year
+              </h5>
+              <h3 className='font-semibold text-[20px] mt-2'>
+                {retention_rate}
+              </h3>
+
+              <progress value={retention_rate.replace('%', '')} max='100' className='mt-5'></progress>
+            </div>
+            <div className='border border-[#E8E8E9] rounded-[14px] px-5 py-4 flex flex-col w-full'>
+              <h5 className='font-medium text-[#00000080] text-[14px]'>
+              Withdrawal Rate
+              </h5>
+              <h3 className='font-semibold text-[20px] mt-2'>
+                {withdrawal_rate}
+              </h3>
+
+              <progress value={withdrawal_rate.replace('%', '')} max='100' className='mt-5'></progress>
+            </div>
+            <div className='border border-[#E8E8E9] rounded-[14px] px-5 py-4 flex flex-col w-full'>
+              <h5 className='font-medium text-[#00000080] text-[14px]'>
+              Transfer Rate
+              </h5>
+              <h3 className='font-semibold text-[20px] mt-2'>
+                {transfer_rate}
+              </h3>
+
+              <progress value={transfer_rate.replace('%', '')} max='100' className='mt-5'></progress>
+            </div>
+          </div>
         </div>
-        </div>
-     
       </div>
     </div>
   )

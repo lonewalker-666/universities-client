@@ -8,12 +8,14 @@ import BackIcon from '../common/icons/backIcon'
 import StudyField from './components/studyField'
 import Overview from './components/overview'
 import Costs from './components/costs'
+import GraduationRetention from './components/graduationRentention'
+import TypicalEarnings from './components/typicalEarnings'
 const CollegeDetailContainer = (props: any) => {
   const { id } = props
   const [college, setCollege] = useState<any>({})
   const getCollegeDetail = async() => {
     try {
-      const res = await getCollegeDetails(243744)
+      const res = await getCollegeDetails(id)
       setCollege(res)
     } catch (e) {
       console.log(e)
@@ -31,6 +33,8 @@ const CollegeDetailContainer = (props: any) => {
         <Overview collegeData={college} />
         <StudyField collegeData={college} />
         <Costs collegeData={college} />
+        <GraduationRetention collegeData={college} />
+        <TypicalEarnings collegeData={college}/>
       </div>
     </div>
   )

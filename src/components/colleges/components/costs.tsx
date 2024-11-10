@@ -33,7 +33,7 @@ const Costs = (props: any) => {
               <h5 className='font-medium text-[#00000080] text-[14px]'>
                 Average annual cost
               </h5>
-              <h3 className='font-semibold text-[18px]'>
+              <h3 className='font-semibold text-[20px] mt-5'>
                 {costs_average_annual_cost}
               </h3>
               <p className='text-[14px] mt-3'>
@@ -42,7 +42,7 @@ const Costs = (props: any) => {
                 financial aid recipients.
               </p>
               <p
-                className='text-[14px] mt-3 text-[#6f42c1e5] font-semibold'
+                className='text-[14px] mt-6 text-[#6f42c1e5] font-semibold'
                 style={{
                   marginLeft:
                     annual_cost_percentage > 50
@@ -62,10 +62,10 @@ const Costs = (props: any) => {
                   <table className='min-w-full table-fixed'>
                     <thead>
                       <tr>
-                        <th className='border-b border-gray-300 px-4 py-3 text-md text-left'>
+                        <th className='border-b border-gray-300 px-4 text-sm py-2 text-md text-left'>
                         Family Income
                         </th>
-                        <th className='border-b border-gray-300 px-4 py-3 text-md text-left'>
+                        <th className='border-b border-gray-300 px-4 text-sm py-2 text-md text-left'>
                         Average Annual Cost
                         </th>
                       </tr>
@@ -75,10 +75,10 @@ const Costs = (props: any) => {
                         (key: any, i: number) => {
                           return (
                             <tr key={i} className='text-center'>
-                              <td className='border-b border-gray-300 px-4 py-3 font-medium text-left text-sm'>
+                              <td className='border-b border-gray-300 px-4 py-2 text-xs font-medium text-left'>
                                 {key}
                               </td>
-                              <td className='border-b border-gray-300 px-4 py-3 font-medium text-left text-sm'>
+                              <td className='border-b border-gray-300 px-4 py-2 text-xs font-medium text-left'>
                                 {by_family_income[key]}
                               </td>
                             </tr>

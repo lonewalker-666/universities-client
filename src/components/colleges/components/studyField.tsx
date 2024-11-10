@@ -28,7 +28,6 @@ const StudyField = (props: any) => {
       </button>
       <div
         className={`accordian-inner ${active ? 'active' : ''}`}
-        onClick={(e: any) => e.stopPropagation()}
       >
         <div className='flex flex-col items-center w-full'>
         <div className='flex flex-col gap-1 px-6 w-full max-w-[1000px]'>

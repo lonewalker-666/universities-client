@@ -52,6 +52,17 @@ export const CollegeDetailsMapper = (data: any) => {
   const study_fields = get(data, 'fields_of_study.top_fields', [])
   const costs_average_annual_cost = get(data, 'costs.average_annual_cost', '')
   const by_family_income = get(data, 'costs.by_family_income', [])
+  const retention_rate = get(
+    data,
+    'graduation_and_retention.retention_rate',
+    ''
+  )
+  const transfer_rate = get(data, 'graduation_and_retention.transfer_rate', '')
+  const withdrawal_rate = get(
+    data,
+    'graduation_and_retention.withdrawal_rate',
+    ''
+  )
   return {
     university_name,
     city_state,
@@ -64,7 +75,10 @@ export const CollegeDetailsMapper = (data: any) => {
     median_earnings,
     study_fields,
     costs_average_annual_cost,
-    by_family_income
+    by_family_income,
+    retention_rate,
+    transfer_rate,
+    withdrawal_rate
   }
 }
 
