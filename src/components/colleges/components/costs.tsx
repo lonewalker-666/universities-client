@@ -16,7 +16,7 @@ const Costs = (props: any) => {
   return (
     <div className='w-full flex flex-col border border-[#E8E8E9] rounded-[20px]'>
       <button
-        className='flex justify-between gap-3 items-center border-0 border-[#E8E8E9] p-6 rounded-[20px] bg-white outline-none'
+        className='flex justify-center gap-3 items-center border-0 border-[#E8E8E9] p-6 rounded-[20px] bg-white outline-none'
         onClick={() => setActive(!active)}
       >
         <div className='flex justify-between w-full max-w-[1000px] gap-3 items-center'>
@@ -45,12 +45,12 @@ const Costs = (props: any) => {
                 className='text-[14px] mt-6 text-[#6f42c1e5] font-semibold'
                 style={{
                   marginLeft:
-                    annual_cost_percentage > 50
+                    annual_cost_percentage >= 70
                       ? 'auto'
-                      : annual_cost_percentage
+                      : `${annual_cost_percentage}%`
                 }}
               >
-                $10,851
+               $ {annual_cost_percentage}
               </p>
               <progress value={annual_cost_percentage} max='100'></progress>
             </div>

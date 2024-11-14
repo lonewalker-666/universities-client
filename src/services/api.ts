@@ -63,7 +63,7 @@ export const getRace = async () => {
   }
 };
 
-export const getHighscholl = async () => {
+export const getHighschool = async () => {
   try {
     const res = await axios.get('/get/highSchool');  // Make sure POST is correct here
     if(res?.data?.success){
