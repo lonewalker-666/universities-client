@@ -52,7 +52,7 @@ const ProductFaq = () => {
       />
       <div className='w-full mt-[50px]'>
         <HeaderContainer
-          title='FAQ’s'
+          title='FAQ&quot;s'
           heading='Answers at Your Fingertips'
           description='Everything you need to know about the product and Features.'
         />
