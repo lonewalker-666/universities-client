@@ -1,20 +1,9 @@
-// Step1.js
 import React, { useState } from "react";
+import { GENDER } from "@/src/lib/constants";
+import { CreateProfileSchema } from "@/src/helpers/validators";
+import { createProfile } from "@/src/services/userApi";
 
 const Step1 = () => {
-  const genderOptions = [
-    { label: "Select Gender", value: "" },
-    { label: "Male", value: "male" },
-    { label: "Female", value: "female" },
-    { label: "Other", value: "other" },
-  ];
-
-  const nationalityOptions = [
-    { label: "Select Nationality", value: "" },
-    { label: "American", value: "american" },
-    { label: "Canadian", value: "canadian" },
-    { label: "Indian", value: "indian" },
-  ];
   const [errors, setErrors] = useState<any>({});
   const [formData, setFormData] = useState({
     firstName: "",
@@ -22,49 +11,77 @@ const Step1 = () => {
     email: "",
     phoneNumber: "",
     gender: "",
-    nationality: "",
+    selectedDate: "",
   });
 
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const validate = () => {
+    const { error } = CreateProfileSchema.validate(formData, {
+      abortEarly: false,
+    });
+    console.log(error);
+    if (!error) return null;
+    // Map Joi error messages
+    const newErrors: any = {};
+    error.details.forEach((item: any) => {
+      console.log(item, "item");
+      newErrors[item.path[0]] = item.message;
+    });
+    return newErrors;
   };
+  const handleCreate = async () => {
+    const newErrors = validate();
+    setErrors(newErrors || {});
+    if (!newErrors) {
+      await createProfile(formData);
+    }
+  };
+
+  // Helper for input border styling
+  const getInputClassName = (field: keyof typeof errors) =>
+    `bg-[#FAFAFA] rounded-md text-lg w-full p-2 font-medium ${
+      errors[field] ? "border-red-600" : "border-gray-300"
+    }`;
+
   return (
     <div className="flex flex-col w-full">
-      <div className="flex gap-4  mb-2">
+      {/* Profile Image Section */}
+      <div className="flex gap-4 mb-2">
         <div className="w-1/4 flex flex-col items-center justify-center gap-4">
           <p>Profile Image</p>
           <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center">
             <p>Image</p>
           </div>
         </div>
+        {/* Name Inputs */}
         <div className="w-3/4 flex flex-col pl-4">
           <div className="mb-4">
-            <label className="block text-sm font-medium">First Name</label>
+            <label htmlFor="firstName" className="block text-sm font-medium">
+              First Name
+            </label>
             <input
+              id="firstName"
               type="text"
               name="firstName"
               value={formData.firstName}
-              onChange={(e: any) => handleChange(e)}
-              className={`bg-[#FAFAFA] rounded-md text-lg w-full p-2 font-medium ${
-                errors.firstName ? "border-red-600" : "border-gray-300"
-              }`}
+              onChange={(e: any) => setFormData(e.target.value)}
+              className={getInputClassName("firstName")}
               placeholder="Enter your First Name"
             />
             {errors.firstName && (
               <p className="text-red-600 text-sm">{errors.firstName}</p>
             )}
           </div>
-
           <div className="mb-4">
-            <label className="block text-sm font-medium">Last Name</label>
+            <label htmlFor="lastName" className="block text-sm font-medium">
+              Last Name
+            </label>
             <input
+              id="lastName"
               type="text"
               name="lastName"
               value={formData.lastName}
-              onChange={(e: any) => handleChange(e)}
-              className={`bg-[#FAFAFA] rounded-md text-lg w-full p-2 font-medium ${
-                errors.lastName ? "border-red-600" : "border-gray-300"
-              }`}
+              onChange={(e: any) => setFormData(e.target.value)}
+              className={getInputClassName("lastName")}
               placeholder="Enter your Last Name"
             />
             {errors.lastName && (
@@ -74,31 +91,35 @@ const Step1 = () => {
         </div>
       </div>
 
+      {/* Email Input */}
       <div className="mb-4">
-        <label className="block text-sm font-medium">Email</label>
+        <label htmlFor="email" className="block text-sm font-medium">
+          Email
+        </label>
         <input
+          id="email"
           type="email"
           name="email"
           value={formData.email}
-          onChange={(e: any) => handleChange(e)}
-          className={`bg-[#FAFAFA] rounded-md text-lg w-full p-2 font-medium ${
-            errors.email ? "border-red-600" : "border-gray-300"
-          }`}
+          onChange={(e: any) => setFormData(e.target.value)}
+          className={getInputClassName("email")}
           placeholder="Enter your Email"
         />
         {errors.email && <p className="text-red-600 text-sm">{errors.email}</p>}
       </div>
 
+      {/* Phone Number Input */}
       <div className="mb-4">
-        <label className="block text-sm font-medium">Phone Number</label>
+        <label htmlFor="phoneNumber" className="block text-sm font-medium">
+          Phone Number
+        </label>
         <input
+          id="phoneNumber"
           type="tel"
           name="phoneNumber"
           value={formData.phoneNumber}
-          onChange={(e: any) => handleChange(e)}
-          className={`bg-[#FAFAFA] rounded-md text-lg w-full p-2 font-medium ${
-            errors.phoneNumber ? "border-red-600" : "border-gray-300"
-          }`}
+          onChange={(e: any) => setFormData(e.target.value)}
+          className={getInputClassName("phoneNumber")}
           placeholder="Enter your Phone Number"
         />
         {errors.phoneNumber && (
@@ -106,17 +127,42 @@ const Step1 = () => {
         )}
       </div>
 
+      {/* Date Picker */}
       <div className="mb-4">
-        <label className="block text-sm font-medium">Gender</label>
+        <label htmlFor="selectedDate" className="block text-sm font-medium">
+          DOB
+        </label>
+        <input
+          id="selectedDate"
+          type="date"
+          name="selectedDate"
+          value={formData.selectedDate}
+          onChange={(e: any) => setFormData(e.target.value)}
+          className={getInputClassName("selectedDate")}
+        />
+        {errors.selectedDate && (
+          <p className="text-red-600 text-sm">{errors.selectedDate}</p>
+        )}
+      </div>
+
+      {/* Gender Dropdown */}
+      <div className="mb-4">
+        <label htmlFor="gender" className="block text-sm font-medium">
+          Gender
+        </label>
         <select
+          id="gender"
           name="gender"
           value={formData.gender}
-          onChange={(e: any) => handleChange(e)}
-          className={` p-2 rounded-md bg-[#FAFAFA] font-medium w-full ${
+          onChange={(e: any) => setFormData(e.target.value)}
+          className={`p-2 rounded-md bg-[#FAFAFA] font-medium w-full ${
             errors.gender ? "border-red-600" : "border-gray-300"
           }`}
         >
-          {genderOptions.map((option, index) => (
+          <option value="" disabled>
+            Select Gender
+          </option>
+          {GENDER.map((option, index) => (
             <option key={index} value={option.value}>
               {option.label}
             </option>
@@ -126,27 +172,7 @@ const Step1 = () => {
           <p className="text-red-600 text-sm">{errors.gender}</p>
         )}
       </div>
-
-      <div className="mb-4">
-        <label className="block text-sm font-medium ">Nationality</label>
-        <select
-          name="nationality"
-          value={formData.nationality}
-          onChange={(e: any) => handleChange(e)}
-          className={` p-2 rounded-md bg-[#FAFAFA] font-medium w-full ${
-            errors.nationality ? "border-red-600" : "border-gray-300"
-          }`}
-        >
-          {nationalityOptions.map((option, index) => (
-            <option key={index} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        {errors.nationality && (
-          <p className="text-red-600 text-sm">{errors.nationality}</p>
-        )}
-      </div>
+      <button onClick={() => handleCreate()}>save</button>
     </div>
   );
 };

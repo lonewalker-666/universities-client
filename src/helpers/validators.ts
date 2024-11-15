@@ -1,18 +1,18 @@
-import Joi from 'joi'
+import Joi from "joi";
 
 export const signUpSchema = Joi.object({
   firstName: Joi.string().required().messages({
-    'string.empty': 'First name is required'
+    "string.empty": "First name is required",
   }),
   lastName: Joi.string().required().messages({
-    'string.empty': 'Last name is required'
+    "string.empty": "Last name is required",
   }),
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required()
     .messages({
-      'string.empty': 'Email is required',
-      'string.email': 'Please enter a valid email'
+      "string.empty": "Email is required",
+      "string.email": "Please enter a valid email",
     }),
   password: Joi.string()
     .min(8)
@@ -22,21 +22,21 @@ export const signUpSchema = Joi.object({
     )
     .required()
     .messages({
-      'string.empty': 'Password is required',
-      'string.min': 'Password must be at least 8 characters',
-      'string.max': 'Password must not exceed 16 characters',
-      'string.pattern.base':
-        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
-    })
-})
+      "string.empty": "Password is required",
+      "string.min": "Password must be at least 8 characters",
+      "string.max": "Password must not exceed 16 characters",
+      "string.pattern.base":
+        "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    }),
+});
 
 export const loginSchema = Joi.object({
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required()
     .messages({
-      'string.empty': 'Email is required',
-      'string.email': 'Please enter a valid email'
+      "string.empty": "Email is required",
+      "string.email": "Please enter a valid email",
     }),
   password: Joi.string()
     .min(8)
@@ -46,77 +46,115 @@ export const loginSchema = Joi.object({
     )
     .required()
     .messages({
-      'string.empty': 'Password is required',
-      'string.min': 'Password must be at least 8 characters',
-      'string.max': 'Password must not exceed 16 characters',
-      'string.pattern.base':
-        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
-    })
-})
-
+      "string.empty": "Password is required",
+      "string.min": "Password must be at least 8 characters",
+      "string.max": "Password must not exceed 16 characters",
+      "string.pattern.base":
+        "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    }),
+});
 
 export const basicDetailsSchema = Joi.object({
   firstName: Joi.string().required().messages({
-    'string.empty': 'First name is required'
+    "string.empty": "First name is required",
   }),
   lastName: Joi.string().required().messages({
-    'string.empty': 'Last name is required'
+    "string.empty": "Last name is required",
   }),
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required()
     .messages({
-      'string.empty': 'Email is required',
-      'string.email': 'Please enter a valid email'
+      "string.empty": "Email is required",
+      "string.email": "Please enter a valid email",
     }),
   mobile: Joi.string().required().min(8).max(17).messages({
-    'string.empty': 'Mobile number is required'
+    "string.empty": "Mobile number is required",
   }),
   location: Joi.string().required().messages({
-    'string.empty': 'Location is required'
+    "string.empty": "Location is required",
   }),
-})
+});
 
 export const personalDetailsSchema = Joi.object({
   gender_id: Joi.number().messages({
-    'number.empty': 'Please Select any one of the options'
+    "number.empty": "Please Select any one of the options",
   }),
   race_id: Joi.number().required().messages({
-    'number.empty': 'Please Select any one of the options'
+    "number.empty": "Please Select any one of the options",
   }),
-  armed_force_status_id: Joi.number()
-    .required()
-    .messages({
-      'number.empty': 'Please Select any one of the options',
-    }),
+  armed_force_status_id: Joi.number().required().messages({
+    "number.empty": "Please Select any one of the options",
+  }),
   citizenship_id: Joi.number().required().messages({
-    'number.empty': 'Please Select any one of the options'
+    "number.empty": "Please Select any one of the options",
   }),
   first_generation_id: Joi.number().required().messages({
-    'number.empty': 'Please Select any one of the options'
+    "number.empty": "Please Select any one of the options",
   }),
   financial_aid_id: Joi.number().required().messages({
-    'number.empty': 'Please Select any one of the options'
+    "number.empty": "Please Select any one of the options",
   }),
-})
+});
 
 export const AcademicDetailsSchema = Joi.object({
   high_school_id: Joi.number().required().messages({
-    'number.empty': 'Please Select any one of the options'
+    "number.empty": "Please Select any one of the options",
   }),
   class_rank: Joi.number().required().messages({
-    'number.empty': 'Please Select any one of the options'
+    "number.empty": "Please Select any one of the options",
   }),
-  gpa: Joi.number().required().messages({
-    'number.empty': 'Please Select any one of the options'
-  }).max(10),
+  gpa: Joi.number()
+    .required()
+    .messages({
+      "number.empty": "Please Select any one of the options",
+    })
+    .max(10),
   college_start_date: Joi.date().required().messages({
-    'date.empty': 'Please Select any one of the options'
+    "date.empty": "Please Select any one of the options",
   }),
   graduation_date: Joi.date().required().messages({
-    'date.empty': 'Please Select any one of the options'
+    "date.empty": "Please Select any one of the options",
   }),
   grade_level_id: Joi.number().required().messages({
-    'number.empty': 'Please Select any one of the options'
+    "number.empty": "Please Select any one of the options",
   }),
-})
+});
+
+export const CreateProfileSchema = Joi.object({
+  firstName: Joi.string().required().messages({
+    "string.empty": "First name is required",
+  }),
+  lastName: Joi.string().required().messages({
+    "string.empty": "Last name is required",
+  }),
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .messages({
+      "string.empty": "Email is required",
+      "string.email": "Please enter a valid email address",
+    }),
+  phoneNumber: Joi.string()
+    .pattern(/^\+?[0-9]{8,17}$/) // Allows optional "+" followed by 8-17 digits
+    .required()
+    .messages({
+      "string.empty": "Phone number is required",
+      "string.pattern.base":
+        'Phone number must be between 8 and 17 digits and can start with "+"',
+    }),
+  gender: Joi.string()
+    .valid("male", "female", "other") // Add valid options based on your application requirements
+    .required()
+    .messages({
+      "string.empty": "Gender is required",
+      "any.only": "Please select a valid gender",
+    }),
+  selectedDate: Joi.date()
+    .iso() // Ensures the date is in ISO 8601 format (e.g., YYYY-MM-DD)
+    .required()
+    .messages({
+      "date.base": "Selected date must be a valid date",
+      "any.required": "Date is required",
+    }),
+});

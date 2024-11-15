@@ -28,6 +28,19 @@ export const updateProfile = async (data: any) => {
     toast.error(e?.response?.data?.message || "Something went wrong");
   }
 };
+export const createProfile = async (data: any) => {
+  try {
+    const res = await axios.post(`/user/createProfile`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.success;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong");
+  }
+};
 
 export const updatePersonDetails = async (data: any) => {
   try {
