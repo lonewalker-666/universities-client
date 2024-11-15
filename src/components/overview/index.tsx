@@ -42,8 +42,8 @@ const OverviewContainer = () => {
             <h2 className="text-lg text-black font-semibold mb-4">
               Essay Writing
             </h2>
-            {essay.map((essay) => (
-              <div className="w-full bg-white p-4 rounded-md border border-gray-300">
+            {essay.map((essay:any,key:number) => (
+              <div className="w-full bg-white p-4 rounded-md border border-gray-300" key={key}>
                 <p className="text-lg font-medium text-black mb-2">
                   {essay?.title}
                 </p>

@@ -36,7 +36,7 @@ const FAQ = () => {
       <div className="w-full md:w-[600px] h-auto p-4 md:p-0 mx-auto">
         <div className="w-full py-8 flex flex-col gap-6 md:gap-9">
           <div className="flex flex-col items-center justify-center">
-            <span className="text-[#6F42C1E5] font-semibold">FAQ's</span>
+            <span className="text-[#6F42C1E5] font-semibold">FAQ&#39;s</span>
             <h1 className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold inter-text">
               Answers at Your Fingertips
             </h1>

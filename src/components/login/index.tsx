@@ -169,7 +169,7 @@ const Login = () => {
             </button>
           </div>
           <div className='text-center mt-4 pb-12'>
-            Don't you have an account?{' '}
+            Don&#34;t you have an account?{' '}
             <a
               href='#'
               className='text-[#6F42C1E5] hover:underline'

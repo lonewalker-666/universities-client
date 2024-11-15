@@ -76,7 +76,7 @@ const CampusDiversity = (props: any) => {
                 const value = demographics[key]
                 const percentage = (value.replace('%', '') / 100) * 100
                 return (
-                  <div className='border border-[#E8E8E9] bg-[#FEFEFE] rounded-[14px] px-5 py-4 flex flex-col w-full'>
+                  <div className='border border-[#E8E8E9] bg-[#FEFEFE] rounded-[14px] px-5 py-4 flex flex-col w-full' key={key}>
                     <h5 className='font-medium text-[#00000080] text-[14px] capitalize'>
                       {title}
                     </h5>
