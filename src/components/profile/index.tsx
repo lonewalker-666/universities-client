@@ -31,7 +31,6 @@ const ProfileContainer = () => {
 
   const getProfileData = async() => {
     const profile = await getProfile()
-    console.log(profile);
     setProfileData(profile)
   }
 
@@ -59,6 +58,7 @@ const ProfileContainer = () => {
         <AcademicDetails
           profileData={profilData}
           setProfileData={setProfileData}
+          refetch={getProfileData}
         />
       </div>
     </div>

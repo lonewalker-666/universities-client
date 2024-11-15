@@ -44,7 +44,7 @@ export const updatePersonDetails = async (data: any) => {
 };
 export const updateAcademicBackground = async (data: any) => {
   try {
-    const res = await axios.put(`/user/updateAcademicBackground`, data, {
+    const res = await axios.post(`/user/updateAcademicBackground`, data, {
       headers: {
         Authorization: `Bearer ${getAccessToken()}`,
       },
