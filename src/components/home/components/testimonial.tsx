@@ -9,7 +9,7 @@ const Testimonials = () => {
         <HeaderContainer
           title='Testimonials'
           heading='Voices of Experience'
-          description="Insights from students who've walked the path."
+          description="Insights from students who have walked the path."
 
         />
       </div>
