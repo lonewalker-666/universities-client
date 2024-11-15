@@ -16,7 +16,7 @@ interface Props {
   hideTitle?: boolean
   options: Array<optionsObject>
   placeholder?: string
-  errMsg?:string
+  errMsg?: string
 }
 
 const EditableSelect = (props: Props) => {
@@ -32,8 +32,9 @@ const EditableSelect = (props: Props) => {
     placeholder,
     errMsg
   } = props
-  const selectedValue = !isEmpty(options) ? options.find(
-    (option) => option.value == value)?.label || "" : ""
+  const selectedValue = !isEmpty(options)
+    ? options.find(option => option.value == value)?.label || ''
+    : ''
 
   return (
     <div className='flex flex-col gap-3 max-w-full'>
@@ -53,10 +54,14 @@ const EditableSelect = (props: Props) => {
             }`}
             onChange={onChange}
             placeholder={placeholder || 'Select Any One'}
+            defaultValue={value}
           >
+            <option value={0}>
+              Please select any One Option
+            </option>
             {!isEmpty(options) &&
               options.map((option, index) => (
-                <option key={index} selected={option?.value == value}  value={option?.value}>
+                <option key={index} value={option?.value}>
                   {option?.label}
                 </option>
               ))}

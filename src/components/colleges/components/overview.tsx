@@ -2,6 +2,8 @@ import { CollegeDetailsMapper } from '@/src/lib/mapper'
 import Building from '../../common/icons/building'
 import GraduationHat from '../../common/icons/graduationHat'
 import LocationMarker from '../../common/icons/locationMarker'
+import HeartOutlined from '../../common/icons/heart'
+import RedHeart from '../../common/icons/redHeart'
 
 const Overview = (props: any) => {
   const { collegeData } = props
@@ -14,7 +16,8 @@ const Overview = (props: any) => {
     official_website,
     number_of_undergraduate_students,
     graduation_rate,
-    median_earnings
+    median_earnings,
+    wishlisted
   } = CollegeDetailsMapper(collegeData)
   return (
     <>
@@ -34,7 +37,7 @@ const Overview = (props: any) => {
           {official_website}
         </a>
       </div>
-      <div className='grid xs:grid-cols-1 md:grid-cols-3 gap-3 max-w-[600px]'>
+      <div className='grid xs:grid-cols-1 md:grid-cols-4 gap-3 max-w-[600px]'>
         <span className='flex items-center gap-2'>
           <GraduationHat className='w-4' />
           <p className='font-normal text-[14px]'>{school_type}</p>
@@ -46,6 +49,13 @@ const Overview = (props: any) => {
         <span className='flex items-center gap-2'>
           <LocationMarker className='w-4' />
           <p className='font-normal text-[14px]'>{city_state}</p>
+        </span>
+        <span className='flex items-center gap-2'>
+          {!wishlisted ? (
+            <RedHeart className='w-4' />
+          ) : (
+            <HeartOutlined className='w-4' />
+          )}
         </span>
       </div>
       <div className='grid xs:grid-cols-1 md:grid-cols-3 gap-3'>

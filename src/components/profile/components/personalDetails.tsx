@@ -70,7 +70,6 @@ const PersonalDetails = (props: Props) => {
   const handleSave = async () => {
     const newErrors = validate();
     setErrors(newErrors || {});
-
     if (!newErrors) {
       const res = await updatePersonDetails(form);
       if (res) {

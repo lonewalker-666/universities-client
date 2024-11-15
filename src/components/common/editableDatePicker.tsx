@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash'
+import moment from 'moment'
 
 interface Props {
   visible: boolean
@@ -58,7 +58,7 @@ const EditableDatePicker = (props: Props) => {
           className='font-medium text-opacity-80 text-black overflow-hidden text-ellipsis whitespace-nowrap'
           style={style || {}}
         >
-          {value}
+          {moment(value).format('DD-MMM-YYYY')}
         </p>
       )}
     </div>

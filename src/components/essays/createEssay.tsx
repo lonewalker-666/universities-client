@@ -6,19 +6,39 @@ import Ai from '../common/icons/ai'
 import AiFilled from '../common/icons/aiFilled'
 import Button from '../common/button'
 import { useRouter } from 'next/router'
+import { createEssay, editEssay, getEssayOne, getEssays } from '@/src/services/essaysApi'
 
 // Dynamically import ReactQuill to avoid SSR issues
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-const CreateEssay = () => {
+const CreateEssay = (props:any) => {
+  const {id} = props
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [isClient, setIsClient] = useState(false)
   const [error, setError] = useState(false)
+const [loading, setLoading] = useState(false)
+const fetchData = async () => {
+  try {
+    setLoading(true)
+    const data = await getEssayOne(id)
+    setContent(data.content)
+    setTitle(data.title)
+    
+  } catch (error) {
+    console.error('Error fetching essays:', error)
+  }
+  finally{
+    setLoading(false)
+  }
+}
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setIsClient(true)
+      if(id){
+        fetchData()
+      }
     }
   }, [])
 
@@ -37,24 +57,42 @@ const CreateEssay = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    // Submission logic
+    if (content.length > 0 && title.length > 0) {
+      if(id){
+        await editEssay({
+          title: title,
+          content: content,
+          essayId: id
+        })
+      }
+      else{
+        await createEssay({
+          title: title,
+          content: content
+        })
+      }
+     
+    }
+    else{
+      setError(true)
+    }
   }
 
   const router = useRouter()
 
-  // Browser confirmation for page reload/close
-  useEffect(() => {
-    const handleBeforeUnload = (e: any) => {
-      e.preventDefault()
-      e.returnValue = '' // Required for showing the prompt
-    }
+  // // Browser confirmation for page reload/close
+  // useEffect(() => {
+  //   const handleBeforeUnload = (e: any) => {
+  //     e.preventDefault()
+  //     e.returnValue = '' // Required for showing the prompt
+  //   }
 
-    window.addEventListener('beforeunload', handleBeforeUnload)
+  //   window.addEventListener('beforeunload', handleBeforeUnload)
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-    }
-  }, [])
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload)
+  //   }
+  // }, [])
 
   // Route confirmation within the app
   useEffect(() => {
@@ -73,7 +111,7 @@ const CreateEssay = () => {
       router.events.off('routeChangeStart', handleRouteChange)
     }
   }, [router.events])
-console.log(title, content);
+
   return (
     <div className='w-full flex flex-col items-center text-black'>
       <div className='w-full max-w-[1200px] flex flex-col gap-8 p-8'>
@@ -134,14 +172,8 @@ console.log(title, content);
             <Button
               title='Save'
               width={100}
-              onClick={() => {
-                if (title === '' || content === '') {
-                  setError(true)
-                } else {
-                  setError(false)
-                  console.log(content);
-                  // router.push('/essays') // Example action on save confirmation
-                }
+              onClick={(e:any) => {
+                handleSubmit(e)
               }}
             />
 

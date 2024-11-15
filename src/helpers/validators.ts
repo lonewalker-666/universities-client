@@ -69,7 +69,7 @@ export const basicDetailsSchema = Joi.object({
       'string.empty': 'Email is required',
       'string.email': 'Please enter a valid email'
     }),
-  mobile: Joi.string().required().messages({
+  mobile: Joi.string().required().min(8).max(17).messages({
     'string.empty': 'Mobile number is required'
   }),
   location: Joi.string().required().messages({
@@ -96,6 +96,27 @@ export const personalDetailsSchema = Joi.object({
     'number.empty': 'Please Select any one of the options'
   }),
   financial_aid_id: Joi.number().required().messages({
+    'number.empty': 'Please Select any one of the options'
+  }),
+})
+
+export const AcademicDetailsSchema = Joi.object({
+  high_school_id: Joi.number().required().messages({
+    'number.empty': 'Please Select any one of the options'
+  }),
+  class_rank: Joi.number().required().messages({
+    'number.empty': 'Please Select any one of the options'
+  }),
+  gpa: Joi.number().required().messages({
+    'number.empty': 'Please Select any one of the options'
+  }).max(10),
+  college_start_date: Joi.date().required().messages({
+    'date.empty': 'Please Select any one of the options'
+  }),
+  graduation_date: Joi.date().required().messages({
+    'date.empty': 'Please Select any one of the options'
+  }),
+  grade_level_id: Joi.number().required().messages({
     'number.empty': 'Please Select any one of the options'
   }),
 })

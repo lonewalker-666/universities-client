@@ -8,7 +8,9 @@ import {
 const TypicalEarnings = (props: any) => {
   const { collegeData } = props
   const [active, setActive] = useState(false)
-  const { graduation_rate, retention_rate, withdrawal_rate, transfer_rate } = CollegeDetailsMapper(collegeData)
+  const { median_earnings } = CollegeDetailsMapper(collegeData)
+  const medianEarnings = median_earnings.replace('$', '').replaceAll(',', '')
+  const medianEarningsPercentage = (+medianEarnings / 100000) * 100
 
   return (
     <div className='w-full flex flex-col border border-[#E8E8E9] rounded-[20px]'>
@@ -31,7 +33,7 @@ const TypicalEarnings = (props: any) => {
               Median Earnings 
               </h5>
               <h3 className='font-semibold text-[20px] mt-2'>
-                {graduation_rate}
+                {median_earnings}
               </h3>
               <p className='font-medium text-[16px] mt-4'>
               The median earnings of former students who received federal financial aid at 10 years after entering the school.
@@ -40,14 +42,14 @@ const TypicalEarnings = (props: any) => {
                 className='text-[14px] mt-6 text-[#6f42c1e5] font-semibold'
                 style={{
                   marginLeft:
-                    graduation_rate.replace('%', '') > 50
+                    medianEarningsPercentage > 70
                       ? 'auto'
-                      : graduation_rate.replace('%', '')
+                      : `${medianEarningsPercentage}%`
                 }}
               >
-                $10,851
+                {median_earnings}
               </p>
-              <progress value={graduation_rate.replace('%', '')} max='100' className='mt-5'></progress>
+              <progress value={medianEarnings} max='100000' className='mt-5'></progress>
             </div>
 
             

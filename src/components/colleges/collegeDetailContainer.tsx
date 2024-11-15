@@ -10,6 +10,8 @@ import Overview from './components/overview'
 import Costs from './components/costs'
 import GraduationRetention from './components/graduationRentention'
 import TypicalEarnings from './components/typicalEarnings'
+import CampusDiversity from './components/campusDiversity'
+import TestScoreAcceptance from './components/testScoreAcceptance'
 const CollegeDetailContainer = (props: any) => {
   const { id } = props
   const [college, setCollege] = useState<any>({})
@@ -35,6 +37,8 @@ const CollegeDetailContainer = (props: any) => {
         <Costs collegeData={college} />
         <GraduationRetention collegeData={college} />
         <TypicalEarnings collegeData={college}/>
+        <CampusDiversity collegeData={college}/>
+        <TestScoreAcceptance collegeData={college}/>
       </div>
     </div>
   )

@@ -9,7 +9,6 @@ const Costs = (props: any) => {
   const [active, setActive] = useState(false)
   const { costs_average_annual_cost, by_family_income } =
     CollegeDetailsMapper(collegeData)
-  console.log(by_family_income)
   const annual_cost_percentage =
     (+costs_average_annual_cost.replace('$', '').replaceAll(',', '') / 100000) *
     100

@@ -33,3 +33,20 @@ export const getCollegeDetails = async(collegeId: number) => {
     return {}
   }
 }
+
+export const addToWishlist = async (collegeId: number) => {
+  try {
+    const accessToken = getAccessToken()
+    const res = await axios.put(`/colleges/addToWishlist:${collegeId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    return res?.data?.wishlisted
+  } catch (e: any) {
+    toast.error(
+      e?.response?.data?.message || 'Something went wrong!!!. Please try again'
+    )
+    return []
+  }
+}

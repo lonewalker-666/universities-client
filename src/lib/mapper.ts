@@ -12,6 +12,12 @@ export const ProfileMapper = (data: any) => {
   const citizenship_id = get(data, 'citizenship_id', '')
   const armed_force_status_id = get(data, 'armed_force_status_id', '')
   const financial_aid_id = get(data, 'financial_aid_id', '')
+  const high_school_id = get(data, 'high_school_id', '')
+  const grade_level_id = get(data, 'grade_level_id', '')
+  const graduation_date = get(data, 'graduation_date', '')
+  const college_start_date = get(data, 'college_start_date', '')
+  const class_rank = get(data, 'class_rank', '')
+  const gpa = get(data, 'gpa', '') 
   return {
     firstName,
     lastName,
@@ -23,7 +29,13 @@ export const ProfileMapper = (data: any) => {
     first_generation_id,
     citizenship_id,
     armed_force_status_id,
-    financial_aid_id
+    financial_aid_id,
+    high_school_id,
+    grade_level_id,
+    graduation_date,
+    college_start_date,
+    class_rank,
+    gpa
   }
 }
 
@@ -36,6 +48,7 @@ export const CollegesListMapper = (data: any) => {
 }
 
 export const CollegeDetailsMapper = (data: any) => {
+  const wishlisted = get(data, 'wishlisted', false)
   const university_name = get(data, 'overview.university_name', '')
   const city_state = get(data, 'overview.city_state', '')
   const school_type = get(data, 'overview.school_type', '')
@@ -63,6 +76,44 @@ export const CollegeDetailsMapper = (data: any) => {
     'graduation_and_retention.withdrawal_rate',
     ''
   )
+  const full_time_students = get(
+    data,
+    'campus_diversity.full_time_students',
+    ''
+  )
+  const part_time_students = get(
+    data,
+    'campus_diversity.part_time_students',
+    ''
+  )
+  const student_size = get(data, 'campus_diversity.student_size', '')
+  const student_size_type = get(data, 'campus_diversity.student_size_type', '')
+  const student_to_faculty_ratio = get(
+    data,
+    'campus_diversity.student_to_faculty_ratio',
+    ''
+  )
+  const demographics = get(data, 'campus_diversity.demographics', {})
+  const test_scores_and_acceptance = get(data, 'test_scores_and_acceptance', {});
+
+  const acceptance_rate = get(test_scores_and_acceptance, 'acceptance_rate', '');
+  
+  const act_composite_25th_percentile = get(test_scores_and_acceptance, 'act.act_composite_25th_percentile', '');
+  const act_english_25th_percentile = get(test_scores_and_acceptance, 'act.act_english_25th_percentile', '');
+  const act_math_25th_percentile = get(test_scores_and_acceptance, 'act.act_math_25th_percentile', '');
+  
+  const act_composite_75th_percentile = get(test_scores_and_acceptance, 'act.act_composite_75th_percentile', '');
+  const act_english_75th_percentile = get(test_scores_and_acceptance, 'act.act_english_75th_percentile', '');
+  const act_math_75th_percentile = get(test_scores_and_acceptance, 'act.act_math_75th_percentile', '');
+  
+  const sat_25th_percentile = get(test_scores_and_acceptance, 'sat.sat_25th_percentile', '');
+  const sat_reading_and_writing_25th_percentile = get(test_scores_and_acceptance, 'sat.sat_reading_and_writing_25th_percentile', '');
+  const sat_math_25th_percentile = get(test_scores_and_acceptance, 'sat.sat_math_25th_percentile', '');
+  
+  const sat_75th_percentile = get(test_scores_and_acceptance, 'sat.sat_75th_percentile', '');
+  const sat_reading_and_writing_75th_percentile = get(test_scores_and_acceptance, 'sat.sat_reading_and_writing_75th_percentile', '');
+  const sat_math_75th_percentile = get(test_scores_and_acceptance, 'sat.sat_math_75th_percentile', '');
+  
   return {
     university_name,
     city_state,
@@ -78,7 +129,27 @@ export const CollegeDetailsMapper = (data: any) => {
     by_family_income,
     retention_rate,
     transfer_rate,
-    withdrawal_rate
+    withdrawal_rate,
+    full_time_students,
+    part_time_students,
+    student_size,
+    student_size_type,
+    student_to_faculty_ratio,
+    demographics,
+    acceptance_rate,
+    act_composite_25th_percentile,
+    act_english_25th_percentile,
+    act_math_25th_percentile,
+    act_composite_75th_percentile,
+    act_english_75th_percentile,
+    act_math_75th_percentile,
+    sat_25th_percentile,
+    sat_reading_and_writing_25th_percentile,
+    sat_math_25th_percentile,
+    sat_75th_percentile,
+    sat_reading_and_writing_75th_percentile,
+    sat_math_75th_percentile,
+    wishlisted
   }
 }
 
