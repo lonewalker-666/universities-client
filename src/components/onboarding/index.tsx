@@ -1,12 +1,13 @@
-// Onboarding.js
 import React, { useState } from "react";
 import ProgressBar from "../common/progressbar";
 import Step1 from "./step1";
 import Step2 from "./step2";
-// Import other steps (e.g., Step2, Step3, etc.) as needed
+import Step3 from "./step3";
+import Step4 from "./step4";
+import ArrowBack from "../common/icons/arrowBack";
 
 const Onboarding = () => {
-  const totalSteps = 5;
+  const totalSteps = 4;
   const [step, setStep] = useState(1);
 
   const titles = [
@@ -18,7 +19,7 @@ const Onboarding = () => {
 
   const descriptions = [
     "Hey there! 😊 Let's help you get the best experience",
-    "Enter your details to get personalised recemmondation",
+    "Enter your details to get personalized recommendations",
     "Tell us about your academic background to personalize your experience",
     "Tell us which standardized tests you’ve taken for better matching",
   ];
@@ -31,33 +32,19 @@ const Onboarding = () => {
     if (step > 1) setStep(step - 1);
   };
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    gender: "",
-    nationality: "",
-  });
-
-  const [personalData, setPersonalData] = useState({
-    race: "",
-    usArmedForceStatus: "",
-    firstGeneration: "",
-    citizenshipStatus: "",
-    about: "",
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const handleChangeStep2 = (e: any) => {
-    setPersonalData({ ...personalData, [e.target.name]: e.target.value });
-  };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
+      <div className="w-16 flex flex-row items-center gap-2 ">
+        <ArrowBack />
+        <button
+          onClick={handlePrevious}
+          disabled={step === 1}
+          className="flex disabled:opacity-50 "
+        >
+          Back
+        </button>
+      </div>
+
       <div className="w-full max-w-md">
         <ProgressBar step={step} totalSteps={totalSteps} />
       </div>
@@ -65,31 +52,19 @@ const Onboarding = () => {
       <h2 className="text-2xl font-semibold mb-2">{titles[step - 1]}</h2>
       <p className="text-gray-600 mb-6">{descriptions[step - 1]}</p>
 
-      <div className="w-full max-w-md p-2 ">
-        {step === 1 && (
-          <Step1 formData={formData} onChange={handleChange} errors={errors} />
-        )}
-        {step === 2 && (
-          <Step2
-            personalData={personalData}
-            onChange={handleChangeStep2}
-            errors={errors}
-          />
-        )}
+      <div className="w-full max-w-md p-2">
+        {step === 1 && <Step1 />}
+        {step === 2 && <Step2 />}
+        {step === 3 && <Step3 />}
+        {step === 4 && <Step4 />}
       </div>
 
-      <div className="flex justify-between w-full max-w-md mt-6">
-        <button
-          onClick={handlePrevious}
-          disabled={step === 1}
-          className="px-4 py-2 bg-gray-300 rounded text-gray-700 disabled:opacity-50"
-        >
-          Previous
-        </button>
+      {/* Next button centered at the bottom */}
+      <div className="w-full max-w-md mt-6 flex justify-center">
         <button
           onClick={handleNext}
           disabled={step === totalSteps}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className="px-4 py-2 bg-[#6F42C1E5] text-white rounded"
         >
           {step === totalSteps ? "Finish" : "Next"}
         </button>

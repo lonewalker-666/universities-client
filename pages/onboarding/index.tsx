@@ -3,11 +3,7 @@ import Login from "@/src/components/login";
 import Onboarding from "@/src/components/onboarding";
 
 const LoginPage = () => {
-  return (
-    <SiteLayout title="Universities@USA-Home" noFooter>
-      <Onboarding />
-    </SiteLayout>
-  );
+  return <Onboarding />;
 };
 
 export default LoginPage;

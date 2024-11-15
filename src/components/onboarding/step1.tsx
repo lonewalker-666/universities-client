@@ -1,7 +1,7 @@
 // Step1.js
-import React from "react";
+import React, { useState } from "react";
 
-const Step1 = ({ formData, onChange, errors }: any) => {
+const Step1 = () => {
   const genderOptions = [
     { label: "Select Gender", value: "" },
     { label: "Male", value: "male" },
@@ -15,7 +15,19 @@ const Step1 = ({ formData, onChange, errors }: any) => {
     { label: "Canadian", value: "canadian" },
     { label: "Indian", value: "indian" },
   ];
+  const [errors, setErrors] = useState<any>({});
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    gender: "",
+    nationality: "",
+  });
 
+  const handleChange = (e: any) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   return (
     <div className="flex flex-col w-full">
       <div className="flex gap-4  mb-2">
@@ -32,7 +44,7 @@ const Step1 = ({ formData, onChange, errors }: any) => {
               type="text"
               name="firstName"
               value={formData.firstName}
-              onChange={onChange}
+              onChange={(e: any) => handleChange(e)}
               className={`bg-[#FAFAFA] rounded-md text-lg w-full p-2 font-medium ${
                 errors.firstName ? "border-red-600" : "border-gray-300"
               }`}
@@ -49,7 +61,7 @@ const Step1 = ({ formData, onChange, errors }: any) => {
               type="text"
               name="lastName"
               value={formData.lastName}
-              onChange={onChange}
+              onChange={(e: any) => handleChange(e)}
               className={`bg-[#FAFAFA] rounded-md text-lg w-full p-2 font-medium ${
                 errors.lastName ? "border-red-600" : "border-gray-300"
               }`}
@@ -62,7 +74,6 @@ const Step1 = ({ formData, onChange, errors }: any) => {
         </div>
       </div>
 
-      {/* Scrollable Container for Additional Fields */}
       <div className="max-h-64 overflow-y-auto p-2 rounded-lg hide-scroll">
         <div className="mb-4">
           <label className="block text-sm font-medium">Email</label>
@@ -70,7 +81,7 @@ const Step1 = ({ formData, onChange, errors }: any) => {
             type="email"
             name="email"
             value={formData.email}
-            onChange={onChange}
+            onChange={(e: any) => handleChange(e)}
             className={`bg-[#FAFAFA] rounded-md text-lg w-full p-2 font-medium ${
               errors.email ? "border-red-600" : "border-gray-300"
             }`}
@@ -87,7 +98,7 @@ const Step1 = ({ formData, onChange, errors }: any) => {
             type="tel"
             name="phoneNumber"
             value={formData.phoneNumber}
-            onChange={onChange}
+            onChange={(e: any) => handleChange(e)}
             className={`bg-[#FAFAFA] rounded-md text-lg w-full p-2 font-medium ${
               errors.phoneNumber ? "border-red-600" : "border-gray-300"
             }`}
@@ -103,7 +114,7 @@ const Step1 = ({ formData, onChange, errors }: any) => {
           <select
             name="gender"
             value={formData.gender}
-            onChange={onChange}
+            onChange={(e: any) => handleChange(e)}
             className={` p-2 rounded-md bg-[#FAFAFA] font-medium w-full ${
               errors.gender ? "border-red-600" : "border-gray-300"
             }`}
@@ -124,7 +135,7 @@ const Step1 = ({ formData, onChange, errors }: any) => {
           <select
             name="nationality"
             value={formData.nationality}
-            onChange={onChange}
+            onChange={(e: any) => handleChange(e)}
             className={` p-2 rounded-md bg-[#FAFAFA] font-medium w-full ${
               errors.nationality ? "border-red-600" : "border-gray-300"
             }`}
