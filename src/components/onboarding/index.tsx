@@ -33,41 +33,47 @@ const Onboarding = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4">
-      <div className="w-16 flex flex-row items-center gap-2 ">
-        <ArrowBack />
-        <button
-          onClick={handlePrevious}
-          disabled={step === 1}
-          className="flex disabled:opacity-50 "
-        >
-          Back
-        </button>
+    <div className="flex flex-col min-h-screen">
+      {/* Sticky Header */}
+      <div className="sticky top-0 bg-white z-10 p-4">
+        <div className="w-full max-w-md mx-auto">
+          <div className="flex flex-row items-center gap-2 mb-4">
+            {/* <ArrowBack /> */}
+            <button
+              onClick={handlePrevious}
+              disabled={step === 1}
+              className="flex disabled:opacity-50"
+            >
+              Back
+            </button>
+          </div>
+          <ProgressBar step={step} totalSteps={totalSteps} />
+          <h2 className="text-2xl font-semibold mt-4">{titles[step - 1]}</h2>
+          <p className="text-[#00000080]">{descriptions[step - 1]}</p>
+        </div>
       </div>
 
-      <div className="w-full max-w-md">
-        <ProgressBar step={step} totalSteps={totalSteps} />
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto p-4">
+        <div className="w-full max-w-md mx-auto">
+          {step === 1 && <Step1 />}
+          {step === 2 && <Step2 />}
+          {step === 3 && <Step3 />}
+          {step === 4 && <Step4 />}
+        </div>
       </div>
 
-      <h2 className="text-2xl font-semibold mb-2">{titles[step - 1]}</h2>
-      <p className="text-gray-600 mb-6">{descriptions[step - 1]}</p>
-
-      <div className="w-full max-w-md p-2">
-        {step === 1 && <Step1 />}
-        {step === 2 && <Step2 />}
-        {step === 3 && <Step3 />}
-        {step === 4 && <Step4 />}
-      </div>
-
-      {/* Next button centered at the bottom */}
-      <div className="w-full max-w-md mt-6 flex justify-center">
-        <button
-          onClick={handleNext}
-          disabled={step === totalSteps}
-          className="px-4 py-2 bg-[#6F42C1E5] text-white rounded"
-        >
-          {step === totalSteps ? "Finish" : "Next"}
-        </button>
+      {/* Sticky Footer */}
+      <div className="sticky bottom-0 bg-white z-10 p-4">
+        <div className="w-full max-w-md mx-auto flex justify-center">
+          <button
+            onClick={handleNext}
+            disabled={step === totalSteps}
+            className="px-4 py-2 bg-[#6F42C1E5] text-white rounded"
+          >
+            {step === totalSteps ? "Finish" : "Next"}
+          </button>
+        </div>
       </div>
     </div>
   );

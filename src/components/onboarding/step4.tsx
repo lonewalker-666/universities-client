@@ -10,7 +10,8 @@ const Step4 = () => {
 
   const [actScores, setActScores] = useState<any>(
     ACT_SUBJECTS.reduce((acc: any, subject) => {
-      acc[subject.name.toLowerCase()] = "";
+      console.log(acc, "acc");
+      acc[subject.name] = "";
       return acc;
     }, {})
   );

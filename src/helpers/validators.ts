@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { RACE } from "../lib/constants";
 
 export const signUpSchema = Joi.object({
   firstName: Joi.string().required().messages({
@@ -135,26 +136,56 @@ export const CreateProfileSchema = Joi.object({
       "string.empty": "Email is required",
       "string.email": "Please enter a valid email address",
     }),
-  phoneNumber: Joi.string()
-    .pattern(/^\+?[0-9]{8,17}$/) // Allows optional "+" followed by 8-17 digits
+  mobile: Joi.string().required().min(8).max(17).messages({
+    "string.empty": "Mobile number is required",
+  }),
+  gender_id: Joi.string().valid("1", "2", "3").required().messages({
+    "string.empty": "Gender is required",
+  }),
+  dob: Joi.date().iso().required().messages({
+    "date.base": "Selected date must be a valid date",
+    "any.required": "Date is required",
+  }),
+});
+
+export const createPersonalInfoSchema = Joi.object({
+  race_id: Joi.number().required().messages({
+    "number.empty": "Please Select any one of the options",
+  }),
+  armed_force_status_id: Joi.number().required().messages({
+    "number.empty": "Please Select any one of the options",
+  }),
+  citizenship_id: Joi.number().required().messages({
+    "number.empty": "Please Select any one of the options",
+  }),
+  first_generation_id: Joi.number().required().messages({
+    "number.empty": "Please Select any one of the options",
+  }),
+  about: Joi.string().required().messages({
+    "string.empty": "About is required",
+  }),
+});
+
+export const CreateAcademicSchema = Joi.object({
+  highSchool_id: Joi.number().required().messages({
+    "number.empty": "Please Select any one of the options",
+  }),
+  class_rank: Joi.number().required().messages({
+    "number.empty": "Please Select any one of the options",
+  }),
+  gpa: Joi.number()
     .required()
     .messages({
-      "string.empty": "Phone number is required",
-      "string.pattern.base":
-        'Phone number must be between 8 and 17 digits and can start with "+"',
-    }),
-  gender: Joi.string()
-    .valid("male", "female", "other") // Add valid options based on your application requirements
-    .required()
-    .messages({
-      "string.empty": "Gender is required",
-      "any.only": "Please select a valid gender",
-    }),
-  selectedDate: Joi.date()
-    .iso() // Ensures the date is in ISO 8601 format (e.g., YYYY-MM-DD)
-    .required()
-    .messages({
-      "date.base": "Selected date must be a valid date",
-      "any.required": "Date is required",
-    }),
+      "number.empty": "Please Select any one of the options",
+    })
+    .max(10),
+  college_start_date: Joi.date().required().messages({
+    "date.empty": "Please Select any one of the options",
+  }),
+  graduation_date: Joi.date().required().messages({
+    "date.empty": "Please Select any one of the options",
+  }),
+  grade_level_id: Joi.number().required().messages({
+    "number.empty": "Please Select any one of the options",
+  }),
 });

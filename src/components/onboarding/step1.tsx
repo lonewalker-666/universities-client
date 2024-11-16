@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { GENDER } from "@/src/lib/constants";
 import { CreateProfileSchema } from "@/src/helpers/validators";
 import { createProfile } from "@/src/services/userApi";
+import EditableDatePicker from "../common/editableDatePicker";
 
 const Step1 = () => {
   const [errors, setErrors] = useState<any>({});
@@ -11,7 +12,7 @@ const Step1 = () => {
     email: "",
     phoneNumber: "",
     gender: "",
-    selectedDate: "",
+    dob: "",
   });
 
   const validate = () => {
@@ -129,20 +130,14 @@ const Step1 = () => {
 
       {/* Date Picker */}
       <div className="mb-4">
-        <label htmlFor="selectedDate" className="block text-sm font-medium">
-          DOB
-        </label>
-        <input
-          id="selectedDate"
-          type="date"
-          name="selectedDate"
-          value={formData.selectedDate}
-          onChange={(e: any) => setFormData(e.target.value)}
-          className={getInputClassName("selectedDate")}
+        <EditableDatePicker
+          visible={true}
+          value={formData.dob}
+          onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
+          title="DOB"
+          placeholder="Select your date of birth"
         />
-        {errors.selectedDate && (
-          <p className="text-red-600 text-sm">{errors.selectedDate}</p>
-        )}
+        {errors.dob && <p className="text-red-600 text-sm">{errors.dob}</p>}
       </div>
 
       {/* Gender Dropdown */}
@@ -172,7 +167,6 @@ const Step1 = () => {
           <p className="text-red-600 text-sm">{errors.gender}</p>
         )}
       </div>
-      <button onClick={() => handleCreate()}>save</button>
     </div>
   );
 };

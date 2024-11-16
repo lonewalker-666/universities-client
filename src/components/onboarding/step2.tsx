@@ -36,9 +36,7 @@ const Step2 = () => {
             </option>
           ))}
         </select>
-        {errors.gender && (
-          <p className="text-red-600 text-sm">{errors.gender}</p>
-        )}
+        {errors.race && <p className="text-red-600 text-sm">{errors.race}</p>}
       </div>
 
       <div className="mb-4">
@@ -50,7 +48,7 @@ const Step2 = () => {
           value={personalData.usArmedForceStatus}
           onChange={(e: any) => handleChangeStep2(e)}
           className={` p-4 rounded-md bg-[#FAFAFA] font-medium w-full ${
-            errors.nationality ? "border-red-600" : "border-gray-300"
+            errors.usArmedForceStatus ? "border-red-600" : "border-gray-300"
           }`}
         >
           {ARMY_STATUS.map((option, index) => (
@@ -59,8 +57,8 @@ const Step2 = () => {
             </option>
           ))}
         </select>
-        {errors.nationality && (
-          <p className="text-red-600 text-sm">{errors.nationality}</p>
+        {errors.usArmedForceStatus && (
+          <p className="text-red-600 text-sm">{errors.usArmedForceStatus}</p>
         )}
       </div>
 
@@ -71,7 +69,7 @@ const Step2 = () => {
           value={personalData.firstGeneration}
           onChange={(e: any) => handleChangeStep2(e)}
           className={` p-4 rounded-md bg-[#FAFAFA] font-medium w-full ${
-            errors.gender ? "border-red-600" : "border-gray-300"
+            errors.firstGeneration ? "border-red-600" : "border-gray-300"
           }`}
         >
           {FIRST_GENERATION.map((option, index) => (
@@ -80,8 +78,8 @@ const Step2 = () => {
             </option>
           ))}
         </select>
-        {errors.gender && (
-          <p className="text-red-600 text-sm">{errors.gender}</p>
+        {errors.firstGeneration && (
+          <p className="text-red-600 text-sm">{errors.firstGeneration}</p>
         )}
       </div>
 
@@ -92,7 +90,7 @@ const Step2 = () => {
           value={personalData.citizenshipStatus}
           onChange={(e: any) => handleChangeStep2(e)}
           className={` p-4 rounded-md bg-[#FAFAFA] font-medium w-full ${
-            errors.nationality ? "border-red-600" : "border-gray-300"
+            errors.citizenshipStatus ? "border-red-600" : "border-gray-300"
           }`}
         >
           {CITIZENSHIP.map((option, index) => (
@@ -101,8 +99,8 @@ const Step2 = () => {
             </option>
           ))}
         </select>
-        {errors.nationality && (
-          <p className="text-red-600 text-sm">{errors.nationality}</p>
+        {errors.citizenshipStatus && (
+          <p className="text-red-600 text-sm">{errors.citizenshipStatus}</p>
         )}
       </div>
       <div>

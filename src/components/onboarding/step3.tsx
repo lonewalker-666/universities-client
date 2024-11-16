@@ -54,7 +54,7 @@ const Step3 = () => {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen overflow-y-auto">
       <div className="mb-4">
         <label className="block text-sm font-medium">High School</label>
         <select
@@ -139,7 +139,7 @@ const Step3 = () => {
         </button>
       </div>
 
-      <div className="overflow-y-auto max-h-20  hide-scroll">
+      <div className="">
         <div className="mb-4">
           <label className="block text-sm font-medium">Grade Level</label>
           <select
@@ -190,7 +190,7 @@ const Step3 = () => {
           </select>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
