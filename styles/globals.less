@@ -583,3 +583,17 @@ progress::-webkit-progress-value {
   text-align: center;
   -webkit-text-fill-color: transparent;
 }
+
+.smoky{
+  height: 120%;
+  width: 100px;
+  position: absolute;
+    &.left{
+      background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 90%);
+      left: -10px;
+    }
+    &.right{
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+      right: -10px;
+    }
+}

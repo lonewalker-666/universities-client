@@ -21,7 +21,11 @@ const ProductLayout = (props: Props) => {
             {customHeader || ''}
         </PageHeader>
         {children}
+        <footer className='w-full sticky bottom-0 xs:flex lg:hidden h-[50px] bg-red-600'>
+
+      </footer>
       </section>
+      
     </div>
   )
 }
