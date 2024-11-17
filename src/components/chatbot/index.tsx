@@ -31,7 +31,7 @@ const ChatbotContainer = () => {
           />
           <div className='smoky right'/>
         </div>
-        <div className='sticky bottom-10 w-full bg-inherit'>
+        <div className='sticky xs:bottom-[4.5rem] lg:bottom-10 w-full bg-inherit'>
          <div className='relative w-full'>
          <input
             className='w-full bg-[#FAFAFA] rounded-[20px] px-4 py-4'
