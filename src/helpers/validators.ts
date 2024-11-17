@@ -122,6 +122,21 @@ export const AcademicDetailsSchema = Joi.object({
   }),
 });
 
+export const createEssayDataSchema = Joi.object({
+  title: Joi.string().required(),
+  content: Joi.string()
+    .required()
+    .custom((value, helpers) => {
+      // Check that non-whitespace text is placed inside tags
+      const contentInsideTagsPattern = /<[^>]+>\s*([^<>\s]+)\s*<\/[^>]+>/;
+      if (!contentInsideTagsPattern.test(value)) {
+        return helpers.message({ en: "Essays should not be empty." });
+      }
+
+      return value;
+    }),
+});
+
 export const CreateProfileSchema = Joi.object({
   firstName: Joi.string().required().messages({
     "string.empty": "First name is required",

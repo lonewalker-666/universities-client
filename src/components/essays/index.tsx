@@ -6,6 +6,7 @@ import { isEmpty, set } from 'lodash'
 import { useRouter } from 'next/router'
 import EditIcon from '../common/icons/editIcon'
 import DeleteIcon from '../common/icons/delete'
+import { deleteEssay } from '@/src/services/collegesApi'
 
 const EssaysContainer = () => {
   const [viewer, setViewer] = useState<any>("")
@@ -19,6 +20,10 @@ const EssaysContainer = () => {
   useEffect(() => {
     getEssayData()
   }, [])
+  const deleteEssayData = async (essayId: string) => {
+    await deleteEssay(essayId)
+    getEssayData()
+  }
   return (
     <div className='w-full flex flex-col items-center'>
       <div className='w-full max-w-[1200px] flex flex-col gap-4 p-8'>
@@ -62,8 +67,11 @@ const EssaysContainer = () => {
                     <EditIcon className='w-4' />
                     Edit
                   </span>
-                  <span className='flex text-[red] py-2 px-1 gap-2 items-center w-full'>
-                    <DeleteIcon className='w-4' />
+                  <span className='flex text-[red] py-2 px-1 gap-2 items-center w-full' onClick={(e: any) => {
+                      e.stopPropagation()
+                      deleteEssayData(essay?.essayId)
+                    }}>
+                    <DeleteIcon className='w-4'/>
                     Delete
                   </span>
                 </div>
