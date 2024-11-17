@@ -146,6 +146,12 @@ export const CreateProfileSchema = Joi.object({
     "date.base": "Selected date must be a valid date",
     "any.required": "Date is required",
   }),
+  profileEmojiId: Joi.number().required().default(1).messages({
+    "number.empty": "profileid req",
+  }),
+  location: Joi.string().required().messages({
+    "string.empty": "location is required",
+  }),
 });
 
 export const createPersonalInfoSchema = Joi.object({
@@ -167,7 +173,7 @@ export const createPersonalInfoSchema = Joi.object({
 });
 
 export const CreateAcademicSchema = Joi.object({
-  highSchool_id: Joi.number().required().messages({
+  high_school_id: Joi.number().required().messages({
     "number.empty": "Please Select any one of the options",
   }),
   class_rank: Joi.number().required().messages({
@@ -189,3 +195,5 @@ export const CreateAcademicSchema = Joi.object({
     "number.empty": "Please Select any one of the options",
   }),
 });
+
+export const actTestSchema = Joi.object({});

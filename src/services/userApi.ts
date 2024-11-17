@@ -38,10 +38,46 @@ export const createProfile = async (data: any) => {
     toast.success(res?.data?.message);
     return res?.data?.success;
   } catch (e: any) {
-    toast.error(e?.response?.data?.message || "Something went wrong");
+    console.log(e?.response?.data?.message);
+    toast.error(
+      e?.response?.data?.message || "Something went wrong!!!. Please try again"
+    );
   }
 };
 
+export const createPersonalInfo = async (data: any) => {
+  try {
+    const res = await axios.post(`/user/updatePersonalInfo`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.success;
+  } catch (e: any) {
+    console.log(e?.response?.data?.message);
+    toast.error(
+      e?.response?.data?.message || "Something went wrong!!!. Please try again"
+    );
+  }
+};
+
+export const createAcademicDetails = async (data: any) => {
+  try {
+    const res = await axios.post(`/user/updateAcademicBackground`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.success;
+  } catch (e: any) {
+    console.log(e?.response?.data?.message);
+    toast.error(
+      e?.response?.data?.message || "Something went wrong!!!. Please try again"
+    );
+  }
+};
 export const updatePersonDetails = async (data: any) => {
   try {
     const res = await axios.put(`/user/updateProfilePersonal`, data, {
@@ -58,6 +94,19 @@ export const updatePersonDetails = async (data: any) => {
 export const updateAcademicBackground = async (data: any) => {
   try {
     const res = await axios.post(`/user/updateAcademicBackground`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.success;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong");
+  }
+};
+export const updateActTestScore = async (data: any) => {
+  try {
+    const res = await axios.post(`/user/updateActTestScore`, data, {
       headers: {
         Authorization: `Bearer ${getAccessToken()}`,
       },

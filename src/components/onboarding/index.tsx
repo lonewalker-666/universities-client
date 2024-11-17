@@ -32,10 +32,16 @@ const Onboarding = () => {
     if (step > 1) setStep(step - 1);
   };
 
+  const steps: any = {
+    1: <Step1 onNext={handleNext} step={step} />,
+    2: <Step2 onNext={handleNext} step={step} />,
+    3: <Step3 onNext={handleNext} step={step} />,
+    4: <Step4 onNext={handleNext} step={step} />,
+  };
+
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Sticky Header */}
-      <div className="sticky top-0 bg-white z-10 p-4">
+    <div className="flex flex-col">
+      <div className=" bg-white z-10 p-4 overflow-auto h-[100vh]">
         <div className="w-full max-w-md mx-auto">
           <div className="flex flex-row items-center gap-2 mb-4">
             {/* <ArrowBack /> */}
@@ -51,28 +57,8 @@ const Onboarding = () => {
           <h2 className="text-2xl font-semibold mt-4">{titles[step - 1]}</h2>
           <p className="text-[#00000080]">{descriptions[step - 1]}</p>
         </div>
-      </div>
-
-      {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto p-4">
-        <div className="w-full max-w-md mx-auto">
-          {step === 1 && <Step1 />}
-          {step === 2 && <Step2 />}
-          {step === 3 && <Step3 />}
-          {step === 4 && <Step4 />}
-        </div>
-      </div>
-
-      {/* Sticky Footer */}
-      <div className="sticky bottom-0 bg-white z-10 p-4">
-        <div className="w-full max-w-md mx-auto flex justify-center">
-          <button
-            onClick={handleNext}
-            disabled={step === totalSteps}
-            className="px-4 py-2 bg-[#6F42C1E5] text-white rounded"
-          >
-            {step === totalSteps ? "Finish" : "Next"}
-          </button>
+        <div className="flex p-4">
+          <div className="w-full max-w-md mx-auto">{steps[step]}</div>
         </div>
       </div>
     </div>

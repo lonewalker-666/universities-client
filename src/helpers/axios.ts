@@ -5,8 +5,8 @@ import Router from "next/router";
 // live EC2
 // const BASE_URL = "https://theuniversitiesusa.com";
 // development
-// const BASE_URL = "https://dev.theuniversitiesusa.com/api";
-const BASE_URL = "http://127.1.0.0:8000/api";
+const BASE_URL = "https://dev.theuniversitiesusa.com/api";
+// const BASE_URL = "http://127.1.0.0:8000/api";
 
 const axiosInstance = axios.create({ baseURL: BASE_URL });
 

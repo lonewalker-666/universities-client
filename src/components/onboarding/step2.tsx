@@ -3,31 +3,55 @@ import { RACE } from "@/src/lib/constants";
 import { CITIZENSHIP } from "@/src/lib/constants";
 import { FIRST_GENERATION } from "@/src/lib/constants";
 import { ARMY_STATUS } from "@/src/lib/constants";
-const Step2 = () => {
+import { createPersonalInfoSchema } from "@/src/helpers/validators";
+import { createPersonalInfo } from "@/src/services/userApi";
+const Step2 = (props: any) => {
+  const { onNext, step } = props;
+
   const [personalData, setPersonalData] = useState({
-    race: "",
-    usArmedForceStatus: "",
-    firstGeneration: "",
-    citizenshipStatus: "",
+    race_id: "",
+    armed_force_status_id: "",
+    first_generation_id: "",
+    citizenship_id: "",
     about: "",
   });
 
   const [errors, setErrors] = useState<any>({});
 
-  const handleChangeStep2 = (e: any) => {
-    setPersonalData({ ...personalData, [e.target.name]: e.target.value });
+  const validate = () => {
+    const { error } = createPersonalInfoSchema.validate(personalData, {
+      abortEarly: false,
+    });
+    console.log(error);
+    if (!error) return null;
+    const newErrors: any = {};
+    error.details.forEach((item: any) => {
+      newErrors[item.path[0]] = item.message;
+    });
+    return newErrors;
   };
-  const [about, setABout] = useState();
+  const handlePersonalInfo = async () => {
+    const newErrors = validate();
+    setErrors(newErrors || {});
+    if (!newErrors) {
+      const res = await createPersonalInfo(personalData);
+      if (res) {
+        onNext();
+      }
+    }
+  };
   return (
     <>
       <div className="mb-4">
         <label className="block text-sm font-medium">Race</label>
         <select
           name="race"
-          value={personalData.race}
-          onChange={(e: any) => handleChangeStep2(e)}
+          value={personalData?.race_id}
+          onChange={(e: any) =>
+            setPersonalData({ ...personalData, race_id: e.target.value })
+          }
           className={` p-4 rounded-md bg-[#FAFAFA] font-medium w-full ${
-            errors.gender ? "border-red-600" : "border-gray-300"
+            errors.race_id ? "border-red-600" : "border-gray-300"
           }`}
         >
           {RACE.map((option, index) => (
@@ -36,7 +60,9 @@ const Step2 = () => {
             </option>
           ))}
         </select>
-        {errors.race && <p className="text-red-600 text-sm">{errors.race}</p>}
+        {errors?.race_id && (
+          <p className="text-red-600 text-sm">{errors?.race_id}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -45,10 +71,15 @@ const Step2 = () => {
         </label>
         <select
           name="Army Status"
-          value={personalData.usArmedForceStatus}
-          onChange={(e: any) => handleChangeStep2(e)}
+          value={personalData?.armed_force_status_id}
+          onChange={(e: any) =>
+            setPersonalData({
+              ...personalData,
+              armed_force_status_id: e.target.value,
+            })
+          }
           className={` p-4 rounded-md bg-[#FAFAFA] font-medium w-full ${
-            errors.usArmedForceStatus ? "border-red-600" : "border-gray-300"
+            errors?.armed_force_status_id ? "border-red-600" : "border-gray-300"
           }`}
         >
           {ARMY_STATUS.map((option, index) => (
@@ -57,8 +88,10 @@ const Step2 = () => {
             </option>
           ))}
         </select>
-        {errors.usArmedForceStatus && (
-          <p className="text-red-600 text-sm">{errors.usArmedForceStatus}</p>
+        {errors?.armed_force_status_id && (
+          <p className="text-red-600 text-sm">
+            {errors?.armed_force_status_id}
+          </p>
         )}
       </div>
 
@@ -66,10 +99,15 @@ const Step2 = () => {
         <label className="block text-sm font-medium">First Generation</label>
         <select
           name="First Generation"
-          value={personalData.firstGeneration}
-          onChange={(e: any) => handleChangeStep2(e)}
+          value={personalData?.first_generation_id}
+          onChange={(e: any) =>
+            setPersonalData({
+              ...personalData,
+              first_generation_id: e.target.value,
+            })
+          }
           className={` p-4 rounded-md bg-[#FAFAFA] font-medium w-full ${
-            errors.firstGeneration ? "border-red-600" : "border-gray-300"
+            errors?.first_generation_id ? "border-red-600" : "border-gray-300"
           }`}
         >
           {FIRST_GENERATION.map((option, index) => (
@@ -78,8 +116,8 @@ const Step2 = () => {
             </option>
           ))}
         </select>
-        {errors.firstGeneration && (
-          <p className="text-red-600 text-sm">{errors.firstGeneration}</p>
+        {errors?.first_generation_id && (
+          <p className="text-red-600 text-sm">{errors?.first_generation_id}</p>
         )}
       </div>
 
@@ -87,10 +125,12 @@ const Step2 = () => {
         <label className="block text-sm font-medium ">Citizenship Status</label>
         <select
           name="Citizenship"
-          value={personalData.citizenshipStatus}
-          onChange={(e: any) => handleChangeStep2(e)}
+          value={personalData?.citizenship_id}
+          onChange={(e: any) =>
+            setPersonalData({ ...personalData, citizenship_id: e.target.value })
+          }
           className={` p-4 rounded-md bg-[#FAFAFA] font-medium w-full ${
-            errors.citizenshipStatus ? "border-red-600" : "border-gray-300"
+            errors?.citizenship_id ? "border-red-600" : "border-gray-300"
           }`}
         >
           {CITIZENSHIP.map((option, index) => (
@@ -99,18 +139,31 @@ const Step2 = () => {
             </option>
           ))}
         </select>
-        {errors.citizenshipStatus && (
-          <p className="text-red-600 text-sm">{errors.citizenshipStatus}</p>
+        {errors?.citizenship_id && (
+          <p className="text-red-600 text-sm">{errors?.citizenship_id}</p>
         )}
       </div>
       <div>
         <label className="block text-black mb-2">About</label>
         <textarea
-          value={about}
-          onChange={(e: any) => setABout(e.target.value)}
+          value={personalData?.about}
+          onChange={(e: any) =>
+            setPersonalData({ ...personalData, about: e.target.value })
+          }
           className="w-full h-[100px] px-4 py-4 bg-[#FAFAFA] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
+      </div>
+      <div className=" bg-white">
+        <div className="w-full flex justify-center">
+          <button
+            onClick={handlePersonalInfo}
+            disabled={step === 4}
+            className="w-full px-4 py-2 bg-[#6F42C1E5] text-white rounded"
+          >
+            {step === 4 ? "Finish" : "Next"}
+          </button>
+        </div>
       </div>
     </>
   );
