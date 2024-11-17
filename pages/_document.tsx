@@ -12,7 +12,7 @@ export default function Document() {
           rel="stylesheet"
         />
         <link rel="stylesheet" />
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/favIcon.svg" />
       </Head>
       <body>
         {/* <div id="globalLoader">

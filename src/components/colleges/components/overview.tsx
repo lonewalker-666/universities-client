@@ -4,6 +4,10 @@ import GraduationHat from '../../common/icons/graduationHat'
 import LocationMarker from '../../common/icons/locationMarker'
 import HeartOutlined from '../../common/icons/heart'
 import RedHeart from '../../common/icons/redHeart'
+import { useEffect, useState } from 'react'
+import { get } from 'lodash'
+import { useRouter } from 'next/router'
+import { addToWishlist } from '@/src/services/collegesApi'
 
 const Overview = (props: any) => {
   const { collegeData } = props
@@ -19,6 +23,20 @@ const Overview = (props: any) => {
     median_earnings,
     wishlisted
   } = CollegeDetailsMapper(collegeData)
+  const router = useRouter()
+  const collegeId = get(router.query, 'id', '')
+  const [wishlist, setWishlist] = useState(wishlisted || false)
+  useEffect(() => {
+    setWishlist(wishlisted)
+  }, [wishlisted])
+  const addOrRemoveWishlist = async () => {
+    const add = await addToWishlist({
+      college_id: collegeId,
+      college_name: university_name,
+      city_state: city_state
+    })
+    setWishlist(add || !wishlisted)
+  }
   return (
     <>
       <div className='flex xs:flex-col md:flex-row justify-between gap-3'>
@@ -32,6 +50,7 @@ const Overview = (props: any) => {
         </div>
         <a
           href={`https://${official_website.replace('https://', '')}`}
+          target='_blank'
           className='text-blue-500 underline cursor-pointer'
         >
           {official_website}
@@ -50,11 +69,17 @@ const Overview = (props: any) => {
           <LocationMarker className='w-4' />
           <p className='font-normal text-[14px]'>{city_state}</p>
         </span>
-        <span className='flex items-center gap-2'>
-          {!wishlisted ? (
-            <RedHeart className='w-4' />
+        <span className='flex items-center'>
+          {wishlist ? (
+            <RedHeart
+              className='w-4 cursor-pointer'
+              onClick={addOrRemoveWishlist}
+            />
           ) : (
-            <HeartOutlined className='w-4' />
+            <HeartOutlined
+              className='w-4 cursor-pointer'
+              onClick={addOrRemoveWishlist}
+            />
           )}
         </span>
       </div>

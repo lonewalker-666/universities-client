@@ -15,7 +15,6 @@ export const getAllColleges = async (data: any = {}) => {
     toast.error(
       e?.response?.data?.message || 'Something went wrong!!!. Please try again'
     )
-    return []
   }
 }
 
@@ -30,14 +29,13 @@ export const getCollegeDetails = async(collegeId: number) => {
     toast.error(
       e?.response?.data?.message || 'Something went wrong!!!'
     )
-    return {}
   }
 }
 
-export const addToWishlist = async (collegeId: number) => {
+export const addToWishlist = async (data: any) => {
   try {
     const accessToken = getAccessToken()
-    const res = await axios.put(`/colleges/addToWishlist:${collegeId}`, {
+    const res = await axios.put(`/colleges/addToWishlist`,data, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
@@ -47,6 +45,23 @@ export const addToWishlist = async (collegeId: number) => {
     toast.error(
       e?.response?.data?.message || 'Something went wrong!!!. Please try again'
     )
-    return []
+
+  }
+}
+
+
+export const deleteEssay = async (essayId: string) => {
+  try {
+    const accessToken = getAccessToken()
+    const res = await axios.delete(`/essay/deleteEssay/${essayId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    return res?.data?.success
+  } catch (e: any) {
+    toast.error(
+      e?.response?.data?.message || 'Something went wrong!!!. Please try again'
+    )
   }
 }

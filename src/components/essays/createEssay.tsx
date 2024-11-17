@@ -6,37 +6,44 @@ import Ai from '../common/icons/ai'
 import AiFilled from '../common/icons/aiFilled'
 import Button from '../common/button'
 import { useRouter } from 'next/router'
-import { createEssay, editEssay, getEssayOne, getEssays } from '@/src/services/essaysApi'
+import {
+  createEssay,
+  editEssay,
+  getEssayOne,
+  getEssays
+} from '@/src/services/essaysApi'
+import { createEssayDataSchema } from '@/src/helpers/validators'
 
 // Dynamically import ReactQuill to avoid SSR issues
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
-const CreateEssay = (props:any) => {
-  const {id} = props
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+const CreateEssay = (props: any) => {
+  const { id } = props
+  const initial = {
+    title: "",
+    content: ""
+  }
+ const [form, setForm] = useState(initial)
   const [isClient, setIsClient] = useState(false)
-  const [error, setError] = useState(false)
-const [loading, setLoading] = useState(false)
-const fetchData = async () => {
-  try {
-    setLoading(true)
-    const data = await getEssayOne(id)
-    setContent(data.content)
-    setTitle(data.title)
-    
-  } catch (error) {
-    console.error('Error fetching essays:', error)
+  const [error, setError] = useState<any>({})
+  const [loading, setLoading] = useState(false)
+  const {title, content} = form
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      const data = await getEssayOne(id)
+      setForm({...form, title: data?.title, content: data?.content})
+    } catch (error) {
+      console.error('Error fetching essays:', error)
+    } finally {
+      setLoading(false)
+    }
   }
-  finally{
-    setLoading(false)
-  }
-}
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setIsClient(true)
-      if(id){
+      if (id) {
         fetchData()
       }
     }
@@ -47,70 +54,49 @@ const fetchData = async () => {
       container: '#custom-toolbar' // Attach custom toolbar ID here
     },
     clipboard: {
-      matchVisual: false, // Ensures HTML content retains formatting
-    },
+      matchVisual: false // Ensures HTML content retains formatting
+    }
+  }
+
+
+  const validate = () => {
+    const { error } = createEssayDataSchema.validate(form, {
+      abortEarly: false
+    })
+    if (!error) return null
+
+    // Map Joi error messages
+    const newErrors: any = {}
+    error.details.forEach(item => {
+      console.log(item)
+      newErrors[item.path[0]] = item.message
+    })
+    return newErrors
   }
 
   const handleContentChange = (value: any) => {
-    setContent(value)
+    setForm({ ...form, content: value })
   }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    if (content.length > 0 && title.length > 0) {
-      if(id){
+    const newErrors = validate()
+    setError(newErrors || {})
+
+    if (!newErrors) {
+      if (id) {
         await editEssay({
-          title: title,
-          content: content,
+          ...form,
           essayId: id
         })
+      } else {
+        await createEssay(form)
       }
-      else{
-        await createEssay({
-          title: title,
-          content: content
-        })
-      }
-     
     }
-    else{
-      setError(true)
-    }
+   
   }
 
   const router = useRouter()
-
-  // // Browser confirmation for page reload/close
-  // useEffect(() => {
-  //   const handleBeforeUnload = (e: any) => {
-  //     e.preventDefault()
-  //     e.returnValue = '' // Required for showing the prompt
-  //   }
-
-  //   window.addEventListener('beforeunload', handleBeforeUnload)
-
-  //   return () => {
-  //     window.removeEventListener('beforeunload', handleBeforeUnload)
-  //   }
-  // }, [])
-
-  // Route confirmation within the app
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      if (!window.confirm('Are you sure you want to leave this page?')) {
-        router.events.emit('routeChangeError')
-        throw 'Route change aborted by user'
-      }
-    }
-
-    if(content.length > 0 && title.length > 0){
-      router.events.on('routeChangeStart', handleRouteChange)
-    }
-
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChange)
-    }
-  }, [router.events])
 
   return (
     <div className='w-full flex flex-col items-center text-black'>
@@ -120,11 +106,11 @@ const fetchData = async () => {
             <input
               type='text'
               value={title}
-              onChange={e => setTitle(e.target.value)}
+              onChange={e => setForm({ ...form, title: e.target.value })}
               placeholder='Essay Title Here'
               className='border border-[#E8E8E9] bg-[#FEFEFE] px-6 py-4 rounded-[12px] w-full'
             />
-            {(title === '' && error) && (
+            {error?.title &&  (
               <p className='text-red-600 px-4 mt-2'>Essay title is mandatory</p>
             )}
           </span>
@@ -138,7 +124,15 @@ const fetchData = async () => {
                   modules={modules}
                   className='quill-editor'
                   formats={[
-                    'header', 'bold', 'italic', 'underline', 'strike', 'list', 'bullet', 'align', 'link'
+                    'header',
+                    'bold',
+                    'italic',
+                    'underline',
+                    'strike',
+                    'list',
+                    'bullet',
+                    'align',
+                    'link'
                   ]}
                 />
 
@@ -151,32 +145,31 @@ const fetchData = async () => {
               </div>
             </div>
           )}
-                  {(content === '' && error) && (
-              <p className='text-red-600 px-4'>Essay Field can not be empty</p>
-            )}
+          {error?.content && (
+            <p className='text-red-600 px-4'>Essay Field can not be empty</p>
+          )}
         </div>
 
         <div className='flex justify-end items-center gap-5'>
-            <Button
-              title='Cancel'
-              onClick={() => {
-                if (window.confirm('Are you sure you want to leave or cancel?')) {
-                  router.push('/essays') // Example action on cancel confirmation
-                }
-              }}
-              width={100}
-              background='#F5F5F5'
-              color='#000'
-              border='1px solid #CAD0D9'
-            />
-            <Button
-              title='Save'
-              width={100}
-              onClick={(e:any) => {
-                handleSubmit(e)
-              }}
-            />
-
+          <Button
+            title='Cancel'
+            onClick={() => {
+              if (window.confirm('Are you sure you want to leave or cancel?')) {
+                router.push('/essays') // Example action on cancel confirmation
+              }
+            }}
+            width={100}
+            background='#F5F5F5'
+            color='#000'
+            border='1px solid #CAD0D9'
+          />
+          <Button
+            title='Save'
+            width={100}
+            onClick={(e: any) => {
+              handleSubmit(e)
+            }}
+          />
         </div>
       </div>
     </div>
