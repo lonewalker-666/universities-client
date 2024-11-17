@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Button from '../common/button'
+import { Hamburger } from '../common/hamburger'
+import { useShowHide } from '@/src/hooks/useShowHide'
+import MobileNav from './mobileNav'
 
 interface Props{
   transparent?: boolean
@@ -9,7 +12,7 @@ interface Props{
 const SiteHeader = (props:Props) => {
   const {transparent} = props
   const router = useRouter()
-
+const {visible,onHide,onShow} = useShowHide(false)
   const handleNavigation = (path:any) => {
     router.push(path);
   };
@@ -69,6 +72,8 @@ const SiteHeader = (props:Props) => {
             />
           </div>
         </div>
+        <Hamburger visible={visible} onShow={onShow} onHide={onHide}/>
+        <MobileNav visible={visible}/>
       </div>
     </div>
   )

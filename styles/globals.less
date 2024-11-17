@@ -5,6 +5,7 @@
 @import "./quil.less";
 @import "./buttonLoader.less";
 @import "./spinner.less";
+@import "./hamburger.less";
 
 @tailwind base;
 @tailwind components;
@@ -126,6 +127,29 @@ progress::-webkit-progress-value {
   &.transparent {
     background: #c0ecff;
     box-shadow: none;
+  }
+}
+
+.mobile-nav-container {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  right: 0;
+  left: 100%;
+  bottom: 100%;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: .2s cubic-bezier(.175,.885,.32,1.275);
+  // border-bottom-left-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  &.active {
+    left: 0;
+    bottom: 0;
+    border-radius: 0;
   }
 }
 
