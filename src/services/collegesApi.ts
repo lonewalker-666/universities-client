@@ -85,7 +85,21 @@ export const getRecentlyVisted = async () => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    return res?.data?.success;
+    return res?.data?.visited;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong!!!");
+  }
+};
+
+export const getOverview = async () => {
+  try {
+    const accessToken = getAccessToken();
+    const res = await axios.get(`/get/overview`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return res?.data?.data;
   } catch (e: any) {
     toast.error(e?.response?.data?.message || "Something went wrong!!!");
   }

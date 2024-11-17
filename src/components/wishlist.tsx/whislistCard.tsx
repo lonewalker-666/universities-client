@@ -2,20 +2,12 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import LocationMarker from "../common/icons/locationMarker";
 import DeleteIcon from "../common/icons/delete";
+import { addToWishlist } from "@/src/services/collegesApi";
+import { useState } from "react";
 
-interface Data {
-  college_id?: number;
-  city_state?: string;
-  college_name?: string;
-}
-interface Props {
-  data: Data;
-  ProductKey: number;
-  key: number;
-}
-
-const WhislistCard = (props: Props) => {
-  const { college_name, city_state, college_id } = props?.data;
+const WhislistCard = (props: any) => {
+  const { refetch, data } = props;
+  const { college_name, city_state, college_id } = data;
 
   const router = useRouter();
   const onClick = (e: any) => {
@@ -23,6 +15,15 @@ const WhislistCard = (props: Props) => {
     router.push(`/colleges/${college_id}`);
   };
 
+  const addOrRemoveWishlist = async (e: any) => {
+    e.stopPropagation();
+    await addToWishlist({
+      college_id: college_id,
+      college_name: college_name,
+      city_state: city_state,
+    });
+    refetch();
+  };
   return (
     <div
       className="product-card-container relative"
@@ -38,8 +39,11 @@ const WhislistCard = (props: Props) => {
           className="product-thumbnail"
           style={{ height: 150 }}
         />
-        <span className="absolute top-5 right-5 p-2 rounded-full bg-gray-200 hover:bg-red-500 text-black hover:text-white shadow-md transition-colors">
-          <DeleteIcon />
+        <span
+          className="absolute top-5 right-5 p-2 rounded-full bg-[#5A5A5A] hover:bg-[red] text-black hover:text-white shadow-md transition-colors"
+          onClick={(e: any) => addOrRemoveWishlist(e)}
+        >
+          <DeleteIcon color="white" />
         </span>
       </div>
       <div className="flex flex-col justify-between gap-2 px-2 py-3">
