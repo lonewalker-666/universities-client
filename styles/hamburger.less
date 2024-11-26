@@ -1,8 +1,9 @@
 .hamburger {
     cursor: pointer;
+    z-index: 25;
+
     &.active{
       position: relative;
-      z-index: 25;
     }
   }
   
@@ -19,7 +20,7 @@
   
   .line {
     fill: none;
-    stroke: white;
+    stroke: black;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 3;
@@ -42,7 +43,7 @@
     stroke-dashoffset: -32.42;
   }
   
-  @media screen and (min-width:768px) {
+  @media screen and (min-width:992px) {
     .hamburger{
       display: none;
     }
