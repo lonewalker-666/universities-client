@@ -18,9 +18,18 @@ import {
   updateToeflTestScore,
 } from "@/src/services/userApi";
 import { useRouter } from "next/router";
-import BackIcon from "../common/icons/backIcon";
+import { useShowHide } from "@/src/hooks/useShowHide";
+import BackIcon from "../../common/icons/backIcon";
 
-const Step4 = (props: any) => {
+interface Props {
+  refetch: any;
+  profileData: any;
+  setProfileData: any;
+}
+
+const TestScore = (props: any) => {
+  const { profileData, setProfileData, refetch } = props;
+  const { visible, onShow, onHide } = useShowHide(false);
   const { step } = props;
   const router = useRouter();
   const [innerActive, setInnerActive] = useState<any>({
@@ -176,6 +185,9 @@ const Step4 = (props: any) => {
 
   return (
     <>
+      <h1 className="text-black font-bold text-2xl text-start">
+        Education Information
+      </h1>
       <div className="w-full p-4">
         {Test.map((section: { id: number; name: string }) => {
           const subjectsWithTotalScore = ["ACT", "SAT", "TOEFL", "IELTS"];
@@ -190,26 +202,28 @@ const Step4 = (props: any) => {
                     [section?.name]: !innerActive[section?.name],
                   })
                 }
-                className="w-full text-left py-3 px-4 bg-[#FAFAFA] rounded-lg font-medium flex justify-between"
+                className="w-full text-left py-3 px-4 text-black bg-[#FAFAFA] rounded-lg font-medium flex justify-between"
               >
                 {section?.name}
+
                 <BackIcon
                   className={`w-4 ${
                     innerActive[section?.name] ? "rotate-[270deg]" : "rotate-90"
                   }`}
                 />
               </button>
+
               <div
                 className={`transition-all duration-300 overflow-hidden ${
                   innerActive[section?.name] ? "max-h-screen" : "max-h-0"
                 }`}
               >
-                <div className="px-4 py-2 mt-2  rounded-lg">
+                <div className="px-4 py-2 mt-2 text-black  rounded-lg">
                   {subjectsWithTotalScore.includes(section?.name) && (
-                    <div className="grid grid-cols-2 gap-8">
+                    <div className="grid xs:grid-cols-1 md:grid-cols-2 gap-8">
                       {subjects.map(({ id, name, total_score }: any) => (
-                        <div key={id} className="flex items-center ">
-                          <label className="w-20 text-sm font-medium">
+                        <div key={id} className="flex items-center gap-3">
+                          <label className=" text-sm font-medium">
                             {name}:
                           </label>
                           <input
@@ -225,11 +239,11 @@ const Step4 = (props: any) => {
                                 },
                               })
                             }
-                            className="w-12 px-2 py-1 border rounded-md text-center"
+                            className="w-12 px-2 py-1 text-sm border rounded-md text-center"
                             placeholder="--"
                             maxLength={total_score?.toString()?.length}
                           />
-                          <span className="ml-2 text-gray-500">
+                          <span className="ml-2 text-gray-500 text-sm">
                             / {total_score}
                           </span>
                         </div>
@@ -260,19 +274,8 @@ const Step4 = (props: any) => {
           );
         })}
       </div>
-      <div className="bg-white">
-        <div className="w-full flex justify-center">
-          <button
-            // disabled={step === 4}
-            className="w-full px-4 py-2 bg-[#6F42C1E5] text-white rounded"
-            onClick={() => router.push("/overview")}
-          >
-            {step === 4 ? "Finish" : "Next"}
-          </button>
-        </div>
-      </div>
     </>
   );
 };
 
-export default Step4;
+export default TestScore;

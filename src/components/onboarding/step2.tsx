@@ -1,18 +1,22 @@
 import React, { useState } from "react";
-import { RACE } from "@/src/lib/constants";
+import { FINIANCIAL_AID, RACE } from "@/src/lib/constants";
 import { CITIZENSHIP } from "@/src/lib/constants";
 import { FIRST_GENERATION } from "@/src/lib/constants";
 import { ARMY_STATUS } from "@/src/lib/constants";
 import { createPersonalInfoSchema } from "@/src/helpers/validators";
 import { createPersonalInfo } from "@/src/services/userApi";
+import EditableSelect from "../common/editableSelect";
+import { useShowHide } from "@/src/hooks/useShowHide";
 const Step2 = (props: any) => {
   const { onNext, step } = props;
 
+  const { visible, onShow, onHide } = useShowHide(true);
   const [personalData, setPersonalData] = useState({
     race_id: "",
     armed_force_status_id: "",
     first_generation_id: "",
     citizenship_id: "",
+    financial_aid_id: "",
     about: "",
   });
 
@@ -143,6 +147,34 @@ const Step2 = (props: any) => {
           <p className="text-red-600 text-sm">{errors?.citizenship_id}</p>
         )}
       </div>
+      <div className="mb-4">
+        <label className="block text-sm font-medium ">
+          Scholarships and Financial Aid
+        </label>
+        <select
+          name="HouseHold Income"
+          value={personalData?.financial_aid_id}
+          onChange={(e: any) =>
+            setPersonalData({
+              ...personalData,
+              financial_aid_id: e.target.value,
+            })
+          }
+          className={` p-4 rounded-md bg-[#FAFAFA] font-medium w-full ${
+            errors?.financial_aid_id ? "border-red-600" : "border-gray-300"
+          }`}
+        >
+          {FINIANCIAL_AID.map((option, index) => (
+            <option key={index} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        {errors?.financial_aid_id && (
+          <p className="text-red-600 text-sm">{errors?.financial_aid_id}</p>
+        )}
+      </div>
+
       <div>
         <label className="block text-black mb-2">About</label>
         <textarea
@@ -154,6 +186,7 @@ const Step2 = (props: any) => {
           required
         />
       </div>
+
       <div className=" bg-white">
         <div className="w-full flex justify-center">
           <button

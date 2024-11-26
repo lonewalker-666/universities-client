@@ -185,6 +185,9 @@ export const createPersonalInfoSchema = Joi.object({
   about: Joi.string().required().messages({
     "string.empty": "About is required",
   }),
+  financial_aid_id: Joi.string().required().messages({
+    "string.empty": "Financialaid  is required",
+  }),
 });
 
 export const CreateAcademicSchema = Joi.object({
@@ -376,4 +379,24 @@ export const updateAPTestScoreSchema = Joi.object({
       "number.min": "Score cannot be less than 0",
       "number.max": "Score cannot be more than 5",
     }),
+});
+
+export const additionalInfoSchema = Joi.object({
+  houseHeld: Joi.number().integer().min(1).max(20).required().messages({
+    "number.base": "Household size must be a number.",
+    "number.integer": "Household size must be an integer.",
+    "number.min": "Household size must be at least 1.",
+    "number.max": "Household size cannot exceed 20.",
+    "any.required": "Household size is required.",
+  }),
+
+  physical_disability: Joi.boolean().required().messages({
+    "boolean.base": "Physical disability must be true or false.",
+    "any.required": "Physical disability is required.",
+  }),
+
+  additionalInfo: Joi.string().max(1000).allow("").messages({
+    "string.base": "Additional information must be a string.",
+    "string.max": "Additional information cannot exceed 1000 characters.",
+  }),
 });

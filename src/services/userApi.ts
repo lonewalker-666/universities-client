@@ -169,3 +169,17 @@ export const updateAPTestScore = async (data: any) => {
     toast.error(e?.response?.data?.message || "Something went wrong");
   }
 };
+
+export const updateAdditionalInfo = async (data: any) => {
+  try {
+    const res = await axios.post(`/user/updateAdditionalInfo`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.success;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong");
+  }
+};

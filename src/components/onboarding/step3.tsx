@@ -106,7 +106,7 @@ const Step3 = (props: any) => {
           </select>
         </div>
 
-        {/* {formData?.high_school_id == "Not Found" && (
+        {formData?.high_school_id == "Not Found" && (
           <>
             <div className="flex flex-row gap-4">
               <div className="mb-4">
@@ -183,7 +183,7 @@ const Step3 = (props: any) => {
               </button>
             </div>
           </>
-        )} */}
+        )}
 
         <div className="">
           <div className="mb-4">
