@@ -211,4 +211,169 @@ export const CreateAcademicSchema = Joi.object({
   }),
 });
 
-export const actTestSchema = Joi.object({});
+export const updateActTestScoreSchema = Joi.array()
+  .items(
+    Joi.object({
+      subject_id: Joi.number()
+        .integer()
+        .valid(1, 2, 3, 4, 5) // Validates that id is in validSubjectIds array
+        .required()
+        .messages({
+          "any.only": "Invalid subject id",
+          "number.base": "Subject id must be a number",
+        }),
+      score: Joi.number()
+        .integer()
+        .min(0)
+        .max(36) // Score limit validation
+        .required()
+        .messages({
+          "number.base": "Score must be a number",
+          "number.min": "Score cannot be less than 0",
+          "number.max": "Score cannot be more than 36",
+        }),
+    })
+  )
+  .custom((value, helpers: any) => {
+    const requiredIds = [1, 2, 3, 4, 5];
+    const providedIds = value.map((item: any) => item.subject_id);
+    // Check if all required IDs are present
+    const missingIds = requiredIds.filter((id) => !providedIds.includes(id));
+    if (missingIds.length > 0) {
+      return helpers.message(
+        `Missing required subject_id(s): ${missingIds.join(", ")}`
+      );
+    }
+
+    return value; // If validation passed, return the validated value
+  });
+
+export const updateSatTestScoreSchema = Joi.array()
+  .items(
+    Joi.object({
+      subject_id: Joi.number()
+        .integer()
+        .valid(6, 7) // Validates that id is in validSubjectIds array
+        .required()
+        .messages({
+          "any.only": "Invalid subject id",
+          "number.base": "Subject id must be a number",
+        }),
+      score: Joi.number()
+        .integer()
+        .min(0)
+        .max(800) // Score limit validation
+        .required()
+        .messages({
+          "number.base": "Score must be a number",
+          "number.min": "Score cannot be less than 0",
+          "number.max": "Score cannot be more than 800",
+        }),
+    })
+  )
+  .custom((value, helpers: any) => {
+    const requiredIds = [6, 7];
+    const providedIds = value.map((item: any) => item.subject_id);
+
+    // Check if all required IDs are present
+    const missingIds = requiredIds.filter((id) => !providedIds.includes(id));
+    if (missingIds.length > 0) {
+      return helpers.message(
+        `Missing required subject_id(s): ${missingIds.join(", ")}`
+      );
+    }
+
+    return value; // If validation passed, return the validated value
+  });
+
+export const updateTOEFLTestScoreSchema = Joi.array()
+  .items(
+    Joi.object({
+      subject_id: Joi.number()
+        .integer()
+        .valid(46, 47, 48, 49) // Validates that id is in validSubjectIds array
+        .required()
+        .messages({
+          "any.only": "Invalid subject id",
+          "number.base": "Subject id must be a number",
+        }),
+      score: Joi.number()
+        .integer()
+        .min(0)
+        .max(30) // Score limit validation
+        .required()
+        .messages({
+          "number.base": "Score must be a number",
+          "number.min": "Score cannot be less than 0",
+          "number.max": "Score cannot be more than 30",
+        }),
+    })
+  )
+  .custom((value, helpers: any) => {
+    const requiredIds = [46, 47, 48, 49];
+    const providedIds = value.map((item: any) => item.subject_id);
+
+    // Check if all required IDs are present
+    const missingIds = requiredIds.filter((id) => !providedIds.includes(id));
+    if (missingIds.length > 0) {
+      return helpers.message(
+        `Missing required subject_id(s): ${missingIds.join(", ")}`
+      );
+    }
+
+    return value; // If validation passed, return the validated value
+  });
+
+export const updateIELTSTestScoreSchema = Joi.array()
+  .items(
+    Joi.object({
+      subject_id: Joi.number()
+        .integer()
+        .valid(50, 51, 52, 53) // Validates that id is in validSubjectIds array
+        .required()
+        .messages({
+          "any.only": "Invalid subject id",
+          "number.base": "Subject id must be a number",
+        }),
+      score: Joi.number()
+        .integer()
+        .min(0)
+        .max(9) // Score limit validation
+        .required()
+        .messages({
+          "number.base": "Score must be a number",
+          "number.min": "Score cannot be less than 0",
+          "number.max": "Score cannot be more than 9",
+        }),
+    })
+  )
+  .custom((value, helpers: any) => {
+    const requiredIds = [50, 51, 52, 53];
+    const providedIds = value.map((item: any) => item.subject_id);
+
+    // Check if all required IDs are present
+    const missingIds = requiredIds.filter((id) => !providedIds.includes(id));
+    if (missingIds.length > 0) {
+      return helpers.message(
+        `Missing required subject_id(s): ${missingIds.join(", ")}`
+      );
+    }
+
+    return value; // If validation passed, return the validated value
+  });
+
+export const updateAPTestScoreSchema = Joi.object({
+  subject_id: Joi.number().integer().required().messages({
+    "number.base": "Subject id is required",
+  }),
+  score: Joi.number()
+    .integer()
+    .min(0)
+    .max(5) // Score limit validation
+    .required()
+    .messages({
+      "number.base": "Score must be a number",
+      "number.min": "Score cannot be less than 0",
+      "number.max": "Score cannot be more than 5",
+    }),
+});

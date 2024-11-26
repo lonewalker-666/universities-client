@@ -117,3 +117,55 @@ export const updateActTestScore = async (data: any) => {
     toast.error(e?.response?.data?.message || "Something went wrong");
   }
 };
+export const updateSatTestScore = async (data: any) => {
+  try {
+    const res = await axios.post(`/user/updateSatTestScore`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.success;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong");
+  }
+};
+export const updateToeflTestScore = async (data: any) => {
+  try {
+    const res = await axios.post(`/user/updateToeflTestScore`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.success;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong");
+  }
+};
+export const updateIELTSTestScore = async (data: any) => {
+  try {
+    const res = await axios.post(`/user/updateIELTSTestScore`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.success;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong");
+  }
+};
+export const updateAPTestScore = async (data: any) => {
+  try {
+    const res = await axios.post(`/user/updateAPTestScore`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.success;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong");
+  }
+};
