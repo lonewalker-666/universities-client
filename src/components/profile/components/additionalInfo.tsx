@@ -143,7 +143,7 @@
 // export default AdditionalInfo;
 
 import React, { useState } from "react";
-import { FINIANCIAL_AID } from "@/src/lib/constants";
+import { FINIANCIAL_AID, Physical_disability } from "@/src/lib/constants";
 import EditableSelect from "../../common/editableSelect";
 import EditableCell from "../../common/editableCell";
 import EditIcon from "../../common/icons/editIcon";
@@ -155,6 +155,7 @@ import {
 } from "@/src/helpers/validators";
 import { ProfileMapper } from "@/src/lib/mapper";
 import {
+  addExtracurriculars,
   updateAdditionalInfo,
   updatePersonDetails,
 } from "@/src/services/userApi";
@@ -203,6 +204,7 @@ const AdditionalInfo = (props: Props) => {
   const handleSave = async () => {
     const newErrors = validate();
     setErrors(newErrors || {});
+    console.log(newErrors, "nee");
     if (!newErrors) {
       const res = await updateAdditionalInfo(form);
       if (res) {
@@ -212,17 +214,25 @@ const AdditionalInfo = (props: Props) => {
     }
   };
 
-  const addTag = () => {
-    if (tagInput.trim() && !tags.includes(tagInput)) {
-      setTags([...tags, tagInput.trim()]);
-      setTagInput("");
-    }
-  };
-
   const removeTag = (index: number) => {
     setTags(tags.filter((_, i) => i !== index));
   };
 
+  const addTag = async () => {
+    if (tagInput.trim() && !tags.includes(tagInput)) {
+      try {
+        const success = await addExtracurriculars({
+          activity: tagInput.trim(),
+        });
+        if (success) {
+          setTags([...tags, tagInput.trim()]);
+          setTagInput("");
+        }
+      } catch (e) {
+        console.error("Failed to add tag:", e);
+      }
+    }
+  };
   const handleTagKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === "Tab") {
       e.preventDefault();
@@ -303,24 +313,25 @@ const AdditionalInfo = (props: Props) => {
 
       {/* Grid Layout */}
       <div className="grid xs:grid-cols-1 w-full md:grid-cols-2 xs:gap-3 md:gap-7 max-w-[1000px] px-2 mt-6">
-        <EditableCell
+        <EditableSelect
           visible={visible}
-          titleStyle={{ fontSize: 14 }}
-          style={{ fontSize: 16 }}
-          value={profileData?.physical_disability || 0}
+          value={profileData?.physical_disability || ""}
+          title="disability"
           onChange={(e: any) =>
             setProfileData({
               ...profileData,
               physical_disability: e.target.value,
             })
           }
-          title="Disability for special scholarships"
+          options={Physical_disability}
+          titleStyle={{ fontSize: 14 }}
+          style={{ fontSize: 16 }}
         />
         <EditableCell
           visible={visible}
           titleStyle={{ fontSize: 14 }}
           style={{ fontSize: 16 }}
-          value={profileData?.houseHeld || 0}
+          value={profileData?.houseHeld || ""}
           onChange={(e: any) =>
             setProfileData({
               ...profileData,

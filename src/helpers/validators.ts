@@ -96,6 +96,9 @@ export const personalDetailsSchema = Joi.object({
   financial_aid_id: Joi.number().required().messages({
     "number.empty": "Please Select any one of the options",
   }),
+  about: Joi.string().required().messages({
+    "string.empty": "about is required",
+  }),
 });
 
 export const AcademicDetailsSchema = Joi.object({

@@ -156,6 +156,7 @@ export const updateIELTSTestScore = async (data: any) => {
     toast.error(e?.response?.data?.message || "Something went wrong");
   }
 };
+
 export const updateAPTestScore = async (data: any) => {
   try {
     const res = await axios.post(`/user/updateAPTestScore`, data, {
@@ -172,7 +173,35 @@ export const updateAPTestScore = async (data: any) => {
 
 export const updateAdditionalInfo = async (data: any) => {
   try {
-    const res = await axios.post(`/user/updateAdditionalInfo`, data, {
+    const res = await axios.put(`/user/updateAdditionalInfo`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.success;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong");
+  }
+};
+
+export const addExtracurriculars = async (data: any) => {
+  try {
+    const res = await axios.post(`/user/addExtracurriculars`, data, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    toast.success(res?.data?.message);
+    return res?.data?.data;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong");
+  }
+};
+
+export const deleteExtracurriculars = async (data: any) => {
+  try {
+    const res = await axios.delete(`/user/addExtracurriculars${data}`, {
       headers: {
         Authorization: `Bearer ${getAccessToken()}`,
       },

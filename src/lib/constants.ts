@@ -497,3 +497,8 @@ export const Test = [
   { id: 5, name: "IELTS" },
   { id: 3, name: "AP" },
 ];
+
+export const Physical_disability = [
+  { value: true, label: "Yes" },
+  { value: false, label: "No" },
+];

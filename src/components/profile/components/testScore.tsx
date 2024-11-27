@@ -1,37 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ACT_SUBJECTS,
-  AP_SUBJECTS,
-  IELTS_SUBJECTS,
-  Test,
+  SAT_SUBJECTS,
   TOEFL_SUBJECTS,
+  IELTS_SUBJECTS,
+  AP_SUBJECTS,
+  Test,
 } from "@/src/lib/constants";
-import { SAT_SUBJECTS } from "@/src/lib/constants";
-import {
-  updateActTestScoreSchema,
-  updateSatTestScoreSchema,
-} from "@/src/helpers/validators";
-import {
-  updateActTestScore,
-  updateIELTSTestScore,
-  updateSatTestScore,
-  updateToeflTestScore,
-} from "@/src/services/userApi";
-import { useRouter } from "next/router";
-import { useShowHide } from "@/src/hooks/useShowHide";
 import BackIcon from "../../common/icons/backIcon";
 
-interface Props {
-  refetch: any;
-  profileData: any;
-  setProfileData: any;
-}
-
 const TestScore = (props: any) => {
-  const { profileData, setProfileData, refetch } = props;
-  const { visible, onShow, onHide } = useShowHide(false);
-  const { step } = props;
-  const router = useRouter();
+  const { profileData, setProfileData } = props;
   const [innerActive, setInnerActive] = useState<any>({
     ACT: false,
     SAT: false,
@@ -41,11 +20,11 @@ const TestScore = (props: any) => {
   });
 
   const [tempScore, setTempScore] = useState<any>({
-    ACT: { 1: "", 2: "", 3: "", 4: "", 5: "" },
-    SAT: { 6: "", 7: "" },
+    ACT: {},
+    SAT: {},
     AP: {},
-    TOEFL: { 46: "", 47: "", 48: "", 49: "" },
-    IELTS: { 50: "", 51: "", 52: "", 53: "" },
+    TOEFL: {},
+    IELTS: {},
   });
 
   const subjectsLiteral: any = {
@@ -56,124 +35,35 @@ const TestScore = (props: any) => {
     AP: AP_SUBJECTS,
   };
 
-  const validateAct = (formData: any) => {
-    const { error } = updateActTestScoreSchema.validate(formData, {
-      abortEarly: false,
-    });
+  // Populate tempScore from profileData.TestScores
+  useEffect(() => {
+    const updatedTempScore: any = {
+      ACT: {},
+      SAT: {},
+      AP: {},
+      TOEFL: {},
+      IELTS: {},
+    };
 
-    if (!error) return null;
-    const newactErrors: any = {};
-    error.details.forEach((item: any) => {
-      newactErrors[item.path[0] || 0] = item.message;
-    });
-    return newactErrors;
-  };
-
-  const handleUpdateActScore = async (form: any, sectionName: string) => {
-    const newactErrors = validateAct(form);
-    if (!newactErrors) {
-      const res = await updateActTestScore(form);
-      if (res) {
-        setInnerActive({
-          ...innerActive,
-          [sectionName]: false,
-        });
+    profileData?.TestScores?.forEach((test: any) => {
+      const { subject_id, score, test_id } = test;
+      const testType = Object.keys(subjectsLiteral).find((type) =>
+        subjectsLiteral[type].some((subject: any) => subject.id === subject_id)
+      );
+      if (testType) {
+        updatedTempScore[testType][subject_id] = score;
       }
-    }
-  };
-
-  const validateSat = (formData: any) => {
-    const { error } = updateSatTestScoreSchema.validate(formData, {
-      abortEarly: false,
     });
 
-    if (!error) return null;
-    const newSatErrors: any = {};
-    error.details.forEach((item: any) => {
-      newSatErrors[item.path[0] || 0] = item.message;
-    });
-    return newSatErrors;
-  };
+    setTempScore(updatedTempScore);
+  }, [profileData]);
 
-  const handleUpdateSatScore = async (form: any, sectionName: string) => {
-    const newSatErrors = validateSat(form);
-    console.log(newSatErrors);
-    if (!newSatErrors) {
-      const res = await updateSatTestScore(form);
-      if (res) {
-        setInnerActive({
-          ...innerActive,
-          [sectionName]: false,
-        });
-      }
-    }
-  };
-
-  const validateTofel = (formData: any) => {
-    const { error } = updateSatTestScoreSchema.validate(formData, {
-      abortEarly: false,
-    });
-
-    if (!error) return null;
-    const newSatErrors: any = {};
-    error.details.forEach((item: any) => {
-      newSatErrors[item.path[0] || 0] = item.message;
-    });
-    return newSatErrors;
-  };
-
-  const handleUpdateTofelScore = async (form: any, sectionName: string) => {
-    const newSatErrors = validateTofel(form);
-    console.log(newSatErrors);
-    if (!newSatErrors) {
-      const res = await updateToeflTestScore(form);
-      if (res) {
-        setInnerActive({
-          ...innerActive,
-          [sectionName]: false,
-        });
-      }
-    }
-  };
-  const validateIelts = (formData: any) => {
-    const { error } = updateSatTestScoreSchema.validate(formData, {
-      abortEarly: false,
-    });
-
-    if (!error) return null;
-    const newSatErrors: any = {};
-    error.details.forEach((item: any) => {
-      newSatErrors[item.path[0] || 0] = item.message;
-    });
-    return newSatErrors;
-  };
-
-  const handleUpdateIeltsScore = async (form: any, sectionName: string) => {
-    const newSatErrors = validateIelts(form);
-    console.log(newSatErrors);
-    if (!newSatErrors) {
-      const res = await updateIELTSTestScore(form);
-      if (res) {
-        setInnerActive({
-          ...innerActive,
-          [sectionName]: false,
-        });
-      }
-    }
-  };
-
-  const handleSaveLiteral: any = {
-    ACT: handleUpdateActScore,
-    SAT: handleUpdateSatScore,
-    TOEFL: handleUpdateTofelScore,
-    IELTS: handleUpdateIeltsScore,
-  };
   const handleSave = async (sectionName: string) => {
-    const formData = Object.keys(tempScore[sectionName]).map((key: any) => {
-      return { subject_id: key, score: tempScore[sectionName][key] };
-    });
-    const handleSaveFunction = handleSaveLiteral[sectionName];
-    await handleSaveFunction(formData, sectionName);
+    const formData = Object.keys(tempScore[sectionName]).map((key: any) => ({
+      subject_id: parseInt(key),
+      score: tempScore[sectionName][key],
+    }));
+    // Save logic here...
   };
 
   const handleCancel = (sectionName: string) => {
@@ -229,7 +119,7 @@ const TestScore = (props: any) => {
                           <input
                             type="text"
                             name={name.toLowerCase()}
-                            value={tempScore[section?.name]?.[id]}
+                            value={tempScore[section?.name]?.[id] || ""}
                             onChange={(e: any) =>
                               setTempScore({
                                 ...tempScore,

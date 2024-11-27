@@ -3,6 +3,7 @@ import { get } from "lodash";
 export const ProfileMapper = (data: any) => {
   const firstName = get(data, "firstName", "");
   const lastName = get(data, "lastName", "");
+  const about = get(data, "about", "");
   const email = get(data, "email", "");
   const mobile = get(data, "mobile", "");
   const location = get(data, "location", "");
@@ -26,6 +27,7 @@ export const ProfileMapper = (data: any) => {
     firstName,
     lastName,
     email,
+    about,
     mobile,
     location,
     gender_id,

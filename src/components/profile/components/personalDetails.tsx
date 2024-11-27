@@ -33,6 +33,7 @@ const PersonalDetails = (props: Props) => {
     citizenship_id,
     armed_force_status_id,
     financial_aid_id,
+    about,
   } = ProfileMapper(profileData);
 
   const editButtonTitle = (
@@ -53,6 +54,7 @@ const PersonalDetails = (props: Props) => {
     citizenship_id,
     armed_force_status_id,
     financial_aid_id,
+    about,
   };
   const validate = () => {
     const { error } = personalDetailsSchema.validate(form, {
@@ -187,6 +189,34 @@ const PersonalDetails = (props: Props) => {
           style={{ fontSize: 16 }}
           errMsg={errors?.financial_aid_id}
         />
+      </div>
+      <div className="w-full max-w-[1000px] mt-6">
+        <label
+          htmlFor="about"
+          className="block text-sm font-medium text-gray-700 mb-2"
+        >
+          About
+        </label>
+        <textarea
+          id="additionalInfo"
+          value={profileData?.about || ""}
+          disabled={!visible}
+          onChange={(e: any) =>
+            setProfileData({
+              ...profileData,
+              about: e.target.value,
+            })
+          }
+          maxLength={1000}
+          className={`w-full border rounded p-3 ${
+            errors?.about ? "border-red-500" : "border-gray-300"
+          }`}
+          rows={5}
+          placeholder="Enter additional information..."
+        />
+        {errors?.about && (
+          <p className="text-red-500 text-sm mt-1">{errors.about}</p>
+        )}
       </div>
     </div>
   );
