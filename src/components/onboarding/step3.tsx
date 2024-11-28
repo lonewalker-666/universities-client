@@ -2,13 +2,11 @@ import { getHighschool } from "@/src/services/api";
 import { isEmpty } from "lodash";
 import React, { useEffect, useState } from "react";
 import { GRADE_LEVEL } from "@/src/lib/constants";
-import { CITIZENSHIP } from "@/src/lib/constants";
-import { FIRST_GENERATION } from "@/src/lib/constants";
 import EditableDatePicker from "../common/editableDatePicker";
 import { CreateAcademicSchema } from "@/src/helpers/validators";
 import { createAcademicDetails } from "@/src/services/userApi";
 const Step3 = (props: any) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     high_school_id: "",
     grade_level_id: "",
     college_start_date: "",

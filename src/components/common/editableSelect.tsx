@@ -2,7 +2,7 @@ import { isEmpty } from "lodash";
 
 interface optionsObject {
   label: string;
-  value: string | number | boolean;
+  value: any;
 }
 interface Props {
   visible: boolean;
