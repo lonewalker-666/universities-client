@@ -6,6 +6,7 @@ import ShareIcon from '../../common/icons/shareIcon'
 import HistoryIcon from '../../common/icons/history'
 
 const CustomChatHeader = () => {
+  const router = useRouter()
   return (
     <div className='flex items-center w-full'>
       <div className='w-full max-w-[1200px] lg:px-12 gap-5 flex items-center justify-between'>
@@ -19,7 +20,7 @@ const CustomChatHeader = () => {
               background: 'linear-gradient(260deg, #ff5fe4 20%, #ad6df4 100%)'
             }}
           >
-            <button className='h-full w-full rounded-[13px] text-sm bg-white text-black'>
+            <button className='h-full w-full rounded-[13px] text-sm bg-white text-black' onClick={()=> router.push('/upgrade')}>
               Upgrade
             </button>
           </span>

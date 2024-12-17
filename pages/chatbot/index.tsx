@@ -3,7 +3,7 @@ import CustomChatHeader from "@/src/components/chatbot/components/chatHeader"
 import ProductLayout from "@/src/components/layout/productLayout"
 
 
-const CollegesPage = () => {
+const ChatPage = () => {
   return (
     <ProductLayout title="Universities@USA-Chatbot" customHeader={<CustomChatHeader />}>
       <ChatbotContainer />
@@ -11,4 +11,8 @@ const CollegesPage = () => {
   )
 }
 
-export default CollegesPage
+ChatPage.getInitialProps = ({ query }: any) => {
+  return { query };
+};
+
+export default ChatPage

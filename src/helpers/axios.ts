@@ -5,8 +5,8 @@ import Router from "next/router";
 // live EC2
 // const BASE_URL = "https://theuniversitiesusa.com";
 // development
-const BASE_URL = "https://dev.theuniversitiesusa.com/api";
-// const BASE_URL = "http://127.1.0.0:8000/api";
+// const BASE_URL = "https://dev.theuniversitiesusa.com/api";
+const BASE_URL = "http://127.1.0.0:8000/api";
 
 const axiosInstance = axios.create({ baseURL: BASE_URL });
 
@@ -52,6 +52,10 @@ axiosInstance.interceptors.response.use(
     // If the error is not a 401 or other conditions fail, push to login and reject
     if (error.response && error.response.status === 401) {
       Router.push("/login"); // Redirect to login on token expiration
+    }
+
+    if (error.response && error.response.status === 402) {
+      Router.push("/upgrade"); // Redirect to Plan Upgrade
     }
 
     return Promise.reject(error); // Reject the original error promise

@@ -8,6 +8,7 @@ import { basicDetailsSchema } from '@/src/helpers/validators'
 import { useState } from 'react'
 import { updateProfile } from '@/src/services/userApi'
 import Ai from '../../common/icons/ai'
+import { useRouter } from 'next/router'
 
 interface Props {
   refetch: any
@@ -20,6 +21,7 @@ const BasicDetails = (props: Props) => {
   const { firstName, lastName, email, mobile, location } =
     ProfileMapper(profileData)
   const [errors, setErrors] = useState<any>({})
+  const router = useRouter()
 
   const form = {
     firstName,
@@ -81,7 +83,8 @@ const BasicDetails = (props: Props) => {
         className='w-full min-h-[80px] object-cover'
       />
       {
-        <button className=' gradient-text absolute top-5 right-5 p-2 small border border-[#ad6df4] xs:flex lg:hidden rounded-[13px] items-center justify-center gap-2 py-2 text-black w-[130px]'>
+        <button className=' gradient-text absolute top-5 right-5 p-2 small border border-[#ad6df4] xs:flex lg:hidden rounded-[13px] items-center justify-center gap-2 py-2 text-black w-[130px]'
+        onClick={() => router.push('/upgrade')}>
           <Ai className='w-5 h-4' /> Upgrade
         </button>
       }

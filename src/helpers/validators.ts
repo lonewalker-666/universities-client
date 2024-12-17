@@ -96,9 +96,7 @@ export const personalDetailsSchema = Joi.object({
   financial_aid_id: Joi.number().required().messages({
     "number.empty": "Please Select any one of the options",
   }),
-  about: Joi.string().required().messages({
-    "string.empty": "about is required",
-  }),
+  about: Joi.string().default(""),
 });
 
 export const AcademicDetailsSchema = Joi.object({
@@ -129,15 +127,15 @@ export const createEssayDataSchema = Joi.object({
   title: Joi.string().required(),
   content: Joi.string()
     .required()
-    .custom((value, helpers) => {
-      // Check that non-whitespace text is placed inside tags
-      const contentInsideTagsPattern = /<[^>]+>\s*([^<>\s]+)\s*<\/[^>]+>/;
-      if (!contentInsideTagsPattern.test(value)) {
-        return helpers.message({ en: "Essays should not be empty." });
-      }
+    // .custom((value, helpers) => {
+    //   // Check that non-whitespace text is placed inside tags
+    //   const contentInsideTagsPattern = /<[^>]+>\s*([^<>\s]+)\s*<\/[^>]+>/;
+    //   if (!contentInsideTagsPattern.test(value)) {
+    //     return helpers.message({ en: "Essays should not be empty." });
+    //   }
 
-      return value;
-    }),
+    //   return value;
+    // }),
 });
 
 export const CreateProfileSchema = Joi.object({

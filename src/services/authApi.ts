@@ -10,7 +10,7 @@ export const createUser = async (data: any) => {
     setAccessToken(res?.headers["authorization"]);
     setRefreshToken(res?.headers["x-refresh-token"]);
     toast.success(res?.data?.message);
-    Router.push("/overview");
+    Router.push("/onboarding");
   } catch (e: any) {
     toast.error(e?.response?.data?.message || "Something went wrong");
   }

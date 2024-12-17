@@ -10,6 +10,7 @@ import PageHeader from './pageHeader'
 import ProductNav from './productNav'
 import { useRouter } from 'next/router'
 import ProductFooter from './productFooter'
+import { ToastContainer } from 'react-toastify'
 
 interface Props {
   title: string
@@ -23,8 +24,9 @@ const ProductLayout = (props: Props) => {
   const { title, children, customHeader, pageTitle } = props
   const router = useRouter()
   return (
-    <div className='h-screen flex flex-col justify-center w-full overflow-y-auto overflow-x-hidden'>
+    <div className='h-screen flex flex-col justify-center w-full overflow-y-auto overflow-x-hidden relative'>
       <Header title={title} />
+      <ToastContainer/>
       <ProductNav />
       <section className='lg:ml-[280px] h-[100vh] xs:pb-[50px] lg:pb-0 text-white overflow-x-auto'>
         <PageHeader title={pageTitle || ''}>{customHeader || ''}</PageHeader>

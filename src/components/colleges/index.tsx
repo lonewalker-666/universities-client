@@ -27,18 +27,20 @@ const Colleges = () => {
 
   const getColleges = async () => {
     setLoading(true);
-    const data = await getAllColleges(dataOrder);
-    setAllColleges(data || []);
-    setTotalRecords(data.total || 0);
+    const body = { sortBy, sortOrder, limit, offset: (offset / limit) + 1 }
+    const data = await getAllColleges(body);
+    setAllColleges(data?.collegesList || []);
+    setTotalRecords(data?.metadata?.total || 0);
     setLoading(false);
   };
 
   useEffect(() => {
     getColleges();
-  }, []);
+  }, [offset, limit, sortBy, sortOrder]);
   const handleNextPage = () => {
     if (offset + limit < totalRecords) {
       setDataOrder((prev) => ({ ...prev, offset: prev.offset + limit }));
+      window.scrollTo(0, 0);
     }
   };
 

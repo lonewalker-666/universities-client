@@ -212,3 +212,17 @@ export const deleteExtracurriculars = async (data: any) => {
     toast.error(e?.response?.data?.message || "Something went wrong");
   }
 };
+
+export const checkSessionStatus = async (session_id: string,price_id:string) => {
+  try {
+    const res = await axios.get(`/payments/check-session-status?session_id=${session_id}&price_id=${price_id}`, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    });
+    // toast.success(res?.data?.message);
+    return res?.data?.data;
+  } catch (e: any) {
+    toast.error(e?.response?.data?.message || "Something went wrong");
+  }
+};

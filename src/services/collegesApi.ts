@@ -10,7 +10,7 @@ export const getAllColleges = async (data: any = {}) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    return res?.data?.success ? res?.data?.collegesList : [];
+    return res?.data
   } catch (e: any) {
     toast.error(
       e?.response?.data?.message || "Something went wrong!!!. Please try again"

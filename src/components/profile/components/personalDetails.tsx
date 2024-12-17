@@ -54,7 +54,7 @@ const PersonalDetails = (props: Props) => {
     citizenship_id,
     armed_force_status_id,
     financial_aid_id,
-    about,
+    about:about || "",
   };
   const validate = () => {
     const { error } = personalDetailsSchema.validate(form, {
